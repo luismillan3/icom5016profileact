@@ -14,8 +14,11 @@ angular.module('student',[])
 
 }]).controller('studentProfileController', ['$scope', '$http', '$log', function($scope, $http, $log) {
 
-    $scope.perro="perro";
-    $scope.todos = [
+    $scope.firstName="Fabio";
+    $scope.lastName="Lanzoni";
+    $scope.major="Computer Engineering"
+    $scope.resume= ""
+    $scope.research = [
         { name: 'Master HTML/CSS/Javascript'},
         { name: 'Learn AngularJS' },
         { name: 'Build NodeJS backend' },
@@ -24,4 +27,11 @@ angular.module('student',[])
         { name: 'Be awesome!' },
       ]
 
-}])
+}]).controller('AppCtrl', function($scope) {
+  $scope.title1 = 'Button';
+  $scope.title4 = 'Warn';
+  $scope.isDisabled = true;
+
+  $scope.googleUrl = 'http://google.com';
+
+});

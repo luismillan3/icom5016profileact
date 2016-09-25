@@ -1,27 +1,29 @@
 <div class="container">
 
-	<div>
-{{perro}}
-		<ul><li ng-repeat="todo in todos">
-			{{ todo.name }}
+	<div class="row">
 
-		</li></ul>
-		<div>
+		<div class="col-md-3">
+			<img src="http://placehold.it/150x150">
+		</div>
+		<div class="col-md-9 studentInfo">
+			<ul class="nav navbar-nav" id="navigation">
 
-			<div>
-				<p>Name</p>
-			</div>
-			<div>
-				<p>Major</p>
-			</div>
-			<div>
-				<p>Resume</p>
-			</div>
-
-
+                <li class="selected" id="software">{{firstName}} {{lastName}}</li>
+                <li class="" id="news">{{major}}</li>
+                <li class="" id="aboutUs">{{resume}}</li>
+            </ul>
 		</div>
 
-
 	</div>
+
+		<section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+		      <md-button>{{firstName}}</md-button>
+		      <md-button md-no-ink class="md-primary">Primary (md-noink)</md-button>
+		      <md-button ng-disabled="true" class="md-primary">Disabled</md-button>
+		      <md-button class="md-warn">{{lastName}}</md-button>
+		      <div class="label">Flat</div>
+	    </section>
+
+
 
 </div>
