@@ -1,4 +1,4 @@
-angular.module('app', ['ngRoute', 'controller', 'professor','student'])
+angular.module('app', ['ngRoute', 'ngMaterial', 'controller', 'professor','student'])
 
 .config(function($routeProvider) {
 	$routeProvider
@@ -11,11 +11,11 @@ angular.module('app', ['ngRoute', 'controller', 'professor','student'])
 	})
     .when('/research', {
 		templateUrl: '/templates/research.html',
-		//controller: 'researchController'
+		controller: 'researchController'
 	})
     .when('/signup', {
 		templateUrl: '/templates/sign_up.html',
-		//controller: 'signUpController'
+		controller: 'signUpController'
 	})
 	.when('/student', {
 		templateUrl: '/templates/studentProfile.html',
