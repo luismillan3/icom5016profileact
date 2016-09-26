@@ -1,9 +1,19 @@
 angular.module('recruiter',[])
 
-.controller('recruiterProfileController', ['$scope', '$http', '$log', function($scope, $http, $log) {
+.controller('recruiterProfileController', ['$scope', '$http', '$log', function($scope, $http,$location, $log) {
 
+	
+    $scope.recruiter={name:"Alejandro",lastname:"Martinez",email:"ale.ma@raytheon.com",company:"Raytheon"}
+    $scope.pic="public/dummyprofilepic.png"
     $scope.frmToggle = function() {
-        $('#blogForm').slideToggle();
+        $('#profileForm').slideToggle();
+    }
+    $scope.go = function ( path ) {
+    	console.log(path);
+	    window.location=path;
+	}	
+    $scope.updateProfile=function(info){
+    	$scope.recruiter=info;
     }
 
 }]).controller('recruiterEventController', ['$scope', '$http', '$log', function($scope, $http, $log) {
