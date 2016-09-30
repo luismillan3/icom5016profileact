@@ -1,4 +1,20 @@
 <div class="container">
-	<h1>Sign Up Page</h1>
-	<p>Here we are going to have a sign up form</p>
+
+    <div class="row">
+        <div class="calendar">
+            <iframe src="https://calendar.google.com/calendar/embed?src=upr.edu_lntpegvkkcihdbc028asip5q0s%40group.calendar.google.com&ctz=America/Puerto_Rico" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+        </div>
+        <div class="upcoming events">
+            <ul class="" ng-repeat="event in events">
+                <li>{{event.date}} {{event.name}}</li>
+            </ul>
+        </div>
+    </div>
+
+<div data-tockify-component="calendar" data-tockify-calendar="unievents"></div>
+<script data-tockify-script="embed" src="https://public.tockify.com/browser/embed.js"></script>
+
+
+
 </div>
+

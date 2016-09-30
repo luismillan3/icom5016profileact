@@ -21,6 +21,10 @@ angular.module('app', ['ngRoute', 'ngMaterial', 'controller', 'professor','stude
 		templateUrl: '/templates/studentProfile.html',
 		controller: 'studentProfileController'
 	})
+	.when('/events', {
+		templateUrl: '/templates/studentEvents.html',
+		controller: 'studentEventsController'
+	})
 	.otherwise({
 		templateUrl: '/templates/404.html'
 	})
