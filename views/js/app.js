@@ -25,11 +25,11 @@ angular.module('app', ['ngRoute', 'ngMaterial','controller', 'professor','studen
 		templateUrl: '/templates/recruiterProfile.html',
 		controller: 'recruiterProfileController'
 	})
-	 .when('/recruiterevent', {
+	 .when('/recruiterEvent', {
 		templateUrl: '/templates/recruiterEvent.html',
 		controller: 'recruiterEventController'
 	})
-	 .when('/recruitersearch', {
+	 .when('/recruiterSearch', {
 		templateUrl: '/templates/recruiterSearch.html',
 		controller: 'recruiterSearchController'
 	})

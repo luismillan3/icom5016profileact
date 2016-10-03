@@ -35,14 +35,14 @@
 	</form>
 
 	<br>
-	<input type="search" ng-model="query" placeholder="Search Blog" class="form-control">
+	<input type="search" ng-model="query" placeholder="Search Events" class="form-control">
 	<br>
 	<table class="table table-striped">
 	 	<tr>
 	 		<th>Title</th><th>Description</th><th>Date</th><th>Remove</th>
 	 	</tr>
 	 	<tr ng-repeat="event in events | filter: query">
-	 		<td>{{ event.title }}</td><td>{{ event.description }}</td><td>{{ event.date }}</td><td><button class="btn btn-danger" ng-click="removeEvent(event)">x</button></td>
+	 		<td>{{ event.title }}</td><td>{{ event.description }}</td><td>{{ event.date }}</td><td><button class="btn btn-danger" ng-click="removeEvent(event)">Remove</button></td>
 	 	</tr>
 	</table>
 
