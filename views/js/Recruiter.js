@@ -41,6 +41,7 @@ angular.module('recruiter',[])
      }
 
 }]).controller('recruiterSearchController', ['$scope', '$http', '$log', function($scope, $http, $log) {
+	$scope.selectedStudent={}
 	$scope.results=[]
 	$scope.criteria={}
 	$scope.majors=[{value:"ICOM"},
@@ -58,6 +59,9 @@ angular.module('recruiter',[])
         { studentName: 'Cafralin',studentLastName:"Pelora",gpa:3.94,major:"ININ"}
       ]
       $scope.results=$scope.students
+      $scope.display=function(student){
+      	$scope.selectedStudent=student;
+      }
       $scope.searchStudents=function(criteria){
       	$scope.results=[]
       	$scope.criteria={}
