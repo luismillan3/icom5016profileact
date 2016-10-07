@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 angular.module('app', ['ngRoute', 'ngMaterial','controller', 'professor','student','recruiter'])
+=======
+angular.module('app', ['ngRoute', 'ngMaterial', 'controller', 'professor','student', 'recruiter'])
+>>>>>>> d711fdf089e5ace37f55e0d1e3eafdc0891371a1
 
 .config(function($routeProvider) {
 	$routeProvider
@@ -21,7 +25,18 @@ angular.module('app', ['ngRoute', 'ngMaterial','controller', 'professor','studen
 		templateUrl: '/templates/studentProfile.html',
 		controller: 'studentProfileController'
 	})
+<<<<<<< HEAD
 	 .when('/recruiter', {
+=======
+	.when('/events', {
+		templateUrl: '/templates/studentEvents.html',
+		controller: 'studentEventsController'
+	})
+	.when('/researchSearch', {
+		templateUrl: '/templates/studentResearch.html',
+		controller: 'researchController'
+	}).when('/recruiter', {
+>>>>>>> d711fdf089e5ace37f55e0d1e3eafdc0891371a1
 		templateUrl: '/templates/recruiterProfile.html',
 		controller: 'recruiterProfileController'
 	})
