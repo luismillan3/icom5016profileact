@@ -1,6 +1,6 @@
 <div class="container">
 
-	<div class="" layout="row">
+	<div class="" layout="row" layout-xs="column">
 
 		<div flex="15">
 			<img width="150" height="150" src="{{profileImage}}">
@@ -15,7 +15,7 @@
             </ul>
 
 		</div>
-        <a flex="10" href="{{resume}}"><md-button>See Resume</md-button></a>
+        <a flex="10" href="{{resume}}"><md-button>Resume</md-button></a>
 
 	</div>
 
@@ -29,7 +29,9 @@
             <ul ng-repeat="project in projects" >
 
                 <li class="col-md-4">
-                    <img width="200px" height="200px" src="{{project.picture}}">
+                    <md-button class="md-default md-raised" ng-click="showAdvanced($event, project)">
+                      <img width="200px" height="200px" src="{{project.picture}}">
+                    </md-button>
                     <h5>{{project.name}}</h5>
                 </li>
             </ul>
@@ -54,20 +56,26 @@
 
     </section>
 
-    <div>
-        <md-button class="md-primary md-raised" ng-click="showAdvanced($event)">
-          Custom Dialog
-        </md-button>
-    </div>
+    <form name="reviewForm" ng-submit="addProject(project)">
 
-		<!-- <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-		      <md-button>{{firstName}}</md-button>
-		      <md-button md-no-ink class="md-primary">Primary (md-noink)</md-button>
-		      <md-button ng-disabled="true" class="md-primary">Disabled</md-button>
-		      <md-button class="md-warn">{{lastName}}</md-button>
-		      <div class="label">Flat</div>
-	    </section> -->
+        <!--  Live Preview -->
+        <!--  <blockquote >
+        <strong>{{reviewCtrl.review.stars}} Stars</strong>
+        {{reviewCtrl.review.body}}
+        <cite class="clearfix">—{{reviewCtrl.review.author}}</cite>
+        </blockquote> -->
 
-
+        <!--  Review Form -->
+        <h4>Add a Project</h4>
+        <fieldset class="form-group">
+            <input ng-model="project.name" class="form-control" title="ProjectName" placeholder="Project Name" />
+        </fieldset>
+        <fieldset class="form-group">
+            <input ng-model="project.description" class="form-control" placeholder="Project description" title="Description" />
+        </fieldset>
+        <fieldset class="form-group">
+            <input type="submit" class="btn btn-primary pull-right" value="Submit Review" />
+        </fieldset>
+    </form>
 
 </div>

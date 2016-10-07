@@ -1,4 +1,49 @@
 <div class="container">
-	<h1>Hello Home Page!!!</h1>
-	<p>Here we are going to put relevant events</p>
+
+    <h1>Events</h1>
+
+    <button class="btn btn-primary" ng-click="frmToggle()">Add Event</button>
+    <br>
+
+    <form class="form-horizontal" id="eventForm" ng-submit="addEvent(event)" hidden>
+        <div class="form-group">
+            <label for="title" class="col-sm-2 control-label">Title</label>
+            <div class="col-sm-10">
+                <input type="text" ng-model="event.title" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="description" class="col-sm-2 control-label">Description</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" ng-model="event.description"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title" class="col-sm-2 control-label">Date</label>
+            <div class="col-sm-10">
+                <input type="text" ng-model="event.date" class="form-control">
+            </div>
+        </div>
+        <!-- <div class="form-group">
+            <datetimepicker data-ng-model="data.date" ></datetimepicker>
+        </div> -->
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" value="submit" class="btn btn-primary">Insert Event</button>
+            </div>
+        </div>
+    </form>
+
+    <br>
+    <input type="search" ng-model="query" placeholder="Search Events" class="form-control">
+    <br>
+    <table class="table table-striped">
+        <tr>
+            <th>Title</th><th>Description</th><th>Date</th><th>Remove</th>
+        </tr>
+        <tr ng-repeat="event in events | filter: query">
+            <td>{{ event.title }}</td><td>{{ event.description }}</td><td>{{ event.date }}</td><td><button class="btn btn-danger" ng-click="removeEvent(event)">Remove</button></td>
+        </tr>
+    </table>
+
 </div>

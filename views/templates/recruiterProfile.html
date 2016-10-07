@@ -1,4 +1,67 @@
 <div class="container">
-	<h1>Research Page</h1>
-	<p>Here we are going to post research projects and their respective students</p>
+
+    <h1>Profile</h1>
+
+
+    <br>
+
+    <div>
+         <div class="img-wrapper clearfix">
+                    <img ng-src="dummyprofilepic.png">
+                </div>
+        <div class="form-group">
+            <h2>{{recruiter.name}}  {{recruiter.lastname}}</h2>
+        </div>
+        <div class="form-group">
+            <h3><strong>Company:</strong> {{recruiter.company}}</h3>
+        </div>
+        <div class="form-group">
+            <h3><strong>email:</strong> {{recruiter.email}}</h3>
+        </div>
+
+    </div>
+
+    <button class="btn btn-primary" ng-click="frmToggle()">Edit Profile Info</button>
+
+    <button class="btn btn-primary" ng-click="go('#/recruiterEvent')">Add Event</button>
+
+    <button class="btn btn-primary" ng-click="go('#/recruiterSearch')">Search Students</button>
+    <br>
+    <br>
+
+    <form class="form-horizontal" id="profileForm" ng-submit="updateProfile(newr)" hidden>
+        <div class="form-group">
+            <label for="title" class="col-sm-2 control-label">Name</label>
+            <div class="col-sm-10">
+                <input type="text" ng-model="newr.name" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="description" class="col-sm-2 control-label">Last Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" ng-model="newr.lastname"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title" class="col-sm-2 control-label">Company</label>
+            <div class="col-sm-10">
+                <input type="text" ng-model="newr.company" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title" class="col-sm-2 control-label">email</label>
+            <div class="col-sm-10">
+                <input type="email" ng-model="newr.email" class="form-control">
+            </div>
+        </div>
+        <!-- <div class="form-group">
+            <datetimepicker data-ng-model="data.date" ></datetimepicker>
+        </div> -->
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" value="submit" class="btn btn-primary">Update</button>
+            </div>
+        </div>
+    </form>
+
 </div>
