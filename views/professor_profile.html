@@ -1,0 +1,147 @@
+<html >
+<title>Professor Profile</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Angular Material requires Angular.js Libraries -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+  <!-- Angular Material Library -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Angular Material style sheet -->
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
+<script type="text/javascript">
+	angular.module('cardDemo1', ['ngMaterial'])
+
+.controller('AppCtrl', function($scope) {
+  $scope.imagePath = 'img/washedout.png';
+})
+.config(function($mdThemingProvider) {
+  $mdThemingProvider.theme('dark-grey').backgroundPalette('grey').dark();
+  $mdThemingProvider.theme('dark-orange').backgroundPalette('orange').dark();
+  $mdThemingProvider.theme('dark-purple').backgroundPalette('deep-purple').dark();
+  $mdThemingProvider.theme('dark-blue').backgroundPalette('blue').dark();
+});
+</script>
+
+<style type="text/css">
+
+.carddemoBasicUsage .card-media {
+  background-color: #222332; }
+
+  body{
+  	background-color: #33334d;
+  	color: #FFF;
+  }
+
+</style>
+
+  <body ng-app="app">
+ <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">ProfileAct</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#">Students</a></li> 
+      <li><a href="#">Curriculum </a></li> 
+    </ul>
+  </div>
+</nav>
+
+<div ng-view></div>
+
+  <br><br><br>
+
+<!--div flex-sm flex-md flex-lg flex-gt-lg="50" flex-gt-md="50" flex-gt-sm="50" layout-md="column">
+      <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Card with image</span>
+            <span class="md-subhead">Large</span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-lg card-media"></div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button>Action 1</md-button>
+          <md-button>Action 2</md-button>
+        </md-card-actions>
+      </md-card>
+      <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Card with image</span>
+            <span class="md-subhead">Large</span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-lg card-media"></div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button>Action 1</md-button>
+          <md-button>Action 2</md-button>
+        </md-card-actions>
+      </md-card>
+</div-->
+
+
+<center>
+<div class='md-padding' layout="row" layout-wrap>
+    <md-card style="width: 250px;" ng-repeat="user in users">
+      <img src="professor.jpg" class="md-card-image" >
+      <md-card-content>
+        <h2>Margott Robbie PhD</h2>
+        <p>University of Gotham City</p>
+      </md-card-content>
+      
+    </md-card>
+  </div>
+</center>
+
+
+<!--table cellspacing="1"><tr><td><img src="professor.jpg" hspace="200" class="img-rounded" width="25%" height="auto"> <br><br>
+</td><td> <h1>Margott Robbie PhD </h1> </td></tr></table-->
+
+<!--
+<div class="container">
+  <div class="panel panel-primary">
+      <div class="panel-heading">Undergraduate Students </div>
+      <div class="panel-body">Lorem Ipsum</div>
+    </div>
+</div>
+
+<div class="container">
+  <div class="panel panel-primary">
+      <div class="panel-heading">Research</div>
+      <div class="panel-body">Lorem Ipsum</div>
+    </div>
+</div>
+
+<div class="container">
+  <div class="panel panel-primary">
+      <div class="panel-heading">Contact information</div>
+      <div class="panel-body">Lorem Ipsum</div>
+    </div>
+</div>
+
+</body>
+</html>
