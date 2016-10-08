@@ -42,7 +42,7 @@
 	 		<th>Title</th><th>Description</th><th>Date</th><th>Remove</th>
 	 	</tr>
 	 	<tr ng-repeat="event in events | filter: query">
-	 		<td>{{ event.title }}</td><td>{{ event.description }}</td><td>{{ event.date }}</td><td><button class="btn btn-danger" ng-click="removeEvent(event)">Remove</button></td>
+	 		<td>{{ event.title }}</td><td>{{ event.description }}</td><td>{{ event.date }}</td><td><button class="btn btn-danger" ng-click="removeEvent(event.id)">Remove</button></td>
 	 	</tr>
 	</table>
 

@@ -3,47 +3,92 @@ angular.module('recruiter',[])
 .controller('recruiterProfileController', ['$scope', '$http', '$log', function($scope, $http,$location, $log) {
 
 	$scope.newr={}
-    $scope.recruiter={name:"Alejandro",lastname:"Martinez",email:"ale.ma@raytheon.com",company:"Raytheon"}
-    $scope.pic="public/dummyprofilepic.png"
+    $scope.recruiter={}
+
     $scope.frmToggle = function() {
         $('#profileForm').slideToggle();
     }
     $scope.go = function ( path ) {
     	console.log(path);
 	    window.location=path;
-	}	
-    $scope.updateProfile=function(info){
-    	$scope.recruiter=info;
-    	$scope.newr={}
-    }
+	}
+	$scope.getRecruiter = function () {
+            $http.get('/recruiter/profile')
+            .success(function (data, status) {
+                $scope.recruiter = data;
+            })
+            .error(function (data, status) {               
+            	console.log(data, status);
+        		console.log("Could not get all")
+            });
+        };	
+   $scope.updateProfile=function(re){
+    	 console.log(re)
+    	 $scope.newr={}
+     	 $http.put('/recruiter/profile/update', re )
+            .success(function (data) {
+                $scope.recruiter = data;
+            })
+            .error(function (data, status, header, config) {
+                console.log(data, status);
+        		console.log("could not add event")
+            });
+        };
+        $scope.getRecruiter();
 
 }]).controller('recruiterEventController', ['$scope', '$http', '$log', function($scope, $http, $log) {
 
     $scope.frmToggle = function() {
         $('#eventForm').slideToggle();
     }
-    $scope.event=[];
-    $scope.events = [
-        { title: 'Master HTML/CSS/Javascript',description:"Awesome Event",date:"10/12/16 10:00"},
-        { title: 'Raytheon Session',description:"Awesome Event",date:"10/12/16 10:00"},
-        { title: 'Johns Hopkins Session',description:"Awesome Event",date:"10/12/16 10:00"},
-        { title: 'Boeing Company',description:"Awesome Event",date:"10/12/16 10:00"},
-        { title: 'Mario Bros in the House',description:"Awesome Event",date:"10/12/16 10:00"}
-      ]
-     $scope.addEvent=function(e){
-     	$scope.events.push(e);
-     	$scope.event=[];
-     }
-     $scope.removeEvent=function(e){
-     	for(var i = $scope.events.length-1; i--;){
-	if ($scope.events[i] === e) $scope.events.splice(i, 1);
-}
-     }
+    $scope.event={};
+    $scope.events = []
+
+     $scope.getEvents = function () {
+            $http.get('/recruiter/events')
+            .success(function (data, status) {
+                $scope.events = data;
+            })
+            .error(function (data, status) {               
+            	console.log(data, status);
+        		console.log("Could not get all")
+            });
+        };
+    $scope.addEvent=function(e){
+    	e.id=$scope.events.length+1;
+    	 console.log(e)
+    	 
+     	 $http.post('/recruiter/events', e )
+            .success(function (data) {
+                $scope.events = data;
+            })
+            .error(function (data, status, header, config) {
+                console.log(data, status);
+        		console.log("could not add event")
+            });
+        };
+    
+     // $scope.addEvent=function(e){
+     // 	$scope.events.push(e);
+     // 	$scope.event=[];
+     // }
+     $scope.removeEvent=function(id){
+     	$http.delete('/recruiter/events/'+id).success(function (data) {
+                $scope.events = data;
+            })
+            .error(function (data, status, header, config) {
+                console.log(data, status);
+        		console.log("could not remove event")
+            })
+      };
+    
+     $scope.getEvents();
 
 }]).controller('recruiterSearchController', ['$scope', '$http', '$log', function($scope, $http, $log) {
 	$scope.selectedStudent={}
 	$scope.results=[]
 	$scope.criteria={}
+	$scope.students=[]
 	$scope.majors=[{value:"ICOM"},
 		{value:"INEL"},
 		{value:"INSO"},
@@ -51,14 +96,19 @@ angular.module('recruiter',[])
 		{value:"INCI"},
 		{value:"ININ"},
 		{value:"INQU"}]
-	  $scope.students = [
-        { studentName: 'Marcel',studentLastName:"Fuentes",gpa:3.53,major:"BIOL"},
-        { studentName: 'Maria',studentLastName:"Del Valle",gpa:3.32,major:"COMP"},
-        { studentName: 'Kelvin',studentLastName:"Pelota",gpa:2.74,major:"ICOM"},
-        { studentName: 'Nerymar',studentLastName:"Cucuza",gpa:2.9,major:"INEL"},
-        { studentName: 'Cafralin',studentLastName:"Pelora",gpa:3.94,major:"ININ"}
-      ]
-      $scope.results=$scope.students
+	  
+	  $scope.getStudents = function () {
+            $http.get('/recruiter/search')
+            .success(function (data, status) {
+                $scope.students = data;
+                $scope.results=$scope.students
+            })
+            .error(function (data, status) {               
+            	console.log(data, status);
+        		console.log("Could not get students")
+            });
+        };
+      
       $scope.display=function(student){
       	$scope.selectedStudent=student;
       }
@@ -86,5 +136,7 @@ angular.module('recruiter',[])
       		
       	}
       }
+      $scope.getStudents();
+
 
 }])
