@@ -36,10 +36,14 @@ angular.module('app', ['ngRoute', 'ngMaterial','controller', 'professor','studen
 	.when('/professor', {
 		templateUrl: '/templates/professor.html',
 		controller: 'recruiterSearchController'
+	}).when('/studentEvents', {
+		templateUrl: '/templates/studentEvents.html',
+		controller: 'studentEventsController'
 	})
-	.when('/research', {
-		templateUrl: '/templates/recruiterSearch.html',
-		controller: 'professorController'
+	.when('/researchSearch', {
+		templateUrl: '/templates/studentResearch.html',
+		controller: 'studentResearchController'
+
 	})
 	.otherwise({
 		templateUrl: '/templates/404.html'

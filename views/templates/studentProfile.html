@@ -1,29 +1,81 @@
 <div class="container">
 
-	<div class="row">
+    <div class="" layout="row" layout-xs="column">
 
-		<div class="col-md-3">
-			<img src="http://placehold.it/150x150">
-		</div>
-		<div class="col-md-9 studentInfo">
-			<ul class="nav navbar-nav" id="navigation">
+        <div flex="15">
+            <img width="150" height="150" src="{{profileImage}}">
+        </div>
+        <div flex="75" layout="column" class="studentInfo">
+            <ul id="navigation">
 
-                <li class="selected" id="software">{{firstName}} {{lastName}}</li>
-                <li class="" id="news">{{major}}</li>
-                <li class="" id="aboutUs">{{resume}}</li>
+                <li flex="100" class="selected" id="software"><h4>{{firstName}} {{lastName}}</h4></li>
+                <li flex="100" class="" id="news">{{major}}</li>
+
+
             </ul>
-		</div>
 
-	</div>
+        </div>
+        <a flex="10" href="{{resume}}"><md-button>Resume</md-button></a>
 
-		<section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-		      <md-button>{{firstName}}</md-button>
-		      <md-button md-no-ink class="md-primary">Primary (md-noink)</md-button>
-		      <md-button ng-disabled="true" class="md-primary">Disabled</md-button>
-		      <md-button class="md-warn">{{lastName}}</md-button>
-		      <div class="label">Flat</div>
-	    </section>
+    </div>
 
 
+
+
+    <br><br><br>
+    <section class="projects" layout="column">
+        <h3 flex>Extracurricular Projects</h3>
+        <div class="row" >
+            <ul ng-repeat="project in projects" >
+
+                <li class="col-md-4">
+                    <md-button class="md-default md-raised" ng-click="showAdvanced($event, project)">
+                      <img width="200px" height="200px" src="{{project.picture}}">
+                    </md-button>
+                    <h5>{{project.name}}</h5>
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+
+    <section class="research" layout="column">
+        <h3 flex>Research</h3>
+        <div class="row" >
+            <ul ng-repeat="r in research" >
+
+                <li class="col-md-4">
+                    <h5>{{r.name}}</h5>
+                    <p>{{r.department}}</p>
+                    <p>Advisor: {{r.advisor}}</p>
+
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+    <form name="reviewForm" ng-submit="addProject(project)">
+
+        <!--  Live Preview -->
+        <!--  <blockquote >
+        <strong>{{reviewCtrl.review.stars}} Stars</strong>
+        {{reviewCtrl.review.body}}
+        <cite class="clearfix">—{{reviewCtrl.review.author}}</cite>
+        </blockquote> -->
+
+        <!--  Review Form -->
+        <h4>Add a Project</h4>
+        <fieldset class="form-group">
+            <input ng-model="project.name" class="form-control" title="ProjectName" placeholder="Project Name" />
+        </fieldset>
+        <fieldset class="form-group">
+            <input ng-model="project.description" class="form-control" placeholder="Project description" title="Description" />
+        </fieldset>
+        <fieldset class="form-group">
+            <input type="submit" class="btn btn-primary pull-right" value="Submit Review" />
+        </fieldset>
+    </form>
 
 </div>
