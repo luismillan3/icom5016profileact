@@ -33,6 +33,14 @@ angular.module('app', ['ngRoute', 'ngMaterial','controller', 'professor','studen
 		templateUrl: '/templates/recruiterSearch.html',
 		controller: 'recruiterSearchController'
 	})
+	.when('/professor', {
+		templateUrl: '/templates/professor.html',
+		controller: 'recruiterSearchController'
+	})
+	.when('/research', {
+		templateUrl: '/templates/recruiterSearch.html',
+		controller: 'professorController'
+	})
 	.otherwise({
 		templateUrl: '/templates/404.html'
 	})
