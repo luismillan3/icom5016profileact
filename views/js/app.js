@@ -35,7 +35,8 @@ angular.module('app', ['ngRoute', 'ngMaterial','controller', 'professor','studen
 	})
 	.when('/professor', {
 		templateUrl: '/templates/professor.html',
-		controller: 'recruiterSearchController'
+		controller: 'professorController'
+		
 	}).when('/studentEvents', {
 		templateUrl: '/templates/studentEvents.html',
 		controller: 'studentEventsController'

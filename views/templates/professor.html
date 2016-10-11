@@ -21,7 +21,7 @@
 <center>
 <h1>University of Puerto Rico at Mayaguez</h1>
 <img src="user.png" height="300px" ><br>
-<h2>Lady Smith PhD</h2>
+<h2>{{profesora.name}} {{profesora.lastName}} {{profesora.title}}</h2>
 
 </center>
 <div class="container">
@@ -43,7 +43,10 @@
 <table class="table" width="75%">
 
 <tr><th>Project</th><th>Funding</th><th>Students</th></tr>
-<tr><td><a href="research_pofile.html"> Shark Buoy</a></td><td>$300.00</td><td>Luis Millan</td></tr>
+<tr ng-repeat="project in projects">
+      <td>{{ project.title }}</td><td>{{ project.funding }}</td><td>{{ project.student}}</td>
+    </tr>
+<!-- <tr><td><a href="research_pofile.html"> Shark Buoy</a></td><td>$300.00</td><td>Luis Millan</td></tr> -->
 
 
 </table>
