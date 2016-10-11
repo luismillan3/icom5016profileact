@@ -1,9 +1,10 @@
-angular.module('app', ['ngRoute', 'ngMaterial','controller', 'professor','student','recruiter'])
+angular.module('app', ['ngRoute', 'ngMaterial','mainController', 'professor','student','recruiter'])
 
 .config(function($routeProvider) {
 	$routeProvider
 	.when('/', {
-		templateUrl: '/templates/home.html'
+		templateUrl: '/templates/home.html',
+		controller: 'mainCtrl'
 	})
 	.when('/signin', {
 		templateUrl: '/templates/sign_in.html',
@@ -36,7 +37,7 @@ angular.module('app', ['ngRoute', 'ngMaterial','controller', 'professor','studen
 	.when('/professor', {
 		templateUrl: '/templates/professor.html',
 		controller: 'professorController'
-		
+
 	}).when('/studentEvents', {
 		templateUrl: '/templates/studentEvents.html',
 		controller: 'studentEventsController'
