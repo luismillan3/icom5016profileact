@@ -5,23 +5,34 @@
 
 	<br>
 	
-	<div>
-		 <div class="img-wrapper clearfix">
-                    <img ng-src="dummyprofilepic.png">
-                </div>
-		<div class="form-group">
-			<h2>{{recruiter.name}}  {{recruiter.lastname}}</h2>
-		</div>
-		<div class="form-group">
-			<h3><strong>Company:</strong> {{recruiter.company}}</h3>
-		</div>
-		<div class="form-group">
-			<h3><strong>email:</strong> {{recruiter.email}}</h3>
-		</div>
+	<center>
+<img src="img/user.png" height="300px" ><br>
+<h2>{{recruiter.name}} {{recruiter.lastname}}</h2>
+</center>
 
-	</div>
+<div class="container">
+<div class="panel panel-default">
+<div class="panel-heading">Profile</div>
+<div class="panel-body">
+<center>
+<table class="table" width="75%">
 
-	<button class="btn btn-primary" ng-click="frmToggle()">Edit Profile Info</button>
+<tr><th>Company</th><th>Email</th><th></th></tr>
+<tr>
+      <td>{{ recruiter.company }}</td><td>{{ recruiter.email }}</td><td>
+      	<button class="btn btn-primary" ng-click="frmToggle()">Edit</button>
+      </td>
+    </tr>
+<!-- <tr><td><a href="research_pofile.html"> Shark Buoy</a></td><td>$300.00</td><td>Luis Millan</td></tr> -->
+
+
+</table>
+</center>
+</div>
+</div>
+</div>
+
+	
 
 	<button class="btn btn-primary" ng-click="go('#/recruiterEvent')">Add Event</button>
 

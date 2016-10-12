@@ -1,8 +1,9 @@
 angular.module('mainController',[])
 
-.controller('mainCtrl', ['$scope', '$http', '$log', function($scope, $http, $log,$location) {
-
+.controller('mainCtrl', ['$scope', '$http', '$log','$window','$cookies','$location', function($scope,$window,$cookies, $http, $log,$location) {
+	//$scope.role=$cookies.get('role');
 	$scope.tempUsr={}
+	$scope.roleVal=0
 	$scope.users=[
 	{username:'Pedro',password:'pedro',role:'student'},
 	{username:'Juan',password:'galleta',role:'recruiter'},
@@ -11,12 +12,23 @@ angular.module('mainController',[])
 	]
 	$scope.login=function(usr){
 		$scope.temUsr={}
+		var bool=false;
 		for(var i=0;i<$scope.users.length;i++){
 			if($scope.users[i].username===usr.username&&
 				$scope.users[i].password===usr.password){
-				window.location="#/"+$scope.users[i].role;
+				$scope.role=$scope.users[i].role
+				//$cookies.put('role',$scope.role);
+				bool=true;
+				break
 			}
 		}
+		if(bool==true)window.location='#/'+$scope.users[i].role
+	}
+	$scope.signUp=function(usr){
+		$scope.temUsr={}
+		$scope.users.push(usr);
+
+		$location.path(usr.role)
 	}
 
 }])

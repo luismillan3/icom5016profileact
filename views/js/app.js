@@ -1,4 +1,5 @@
-angular.module('app', ['ngRoute', 'ngMaterial','mainController', 'professor','student','recruiter'])
+
+var app=angular.module('app', ['ngRoute','ngCookies', 'ngMaterial','mainController', 'professor','student','recruiter'])
 
 .config(function($routeProvider) {
 	$routeProvider
