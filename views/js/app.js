@@ -1,5 +1,5 @@
 
-var app=angular.module('app', ['ngRoute','ngCookies', 'ngMaterial','mainController', 'professor','student','recruiter'])
+var app=angular.module('app', ['ngRoute','ngCookies', 'ngMaterial','mainController', 'professor','student','recruiter','research'])
 
 .config(function($routeProvider) {
 	$routeProvider
@@ -43,11 +43,6 @@ var app=angular.module('app', ['ngRoute','ngCookies', 'ngMaterial','mainControll
 	}).when('/studentEvents', {
 		templateUrl: '/templates/studentEvents.html',
 		controller: 'studentEventsController'
-	})
-	.when('/researchSearch', {
-		templateUrl: '/templates/studentResearch.html',
-		controller: 'studentResearchController'
-
 	})
 	.otherwise({
 		templateUrl: '/templates/404.html'
