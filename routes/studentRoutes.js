@@ -51,15 +51,18 @@ router.get('/profile', function(req, res, next) {
 
 router.post('/projects', function(req, res, next) {
     console.log(req.body)
-    if(!req.body.hasOwnProperty('title') || !req.body.hasOwnProperty('description')){
+    if(!req.body.hasOwnProperty('title') || !req.body.hasOwnProperty('description') || !req.body.hasOwnProperty('advisor')){
       res.statusCode = 400;
       return res.send('Error: Missing fields for event.');
     }
     student.projects.push(req.body)
 
     res.json(student.projects);
+    console.log(req.body)
 
 });
+
+
 // router.delete('/events/:id', function(req, res, next) {
 
 //   console.log("From delete route");

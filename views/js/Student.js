@@ -173,9 +173,9 @@ angular.module('student',[])
     //   projects.push(this.project);
     // };
 
-    // $scope.display=function(project){
-    //     $scope.selectedProject=project;
-    // }
+    $scope.display=function(project){
+        $scope.selectedProject=project;
+    }
 
     $scope.showAdvanced = function(ev,project) {
       $mdDialog.show({
