@@ -51,7 +51,7 @@ router.get('/profile', function(req, res, next) {
 
 router.post('/projects', function(req, res, next) {
     console.log(req.body)
-    if(!req.body.hasOwnProperty('title') || !req.body.hasOwnProperty('description') || !req.body.hasOwnProperty('advisor')){
+    if(!req.body.hasOwnProperty('title') || !req.body.hasOwnProperty('description')){
       res.statusCode = 400;
       return res.send('Error: Missing fields for event.');
     }
