@@ -44,6 +44,10 @@ var app=angular.module('app', ['ngRoute','ngCookies', 'ngMaterial','mainControll
 		templateUrl: '/templates/studentEvents.html',
 		controller: 'studentEventsController'
 	})
+	.when('/studentResearch', {
+		templateUrl: '/templates/studentResearch.html',
+		controller: 'studentResearchController'
+	})
 	.otherwise({
 		templateUrl: '/templates/404.html'
 	})

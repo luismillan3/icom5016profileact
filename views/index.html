@@ -55,12 +55,10 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-left">
-                <li><a href="#/">Home</a></li>
-                <li ><a href="#/professor">Professors</a></li>
-                <li><a href="#/recruiter">Recruiters</a></li>
-                <li><a href="#/research">Projects</a></li>
-                <li><a href="#/student">Undergrad Students</a></li> 
-                <li><a href="#/">Funding</a></li> 
+                <li><a href="#/student">Home</a></li>
+                <li><a href="#/studentEvents">Events</a></li>
+                <li><a href="#/studentResearch">Research</a></li>
+               
               </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
@@ -68,6 +66,7 @@
         </div>
  
  <div >
+ <div ng-show='roleSet("professor")'>
  <nav class="navbar navbar-default">
           <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -84,12 +83,8 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-left">
-                <li><a href="#/">Home</a></li>
-                <li ><a href="#/professor">Professors</a></li>
-                <li><a href="#/recruiter">Recruiters</a></li>
-                <li><a href="#/research">Projects</a></li>
-                <li><a href="#/student">Undergrad Students</a></li> 
-                <li><a href="#/">Funding</a></li> 
+                <li><a href="#/professor">Home</a></li>
+                <li><a href="#/professorResearch">Projects</a></li>
               </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
