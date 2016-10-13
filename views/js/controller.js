@@ -22,13 +22,21 @@ angular.module('mainController',[])
 				break
 			}
 		}
-		if(bool==true)window.location='#/'+$scope.users[i].role
+		if(bool==true){
+			$('#loginModal').modal('hide');
+			$('.modal-backdrop').remove();
+			$location.path('/'+$scope.users[i].role)
+		}
 	}
 	$scope.signUp=function(usr){
 		$scope.temUsr={}
 		$scope.users.push(usr);
+		 $('#signupModal').modal('hide');
+   		 $('.modal-backdrop').remove();
+		$location.path('/'+usr.role)
 
-		$location.path(usr.role)
 	}
+	
+	
 
 }])

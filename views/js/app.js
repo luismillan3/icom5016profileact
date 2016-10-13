@@ -25,7 +25,8 @@ var app=angular.module('app', ['ngRoute','ngCookies', 'ngMaterial','mainControll
 	})
 	 .when('/recruiter', {
 		templateUrl: '/templates/recruiterProfile.html',
-		controller: 'recruiterProfileController'
+		controller: 'recruiterProfileController',
+		aunthenticated:true
 	})
 	 .when('/recruiterEvent', {
 		templateUrl: '/templates/recruiterEvent.html',
