@@ -1,9 +1,9 @@
 angular.module('mainController',[])
 
 .controller('mainCtrl', ['$scope', '$http', '$log','$window','$cookies','$location', function($scope,$window,$cookies, $http, $log,$location) {
-	//$scope.role=$cookies.get('role');
+	$scope.role="none"
 	$scope.tempUsr={}
-	$scope.roleVal=0
+	
 	$scope.users=[
 	{username:'Pedro',password:'pedro',role:'student'},
 	{username:'Juan',password:'galleta',role:'recruiter'},
@@ -25,6 +25,7 @@ angular.module('mainController',[])
 		if(bool==true){
 			$('#loginModal').modal('hide');
 			$('.modal-backdrop').remove();
+			$scope.role=$scope.users[i].role
 			$location.path('/'+$scope.users[i].role)
 		}
 	}
@@ -33,8 +34,12 @@ angular.module('mainController',[])
 		$scope.users.push(usr);
 		 $('#signupModal').modal('hide');
    		 $('.modal-backdrop').remove();
+   		 $scope.role=usr.role
 		$location.path('/'+usr.role)
 
+	}
+	$scope.roleSet=function(rol){
+		return $scope.role===rol;
 	}
 	
 	
