@@ -1,6 +1,5 @@
 var express = require('express');
 var app = express();
-var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var pg = require('pg');
@@ -29,6 +28,9 @@ app.listen(app.get('port'), function() {
 
 var recruiter = require('./routes/recruiterRoutes');
 app.use('/recruiter', recruiter);
+
+var student = require('./routes/studentRoutes');
+app.use('/student', student);
 
 
 
