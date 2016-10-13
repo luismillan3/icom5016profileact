@@ -111,15 +111,16 @@ angular.module('student',[])
             console.log("could not add event")
         });
     };
-
+    $scope.project={}
      $scope.addProject=function(re){
+        $scope.project={}
         re.id=$scope.student.projects.length+1;
         console.log(re)
         $scope.newr={}
 
         $http.post('/student/projects', re )
         .success(function (data) {
-            $scope.projects = data;
+            $scope.student.projects = data;
         })
         .error(function (data, status, header, config) {
             console.log(data, status);

@@ -55,6 +55,7 @@ router.post('/projects', function(req, res, next) {
       res.statusCode = 400;
       return res.send('Error: Missing fields for event.');
     }
+    req.body.picture= "https://yellowpencil.com/assets/blog/banners/banner-angularjs.jpg"
     student.projects.push(req.body)
 
     res.json(student.projects);
