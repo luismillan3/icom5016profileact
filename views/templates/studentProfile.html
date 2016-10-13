@@ -3,13 +3,13 @@
     <div class="" layout="row" layout-xs="column">
 
         <div flex="15">
-            <img width="150" height="150" src="{{profileImage}}">
+            <img width="150" height="150" src="{{student.profileImage}}">
         </div>
         <div flex="75" layout="column" class="studentInfo">
             <ul id="navigation">
 
-                <li flex="100" class="selected" id="software"><h4>{{firstName}} {{lastName}}</h4></li>
-                <li flex="100" class="" id="news">{{major}}</li>
+                <li flex="100" class="selected" id="software"><h4>{{student.name}} {{student.lastName}}</h4></li>
+                <li flex="100" class="" id="news">{{student.major}}</li>
 
 
             </ul>
@@ -22,13 +22,13 @@
     <section class="projects" layout="column">
         <h3 flex>Extracurricular Projects</h3>
         <div class="row" >
-            <ul ng-repeat="project in projects" >
+            <ul ng-repeat="project in student.projects" >
 
                 <li class="col-md-4">
                     <md-button class="md-default md-raised" ng-click="showAdvanced($event, project)">
                       <img width="200px" height="200px" src="{{project.picture}}">
                     </md-button>
-                    <h5>{{project.name}}</h5>
+                    <h5>{{project.title}}</h5>
                 </li>
             </ul>
         </div>
@@ -39,7 +39,7 @@
     <section class="research" layout="column">
         <h3 flex>Research</h3>
         <div class="row" >
-            <ul ng-repeat="r in research" >
+            <ul ng-repeat="r in student.research" >
 
                 <li class="col-md-4">
                     <h5>{{r.name}}</h5>
@@ -63,15 +63,26 @@
 
         <!--  Review Form -->
         <h4>Add a Project</h4>
-        <fieldset class="form-group">
-            <input ng-model="project.name" class="form-control" title="ProjectName" placeholder="Project Name" />
-        </fieldset>
-        <fieldset class="form-group">
-            <input ng-model="project.description" class="form-control" placeholder="Project description" title="Description" />
-        </fieldset>
-        <fieldset class="form-group">
-            <input type="submit" class="btn btn-primary pull-right" value="Submit Review" />
-        </fieldset>
+        <div class="form-group">
+            <label for="title" class="col-sm-2 control-label">Title</label>
+            <div class="col-sm-10">
+                <input type="text" ng-model="project.title" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="description" class="col-sm-2 control-label">Description</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" ng-model="project.description"></textarea>
+            </div>
+        </div>
+        <!-- <div class="form-group">
+            <datetimepicker data-ng-model="data.date" ></datetimepicker>
+        </div> -->
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" value="submit" class="btn btn-primary">Insert Event</button>
+            </div>
+        </div>
     </form>
 
 </div>

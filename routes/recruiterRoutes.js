@@ -22,7 +22,7 @@ var students = [
 router.get('/events', function(req, res, next) {
     console.log('entre')
     res.json(events);
-   
+
 });
 
 router.post('/events', function(req, res, next) {
@@ -33,12 +33,12 @@ router.post('/events', function(req, res, next) {
       return res.send('Error: Missing fields for event.');
     }
     events.push(req.body)
-    
+
     res.json(events);
-   
+
 });
 router.delete('/events/:id', function(req, res, next) {
-  
+
   console.log("From delete route");
   console.log(req.params.id);
   for(var i=0;i<events.length;i++){
@@ -52,7 +52,7 @@ router.delete('/events/:id', function(req, res, next) {
 router.get('/profile', function(req, res, next) {
     console.log('entre')
     res.json(recruiter);
-   
+
 });
 router.put('/profile/update', function(req, res, next) {
     console.log('entre')
@@ -60,13 +60,13 @@ router.put('/profile/update', function(req, res, next) {
     || !req.body.hasOwnProperty('email'))
       recruiter=req.body;
     res.json(recruiter);
-   
+
 });
 
 router.get('/search', function(req, res, next) {
     console.log('entre')
     res.json(students);
-   
+
 });
 
 

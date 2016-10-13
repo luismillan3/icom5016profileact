@@ -7,7 +7,7 @@
 
         <md-input-container class="md-block" flex-gt-sm>
             <label>Research Title</label>
-            <md-select ng-model="criteria.name">
+            <md-select ng-model="criteria.projects">
               <md-option ng-repeat="research in projects" value="{{research.name}}">
                 {{research.name}}
               </md-option>
@@ -25,7 +25,7 @@
 
           <md-input-container class="md-block" flex-gt-sm>
             <label>Advisor</label>
-            <md-select ng-model="criteria.advisor">
+            <md-select ng-model="criteria.projects">
               <md-option ng-repeat="research in projects" value="{{research.advisor}}">
                 {{research.advisor}}
               </md-option>
@@ -45,10 +45,10 @@
 
     <table class="table table-striped">
         <tr>
-            <th>Name</th><th>Major</th><th>GPA</th><th>View</th>
+            <th>Name</th><th>Major</th><th>Advisor</th><th>View</th>
         </tr>
         <tr ng-repeat="research in results">
-            <td>{{ research.name }}</td><td>{{ research.department }}</td><td>{{ student.gpa }}</td><td><button class="btn btn-success" data-target="#viewModal" data-toggle="modal" ng-click="display(student)">Look!</button></td>
+            <td>{{ research.name }}</td><td>{{ research.department }}</td><td>{{ research.advisor }}</td><td><button class="btn btn-success" data-target="#viewModal" data-toggle="modal" ng-click="display(student)">Look!</button></td>
         </tr>
     </table>
 <!-- student template pop up -->

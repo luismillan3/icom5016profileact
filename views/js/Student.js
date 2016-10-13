@@ -75,42 +75,107 @@ angular.module('student',[])
         {date: '9/06/2106', name: 'Facebook Info Session', image:"luna.jpg", description:"Maecenas sed diam eget risus varius blandit sit amet non magna. Maecenas sed diam eget risus varius blandit sit amet non magna. Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum."},
     ]
 
-}]).controller('studentProfileController', ['$scope', '$http', '$log', '$mdDialog', function($scope, $http, $log, $mdDialog) {
-
-    selectedProject={}
-    projects = [
-          {id: 0, name: 'Enfoque Film Festival', picture:"http://www.filmfestivals.com/files/enfoque_logo_HORIZONTAL1.jpg?0", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
-          {id: 1, name: 'Tarzan Watch', picture:"http://www.nse.org/exchange/slides/135_4_Our-Mascot-Tarzan.jpg", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
-          {id: 2, name: 'Build NodeJS backend' , picture:"https://cdn.tutsplus.com/net/uploads/legacy/956_nodeJs/nodeJs.png", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
-          {id: 3, name: 'Get started with AngularJS' , picture:"https://yellowpencil.com/assets/blog/banners/banner-angularjs.jpg", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
-          {id: 4, name: 'Setup Postgres database' , picture:"https://yellowpencil.com/assets/blog/banners/banner-angularjs.jpg", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
-          {id: 5, name: 'Be awesome!' , picture:"https://yellowpencil.com/assets/blog/banners/banner-angularjs.jpg", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
-    ];
-
-    $scope.selectedProject={};
-
-    $scope.firstName="Fabio";
-    $scope.lastName="Lanzoni";
-    $scope.profileImage = "https://s-media-cache-ak0.pinimg.com/236x/bd/01/40/bd01401c5b6c716b8b14786ec995ecbe.jpg";
-    $scope.major="Computer Engineering";
-    $scope.resume= "https://github.com/Specialist17/Resume/blob/master/Fernando-Arocho-Colom_Resume.pdf";
-    $scope.projects = projects
-
-    $scope.research = [
-        { name: 'Enfoque Film Festival', department: 'Computer Engineering', advisor: 'Nayda Santiago'},
-        { name: 'Tiburones', department: 'Electrical Engineering', advisor: 'Nayda Santiago'},
-
-    ];
+}]).controller('studentProfileController', ['$scope', '$http', '$log', '$mdDialog', function($scope, $http, $log, $mdDialog, $location) {
 
 
-    $scope.addProject = function(project){
-      this.project.id = projects.length
-      projects.push(this.project);
+    $scope.newr={}
+    $scope.student={}
+
+    $scope.frmToggle = function() {
+        $('#profileForm').slideToggle();
+    }
+    $scope.go = function ( path ) {
+      console.log(path);
+      window.location=path;
+    }
+    $scope.getStudent = function () {
+            $http.get('/student/profile')
+            .success(function (data, status) {
+                $scope.student = data;
+            })
+            .error(function (data, status) {
+              console.log(data, status);
+            console.log("Could not get all")
+            });
+    };
+    $scope.updateProfile=function(re){
+        console.log(re)
+        $scope.newr={}
+
+        $http.put('/student/update', re )
+        .success(function (data) {
+            $scope.student = data;
+        })
+        .error(function (data, status, header, config) {
+            console.log(data, status);
+            console.log("could not add event")
+        });
     };
 
-    $scope.display=function(project){
-        $scope.selectedProject=project;
-    }
+     $scope.addProject=function(re){
+        re.id=$scope.student.projects.length+1;
+        console.log(re)
+        $scope.newr={}
+
+        $http.post('/student/projects', re )
+        .success(function (data) {
+            $scope.projects = data;
+        })
+        .error(function (data, status, header, config) {
+            console.log(data, status);
+            console.log("could not add event")
+        });
+    };
+
+        //  $scope.addProject=function(e){
+        // e.id=$scope.projects.length+1;
+        //  console.log(e)
+
+        //  $http.post('/student/projects', e )
+        //     .success(function (data) {
+        //         $scope.projects = data;
+        //     })
+        //     .error(function (data, status, header, config) {
+        //         console.log(data, status);
+        //         console.log("could not add event")
+        //     });
+        // };
+    $scope.getStudent();
+
+    // selectedProject={}
+    // projects = [
+    //       {id: 0, name: 'Enfoque Film Festival', picture:"http://www.filmfestivals.com/files/enfoque_logo_HORIZONTAL1.jpg?0", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
+    //       {id: 1, name: 'Tarzan Watch', picture:"http://www.nse.org/exchange/slides/135_4_Our-Mascot-Tarzan.jpg", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
+    //       {id: 2, name: 'Build NodeJS backend' , picture:"https://cdn.tutsplus.com/net/uploads/legacy/956_nodeJs/nodeJs.png", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
+    //       {id: 3, name: 'Get started with AngularJS' , picture:"https://yellowpencil.com/assets/blog/banners/banner-angularjs.jpg", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
+    //       {id: 4, name: 'Setup Postgres database' , picture:"https://yellowpencil.com/assets/blog/banners/banner-angularjs.jpg", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
+    //       {id: 5, name: 'Be awesome!' , picture:"https://yellowpencil.com/assets/blog/banners/banner-angularjs.jpg", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
+    // ];
+
+    // $scope.selectedProject={};
+
+    // $scope.firstName="Fabio";
+    // $scope.lastName="Lanzoni";
+    // $scope.profileImage = "https://s-media-cache-ak0.pinimg.com/236x/bd/01/40/bd01401c5b6c716b8b14786ec995ecbe.jpg";
+    // $scope.major="Computer Engineering";
+    // $scope.resume= "https://github.com/Specialist17/Resume/blob/master/Fernando-Arocho-Colom_Resume.pdf";
+    // $scope.projects = projects
+
+    // $scope.research = [
+    //     { name: 'Enfoque Film Festival', department: 'Computer Engineering', advisor: 'Nayda Santiago'},
+    //     { name: 'Tiburones', department: 'Electrical Engineering', advisor: 'Nayda Santiago'},
+
+    // ];
+
+
+    // $scope.addProject = function(project){
+    //   this.project.id = projects.length
+    //   projects.push(this.project);
+    // };
+
+    // $scope.display=function(project){
+    //     $scope.selectedProject=project;
+    // }
 
     $scope.showAdvanced = function(ev,project) {
       $mdDialog.show({
@@ -143,8 +208,8 @@ angular.module('student',[])
         $mdDialog.hide(answer);
       };
 
-      $scope.firstName="Fabio";
-      $scope.lastName="Lanzoni";
+    //   $scope.firstName="Fabio";
+    //   $scope.lastName="Lanzoni";
       $scope.selectedProject=selectedProject;
     }
 
