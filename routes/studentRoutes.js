@@ -18,8 +18,8 @@ var student = {name:"Hijoerrr",
           {id: 6, title: 'Be awesome!' , picture:"https://yellowpencil.com/assets/blog/banners/banner-angularjs.jpg", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
     ],
   research: [
-        { name: 'Enfoque Film Festival', department: 'Computer Engineering', advisor: 'Nayda Santiago'},
-        { name: 'Tiburones', department: 'Electrical Engineering', advisor: 'Nayda Santiago'},
+        { name: 'Enfoque Film Festival', department: 'Computer Engineering', advisor: 'Nayda Santiago', role: 'Developer'},
+        { name: 'Tiburones', department: 'Electrical Engineering', advisor: 'Nayda Santiago', role: 'Developer'},
 
     ],
 

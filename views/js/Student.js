@@ -98,19 +98,19 @@ angular.module('student',[])
                 console.log("Could not get all")
             });
     };
-    $scope.updateProfile=function(re){
-        console.log(re)
-        $scope.newr={}
+    // $scope.updateProfile=function(re){
+    //     console.log(re)
+    //     $scope.newr={}
 
-        $http.put('/student/update', re )
-        .success(function (data) {
-            $scope.student = data;
-        })
-        .error(function (data, status, header, config) {
-            console.log(data, status);
-            console.log("could not add event")
-        });
-    };
+    //     $http.put('/student/update', re )
+    //     .success(function (data) {
+    //         $scope.student = data;
+    //     })
+    //     .error(function (data, status, header, config) {
+    //         console.log(data, status);
+    //         console.log("could not add event")
+    //     });
+    // };
     $scope.project={}
      $scope.addProject=function(re){
         $scope.project={}
