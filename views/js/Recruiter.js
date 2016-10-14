@@ -17,11 +17,11 @@ angular.module('recruiter',[])
             .success(function (data, status) {
                 $scope.recruiter = data;
             })
-            .error(function (data, status) {               
+            .error(function (data, status) {
             	console.log(data, status);
         		console.log("Could not get all")
             });
-        };	
+        };
    $scope.updateProfile=function(re){
     	 console.log(re)
     	 $scope.newr={}
@@ -49,7 +49,7 @@ angular.module('recruiter',[])
             .success(function (data, status) {
                 $scope.events = data;
             })
-            .error(function (data, status) {               
+            .error(function (data, status) {
             	console.log(data, status);
         		console.log("Could not get all")
             });
@@ -57,7 +57,7 @@ angular.module('recruiter',[])
     $scope.addEvent=function(e){
     	e.id=$scope.events.length+1;
     	 console.log(e)
-    	 
+
      	 $http.post('/recruiter/events', e )
             .success(function (data) {
                 $scope.events = data;
@@ -67,7 +67,7 @@ angular.module('recruiter',[])
         		console.log("could not add event")
             });
         };
-    
+
      // $scope.addEvent=function(e){
      // 	$scope.events.push(e);
      // 	$scope.event=[];
@@ -81,7 +81,7 @@ angular.module('recruiter',[])
         		console.log("could not remove event")
             })
       };
-    
+
      $scope.getEvents();
 
 }]).controller('recruiterSearchController', ['$scope', '$http', '$log', function($scope, $http, $log) {
@@ -96,19 +96,19 @@ angular.module('recruiter',[])
 		{value:"INCI"},
 		{value:"ININ"},
 		{value:"INQU"}]
-	  
+
 	  $scope.getStudents = function () {
             $http.get('/recruiter/search')
             .success(function (data, status) {
                 $scope.students = data;
                 $scope.results=$scope.students
             })
-            .error(function (data, status) {               
+            .error(function (data, status) {
             	console.log(data, status);
         		console.log("Could not get students")
             });
         };
-      
+
       $scope.display=function(student){
       	$scope.selectedStudent=student;
       }
@@ -116,7 +116,7 @@ angular.module('recruiter',[])
       	$scope.results=[]
       	$scope.criteria={}
       	for(var i=0;i<$scope.students.length;i++){
-      		
+
       		// if(criteria==null)break;
       		if(criteria.gpa!=null &&criteria.major!=null){
       			if ($scope.students[i].major==criteria.major&&$scope.students[i].gpa>=criteria.gpa){
@@ -133,7 +133,7 @@ angular.module('recruiter',[])
       				$scope.results.push($scope.students[i])
       		}
       		}
-      		
+
       	}
       }
       $scope.getStudents();

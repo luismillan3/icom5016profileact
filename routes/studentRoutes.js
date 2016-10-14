@@ -4,7 +4,7 @@ var pg = require('pg');//para la base de datos luego
 
 
 var student = {name:"Hijoerrr",
-  lastname:"Diablo",
+  lastName:"Diablo",
   email:"diablo@upr.edu",
   profileImage: "https://s-media-cache-ak0.pinimg.com/236x/bd/01/40/bd01401c5b6c716b8b14786ec995ecbe.jpg",
   major: "Computer Engineering",
@@ -76,14 +76,14 @@ router.post('/projects', function(req, res, next) {
 //   res.json(events);
 //   });
 
-// router.put('/update', function(req, res, next) {
-//     console.log('entre')
-//      if(!req.body.hasOwnProperty('name') || !req.body.hasOwnProperty('lastname')
-//     || !req.body.hasOwnProperty('email'))
-//       student=req.body;
-//     res.json(student);
+router.put('/profileUpdate', function(req, res, next) {
+    console.log('entre')
+     if(!req.body.hasOwnProperty('name') || !req.body.hasOwnProperty('lastname')
+    || !req.body.hasOwnProperty('email'))
+      recruiter=req.body;
+    res.json(recruiter);
 
-// });
+});
 
 
 

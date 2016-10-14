@@ -17,7 +17,7 @@
                 <li><a href="#/student">Home</a></li>
                 <li><a href="#/studentEvents">Events</a></li>
                 <li><a href="#/studentResearch">Research</a></li>
-               
+
               </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
@@ -30,16 +30,51 @@
             <img width="150" height="150" src="{{student.profileImage}}">
         </div>
         <div flex="75" layout="column" class="studentInfo">
+
+            <form editable-form name="editableForm" onaftersave="updateProfile()">
             <ul id="navigation">
 
-                <li flex="100" class="selected" id="software"><h4>{{student.name}} {{student.lastName}}</h4></li>
-                <li flex="100" class="" id="news">{{student.major}}</li>
+                <li>
+                    <span editable-text="student.name" e-name="name" e-form="textBtnForm" >
+                        {{ student.name || 'empty' }}
+                    </span>
+                </li>
 
+
+                <!-- <li flex="100" class="selected" id="software">
+                    <h4 ng-if="!editMode">{{student.name}} {{student.lastName}}</h4>
+                    <span ng-if="editMode">
+                        <md-input-container>
+                            <label>Name</label>
+                            <input ng-model="student.name" type="text">
+                        </md-input-container>
+                        <md-button ng-click="updateProfile(student.name); editMode = false">Save</md-button>
+                    <span>
+                </li> -->
+                <!-- <li flex="100" class="" id="news">{{student.major}}</li> -->
+
+                <li>
+                    <span editable-text="student.major" e-name="major" e-form="textBtnForm">
+                        {{ student.major || 'empty' }}
+                    </span>
+                </li>
+                <!-- buttons to submit / cancel form -->
+                <span ng-show="editableForm.$visible">
+                    <md-button type="submit" ng-disabled="editableForm.$waiting">
+                      Save
+                    </md-button>
+                    <md-button type="button" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+                      Cancel
+                    </md-button>
+                </span>
 
             </ul>
+            </form>
 
         </div>
-        <a flex="10" href="{{resume}}"><md-button>Resume</md-button></a>
+        <md-button type="button" class="btn btn-default" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+        Edit
+      </md-button>
 
     </div>
 
@@ -48,7 +83,7 @@
         <div class="row" >
             <ul ng-repeat="project in student.projects" >
 
-                <li class="col-md-4">
+                <li class="col-md-4 col-sm-6 col-xs-12">
                     <md-button class="md-default md-raised" ng-click="showAdvanced($event, project)">
                       <img width="200px" height="200px" src="{{project.picture}}">
                     </md-button>
