@@ -37,7 +37,7 @@
 <div class="panel panel-default">
 <div class="panel-heading">Current Research  
 
-<div class="pull-right"> <button class="btn btn-success" data-target="#viewModalAddResearch" data-toggle="modal" ng-click="display(research)">Add New Research</button></div>
+<div class="pull-right"> <button class="btn btn-success" data-target="#viewModalAddResearch" data-toggle="modal" ng-click="display(student)">Add New Research</button></div>
 
 <br><br>
 </div>
@@ -54,7 +54,7 @@
       <p ng-repeat ="st in project.student">{{st}}</p> 
 
       </td>
-      <td> <button class="btn btn-success" >Manage Students</button> </td>
+      <td> <button class="btn btn-success" data-target="#viewModalStudent" data-toggle="modal" ng-click="display(project.student)">Manage Students</button> </td>
       <td> <button class="btn btn-success" >Edit Research</button> </td>
     </tr>
 
@@ -67,7 +67,7 @@
 
 
 
-<!-- Donate Option -->
+<!-- Add Option -->
   <div class="modal fade" tabindex="-1" id="viewModalAddResearch"
         data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog modal-lg">
@@ -103,6 +103,40 @@
 
 
                    </form>
+                </div>
+    
+ 
+            </div>
+            <div class="modal-footer">
+               
+                <button type="button" class="btn btn-primary">Done</button>
+                <button type="button" class="btn btn-primary"
+                        data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Edit Students-->
+ <div class="modal fade" tabindex="-1" id="viewModalStudent"
+        data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    &times;
+                </button>
+                <h4 class="modal-title">Student Management</h4>
+            </div>
+            <div class="modal-body">
+                <div class="img-wrapper clearfix">
+                  <table class="table">
+                    <tr ng-repeat = "Students in selectedStudent"><td>{{Students}}</td>
+
+                    <td><button type="button" class="btn btn-warning">X</button></td></tr>
+
+                  </table>
                 </div>
     
  

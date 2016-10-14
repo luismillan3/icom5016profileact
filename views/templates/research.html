@@ -39,7 +39,7 @@
         <tr>
             <th>Name</th><th>Major</th><th>Advisor</th><th>View</th><th>Contribution</th>
         </tr>
-        <tr ng-repeat="research in results | filter: query">
+        <tr ng-repeat="research in projectazos | filter: query">
             <td>{{ research.name }}</td><td>{{ research.department }}</td><td>{{ research.advisor }}</td><td><button class="btn btn-success" data-target="#viewModal" data-toggle="modal" ng-click="display(research)">Look!</button></td>
 			<td>
             <button class="btn btn-success" data-target="#viewModalDonate" data-toggle="modal" ng-click="display(research)">Donate</button></td>

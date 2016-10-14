@@ -29,6 +29,9 @@ app.listen(app.get('port'), function() {
 var recruiter = require('./routes/recruiterRoutes');
 app.use('/recruiter', recruiter);
 
+var research = require('./routes/researchRoutes');
+app.use('/investigacion', research);
+
 var student = require('./routes/studentRoutes');
 app.use('/student', student);
 
