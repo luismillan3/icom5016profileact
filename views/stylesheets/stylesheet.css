@@ -2,6 +2,17 @@ html{
     background-color: #fff;
 }
 
+
+
+
+#addProject{
+    margin-bottom: 2em;
+}
+
+.formItems{
+    margin: 1em 0;
+}
+
 li {
     list-style: none;
 }

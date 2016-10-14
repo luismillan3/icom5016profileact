@@ -81,12 +81,44 @@
 
     </div>
 
+    <br>
+    <md-divider ></md-divider>
+    <br>
+
     <section class="projects" layout="column">
         <div layout="row" class="row">
             <h3 flex="90">Extracurricular Projects</h3>
-            <md-button flex="10" type="button" ng-show="editableForm.$visible" ng-click="editableForm.$cancel()">
-                Done
+            <md-button flex="10" type="button" ng-show="editableForm.$visible" ng-click="frmToggle()">
+                Add Project
             </md-button>
+
+        </div>
+        <div id="addProject">
+            <form id="projectForm" name="projectForm" ng-submit="addProject(project)" hidden>
+
+
+                <h4>Add a Project</h4>
+                <div class="form-group">
+                    <label for="title" class="col-sm-2 control-label formItems">Title</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="title" ng-model="project.title" class="form-control formItems">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description" class="col-sm-2 control-label formItems">Description</label>
+                    <div class="col-sm-10">
+                        <textarea name="description" class="form-control formItems" ng-model="project.description"></textarea>
+                    </div>
+                </div>
+                <!-- <div class="form-group">
+                    <datetimepicker data-ng-model="data.date" ></datetimepicker>
+                </div> -->
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" ng-click="addProject(project)" class="btn btn-primary formItems">Insert Event</button>
+                    </div>
+                </div>
+            </form>
         </div>
 
         <div class="row" >
@@ -96,13 +128,16 @@
                     <md-button class="md-default md-raised" ng-click="showAdvanced($event, project)">
                       <img width="200px" height="200px" src="{{project.picture}}">
                     </md-button>
-                    <h5>{{project.title}}</h5>
+                    <p>{{project.title}}</p>
                 </li>
             </ul>
         </div>
 
     </section>
 
+    <br>
+    <md-divider></md-divider>
+    <br>
 
     <section class="research" layout="column">
         <h3 flex>Research</h3>
@@ -118,50 +153,27 @@
             </ul>
         </div> -->
 
-        <table class="table" width="75%">
+        <table class="bordered" width="75%">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Department</th>
+                    <th>Advisor</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
 
-        <tr>
-            <th>Title</th>
-            <th>Department</th>
-            <th>Advisor</th>
-            <th>Role</th>
-        </tr>
-        <tr ng-repeat="r in student.research">
-            <td>{{ r.name }}</td>
-            <td>{{ r.department }}</td>
-            <td>{{ r.advisor }}</td>
-            <td>{{ r.role }}</td>
-        </tr>
+            <tbody>
+                <tr ng-repeat="r in student.research">
+                    <td>{{ r.name }}</td>
+                    <td>{{ r.department }}</td>
+                    <td>{{ r.advisor }}</td>
+                    <td>{{ r.role }}</td>
+                </tr>
+            </tbody>
 
         </table>
 
     </section>
-
-    <form name="reviewForm" ng-submit="addProject(project)">
-
-
-        <h4>Add a Project</h4>
-        <div class="form-group">
-            <label for="title" class="col-sm-2 control-label">Title</label>
-            <div class="col-sm-10">
-                <input type="text" name="title" ng-model="project.title" class="form-control">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="description" class="col-sm-2 control-label">Description</label>
-            <div class="col-sm-10">
-                <textarea name="description" class="form-control" ng-model="project.description"></textarea>
-            </div>
-        </div>
-        <!-- <div class="form-group">
-            <datetimepicker data-ng-model="data.date" ></datetimepicker>
-        </div> -->
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" ng-click="addProject(project)" class="btn btn-primary">Insert Event</button>
-            </div>
-        </div>
-    </form>
-
 
 </div>
