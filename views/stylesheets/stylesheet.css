@@ -22,5 +22,16 @@ li {
 }
 
 .btn, .md-button{
-    font-size: 0.8em;
+    font-size: 0.9em;
+    margin: 0 0.5em;
+}
+
+.eventSearch{
+    margin: 0 auto;
+    width: 50%;
+}
+
+md-input-container{
+    margin: 0 10%;
+
 }

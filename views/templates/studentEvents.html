@@ -22,21 +22,20 @@
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
         </nav>
-<div class="container">
-
-    <div class="row">
-        <!-- <div class="calendar">
-            <iframe src="https://calendar.google.com/calendar/embed?src=upr.edu_lntpegvkkcihdbc028asip5q0s%40group.calendar.google.com&ctz=America/Puerto_Rico" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-        </div> -->
-        <!-- <div class="upcoming events">
-            <ul class="" ng-repeat="event in events">
-                <li>{{event.date}} {{event.name}}</li>
-            </ul>
-        </div> -->
+<div class="container-fluid">
+    <div class="eventSearch row">
+        <md-input-container>
+            <label>Search Event Name</label>
+            <input ng-model="event.name" type="search">
+        </md-input-container>
+        <md-input-container>
+            <label>Search Event Date</label>
+            <input ng-model="event.date" type="search">
+        </md-input-container>
     </div>
-    <md-content class="md-padding" layout="row" layout-wrap>
+    <md-content class="md-padding" layout="row" layout-wrap style="background-color: #fff">
 
-        <div ng-repeat="event in events" layout="column" flex-xs flex-gt-xs="33">
+        <div ng-repeat="event in events | filter:query | orderBy:event.date" layout="column" flex-xs flex-gt-xs="33">
             <md-card md-theme="{{ showDarkTheme ? 'dark-blue' : 'default' }}" md-theme-watch>
                 <md-card-title>
                   <md-card-title-text>
@@ -48,8 +47,8 @@
                   </md-card-title-media>
                 </md-card-title>
                 <md-card-actions layout="row" layout-align="end center">
-                  <md-button>Remind me</md-button>
-                  <md-button>More Info</md-button>
+                  <button class="btn btn-primary" >Remind me</button>
+                  <button class="btn btn-primary" ng-click="showAdvanced($event, project)">More Info</button>
                 </md-card-actions>
             </md-card>
         </div>

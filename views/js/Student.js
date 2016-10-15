@@ -64,7 +64,7 @@ angular.module('student',[])
 
 }]).controller('studentEventsController', ['$scope', '$http', '$log', function($scope, $http, $log) {
 
-    $scope.events = [ {date: '10/06/2106', name:'GM Info Session', image:"lib/img/eventsPlaceholder.jpg", description:"Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Donec sed odio dui. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod."},
+    $scope.events = [ {date: '7/06/2106', name:'GM Info Session', image:"lib/img/eventsPlaceholder.jpg", description:"Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Donec sed odio dui. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod."},
         {date: '10/25/2106', name: 'Graduate School Fair', image:"lib/img/eventsPlaceholder.jpg", description:"Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Donec sed odio dui. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod."},
         {date: '10/07/2106', name: 'Facebook Info Table', image:"lib/img/eventsPlaceholder.jpg", description:"Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Donec sed odio dui. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod."},
         {date: '9/06/2106', name: 'Facebook Info Session', image:"lib/img/eventsPlaceholder.jpg", description:"Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Donec sed odio dui. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod."},
@@ -74,6 +74,43 @@ angular.module('student',[])
         {date: '9/06/2106', name: 'Facebook Info Session', image:"lib/img/eventsPlaceholder.jpg", description:"Maecenas sed diam eget risus varius blandit sit amet non magna. Maecenas sed diam eget risus varius blandit sit amet non magna. Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum."},
         {date: '9/06/2106', name: 'Facebook Info Session', image:"lib/img/eventsPlaceholder.jpg", description:"Maecenas sed diam eget risus varius blandit sit amet non magna. Maecenas sed diam eget risus varius blandit sit amet non magna. Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum."},
     ]
+
+    $scope.display=function(event){
+        $scope.selectedEvent=event;
+    }
+
+    $scope.showAdvanced = function(ev,event) {
+      $mdDialog.show({
+        controller: DialogController,
+        templateUrl: 'components/eventDialog.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+      })
+      .then(function() {
+
+      }, function() {
+        $scope.status = 'You cancelled the dialog.';
+      });
+
+      selectedEvent=event
+    };
+
+    function DialogController($scope, $mdDialog) {
+        $scope.hide = function() {
+            $mdDialog.hide();
+        };
+
+        $scope.cancel = function() {
+            $mdDialog.cancel();
+        };
+
+        $scope.answer = function(answer) {
+            $mdDialog.hide(answer);
+        };
+        $scope.selectedEvent=selectedEvent;
+    }
 
 }]).controller('studentProfileController', ['$scope', '$http', '$log', '$mdDialog', function($scope, $http, $log, $mdDialog, $location) {
 
