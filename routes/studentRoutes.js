@@ -3,8 +3,8 @@ var router = express.Router();
 var pg = require('pg');//para la base de datos luego
 
 
-var student = {name:"Hijoerrr",
-  lastName:"Diablo",
+var student = {name:"Bartolo",
+  lastName:"Del Pueblo",
   email:"diablo@upr.edu",
   profileImage: "https://s-media-cache-ak0.pinimg.com/236x/bd/01/40/bd01401c5b6c716b8b14786ec995ecbe.jpg",
   major: "Computer Engineering",

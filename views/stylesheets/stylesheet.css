@@ -3,7 +3,14 @@ html{
 }
 
 
+/*---------------------------------- Student Profile ----------------------------------*/
+#resumeModal .modal-content{
+    height: 850px;
+}
 
+#resumeModal .modal-body{
+    height:700px;
+}
 
 #addProject{
     margin-bottom: 2em;
@@ -24,6 +31,10 @@ li {
 .btn, .md-button{
     font-size: 0.9em;
     margin: 0 0.5em;
+}
+
+#nameEdit{
+    font-size: 50%;
 }
 
 .eventSearch{

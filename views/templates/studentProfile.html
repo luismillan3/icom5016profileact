@@ -22,63 +22,83 @@
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
         </nav>
-<div class="container">
+<div class="container studentProfile">
 
     <div class="" layout="row" layout-xs="column">
-
-        <div flex="15">
-            <img width="150" height="150" src="{{student.profileImage}}">
-        </div>
-        <div flex="75" layout="column" class="studentInfo">
-
-            <form editable-form name="editableForm" onaftersave="updateProfile()">
-            <ul id="navigation">
-
-                <li>
+        <center flex>
+            <img src="img/user.png" height="300px" ><br>
+            <form editable-form name="editableForm1" onaftersave="updateProfile()">
+                <h2>
                     <span editable-text="student.name" e-name="name" e-form="textBtnForm" >
-                        {{ student.name || 'empty' }}
+                            {{ student.name || 'empty' }}
                     </span>
-                </li>
-
-
-                <!-- <li flex="100" class="selected" id="software">
-                    <h4 ng-if="!editMode">{{student.name}} {{student.lastName}}</h4>
-                    <span ng-if="editMode">
-                        <md-input-container>
-                            <label>Name</label>
-                            <input ng-model="student.name" type="text">
-                        </md-input-container>
-                        <md-button ng-click="updateProfile(student.name); editMode = false">Save</md-button>
-                    <span>
-                </li> -->
-                <!-- <li flex="100" class="" id="news">{{student.major}}</li> -->
-
-                <li>
-                    <span editable-text="student.major" e-name="major" e-form="textBtnForm">
-                        {{ student.major || 'empty' }}
+                    <span editable-text="student.lastName" e-name="name" e-form="textBtnForm" >
+                             {{ student.lastName || 'empty' }}
                     </span>
-                </li>
-                <!-- buttons to submit / cancel form -->
-                <span ng-show="editableForm.$visible">
-                    <md-button type="submit" ng-disabled="editableForm.$waiting">
-                      Save
-                    </md-button>
+                    <span ng-show="editableForm1.$visible">
+                        <md-button class="btn btn-default" id="nameEdit" type="submit" ng-disabled="editableForm1.$waiting">
+                          Save
+                        </md-button>
 
-                </span>
-
-            </ul>
+                    </span>
+                </h2>
             </form>
+        </center>
 
-        </div>
+
+
         <span>
-            <md-button type="button" class="btn btn-default" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+            <md-button type="button" class="btn btn-default" ng-click="editableForm1.$show()" ng-show="!editableForm1.$visible">
                 Edit
             </md-button>
-            <md-button type="button" class="btn btn-default" ng-show="editableForm.$visible" ng-click="editableForm.$cancel()">
+            <md-button type="submit" class="btn btn-default" ng-show="editableForm1.$visible" ng-click="updateProfile(); editableForm1.$cancel()">
                 Done
             </md-button>
-      </span>
+        </span>
 
+    </div>
+
+    <br>
+    <md-divider ></md-divider>
+    <br>
+
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">Profile</div>
+            <div class="panel-body">
+                <center>
+                    <form editable-form name="tableform" onaftersave="updateProfile()">
+                        <table class="table" width="75%" >
+                            <tr><th>Major</th><th>Resume</th></tr>
+                            <tr display="row">
+                                <td flex>
+                                    <span editable-text="student.major" e-name="name" e-form="tableform" >
+                                        {{ student.major || 'empty' }}
+                                    </span>
+                                </td flex>
+                                <td><!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#resumeModal">
+                                      View Resume
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                        <!-- buttons -->
+                        <div class="btn-edit">
+                            <button type="button" class="btn btn-default" ng-show="!tableform.$visible" ng-click="tableform.$show()">
+                                edit
+                            </button>
+                        </div>
+                        <div class="btn-form" ng-show="tableform.$visible">
+                            <button type="button" ng-disabled="tableform.$waiting" ng-click="updateProfile()" class="btn btn-default pull-right">add row</button>
+                            <button type="submit" ng-disabled="tableform.$waiting" class="btn btn-primary">save</button>
+                            <button type="button" ng-disabled="tableform.$waiting" ng-click="tableform.$cancel()" class="btn btn-default">cancel</button>
+                        </div>
+                    </form>
+
+                </center>
+            </div>
+        </div>
     </div>
 
     <br>
@@ -88,7 +108,7 @@
     <section class="projects" layout="column">
         <div layout="row" class="row">
             <h3 flex="90">Extracurricular Projects</h3>
-            <md-button class="md-raised md-primary" flex="10" type="button" ng-show="editableForm.$visible" ng-click="frmToggle()" style="font-size: 300%">
+            <md-button class="md-raised md-primary" flex="10" type="button" ng-show="editableForm1.$visible" ng-click="frmToggle()" style="font-size: 300%">
                 +
             </md-button>
 
@@ -161,4 +181,25 @@
 
     </section>
 
+</div>
+
+
+
+<div class="modal fade" id="resumeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel" style="">Resume</h4>
+      </div>
+      <div class="modal-body">
+        <object data="lib/img/resume.pdf" type="application/pdf" width="100%" height="100%">
+            <p><b>Example fallback content</b>: This browser does not support PDFs. Please download the PDF to view it: <a href="/pdf/sample-3pp.pdf">Download PDF</a>.</p>
+        </object>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
