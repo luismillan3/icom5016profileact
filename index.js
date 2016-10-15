@@ -32,6 +32,9 @@ app.use('/recruiter', recruiter);
 var research = require('./routes/researchRoutes');
 app.use('/investigacion', research);
 
+var researchprof = require('./routes/professorRoutes');
+app.use('/investigacionprof', researchprof);
+
 var student = require('./routes/studentRoutes');
 app.use('/student', student);
 

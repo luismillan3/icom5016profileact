@@ -37,7 +37,7 @@
 <div class="panel panel-default">
 <div class="panel-heading">Current Research  
 
-<div class="pull-right"> <button class="btn btn-success" data-target="#viewModalAddResearch" data-toggle="modal" ng-click="display(student)">Add New Research</button></div>
+<div class="pull-right"> <button class="btn btn-success" data-target="#viewModalAddResearch" data-toggle="modal" ng-click="display(projects)">Add New Research</button></div>
 
 <br><br>
 </div>
@@ -80,39 +80,37 @@
             </div>
             <div class="modal-body">
                 <div class="img-wrapper clearfix">
-                   <form>
+                   <form  id="addProjectForm" ng-submit="addProject(project)">
                     
                     <div class="form-group">
               <label for="title">Title:</label>
-              <input type="text" class="form-control" id="title">
+              <input type="text" ng-model = "project.title" class="form-control" id="title">
             </div>
             <div class="form-group">
-              <label for="smry">Summary</label>
-              <input type="text" class="form-control" id="smry">
+              <label for="smry">Funding</label>
+              <input type="text" ng-model = "project.funding"  class="form-control" id="smry">
           </div>
 
           <div class="form-group">
               <label for="studnt">Student:</label>
-              <input type="text" class="form-control" id="studnt">
+              <input type="text" ng-model = "project.student" class="form-control" id="studnt">
           </div>
 
-          <div class="form-group">
-              <label for="dept">Department:</label>
-              <input type="text" class="form-control" id="dept">
-          </div>
+      
 
 
-                   </form>
+                   
                 </div>
     
  
             </div>
             <div class="modal-footer">
                
-                <button type="button" class="btn btn-primary">Done</button>
+                <button type="submit" class="btn btn-primary">Done</button>
                 <button type="button" class="btn btn-primary"
                         data-dismiss="modal">Close</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
