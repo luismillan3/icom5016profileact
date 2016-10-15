@@ -1,1 +1,32 @@
-eventDialog.html
+
+  <md-dialog aria-label="{{selectedEvent.name}}">
+    <form ng-cloak>
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <h2>{{selectedEvent.name}}</h2>
+          <span flex></span>
+          <md-button class="md-icon-button" ng-click="cancel()">
+            <md-icon aria-label="Close dialog"><i class="fa fa-times" aria-hidden="true"></i></md-icon>
+          </md-button>
+        </div>
+      </md-toolbar>
+
+      <md-dialog-content>
+        <div class="md-dialog-content">
+          <h2></h2>
+          <p>{{selectedEvent.description}}</p>
+
+          <img style="margin: auto; max-width: 100%;" alt="Lush mango tree" src="{{selectedEvent.image}}">
+
+
+          </p>
+        </div>
+      </md-dialog-content>
+
+      <md-dialog-actions layout="row">
+        <md-button ng-click="answer('useful')">
+          Close
+        </md-button>
+      </md-dialog-actions>
+    </form>
+  </md-dialog>

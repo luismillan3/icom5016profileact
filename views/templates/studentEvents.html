@@ -25,13 +25,13 @@
 <div class="container-fluid">
     <div class="eventSearch row">
         <md-input-container>
-            <label>Search Event Name</label>
-            <input ng-model="event.name" type="search">
+            <label>Global Search</label>
+            <input ng-model="query" type="search">
         </md-input-container>
-        <md-input-container>
+        <!-- <md-input-container>
             <label>Search Event Date</label>
             <input ng-model="event.date" type="search">
-        </md-input-container>
+        </md-input-container> -->
     </div>
     <md-content class="md-padding" layout="row" layout-wrap style="background-color: #fff">
 
@@ -47,8 +47,8 @@
                   </md-card-title-media>
                 </md-card-title>
                 <md-card-actions layout="row" layout-align="end center">
-                  <button class="btn btn-primary" >Remind me</button>
-                  <button class="btn btn-primary" ng-click="showAdvanced($event, project)">More Info</button>
+                  <button class="btn btn-primary" ng-click="showAlert($event)">Remind me</button>
+                  <button class="btn btn-primary" ng-click="eventDialog($event, event)">More Info</button>
                 </md-card-actions>
             </md-card>
         </div>

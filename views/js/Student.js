@@ -62,7 +62,7 @@ angular.module('student',[])
         }
       }
 
-}]).controller('studentEventsController', ['$scope', '$http', '$log', function($scope, $http, $log) {
+}]).controller('studentEventsController', ['$scope', '$http', '$log','$mdDialog', function($scope, $http, $log, $mdDialog) {
 
     $scope.events = [ {date: '7/06/2106', name:'GM Info Session', image:"lib/img/eventsPlaceholder.jpg", description:"Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Donec sed odio dui. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod."},
         {date: '10/25/2106', name: 'Graduate School Fair', image:"lib/img/eventsPlaceholder.jpg", description:"Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Donec sed odio dui. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod."},
@@ -79,7 +79,20 @@ angular.module('student',[])
         $scope.selectedEvent=event;
     }
 
-    $scope.showAdvanced = function(ev,event) {
+    $scope.showAlert = function(ev) {
+        $mdDialog.show(
+          $mdDialog.alert()
+            .parent(angular.element(document.querySelector('#popupContainer')))
+            .clickOutsideToClose(true)
+            .title('You will be reminded')
+            .textContent('This event has been added to your calendar')
+            .ariaLabel('Alert Dialog Demo')
+            .ok('Got it!')
+            .targetEvent(ev)
+        );
+    };
+
+    $scope.eventDialog = function(ev,event) {
       $mdDialog.show({
         controller: DialogController,
         templateUrl: 'components/eventDialog.html',
