@@ -28,6 +28,8 @@ angular.module('professor',[])
         };
 
           $scope.addProject=function(e){
+           
+          $('#viewModalAddResearch').modal("hide");
           e.id=$scope.projects.length+1;
            console.log(e)
 
