@@ -16,7 +16,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-left">
                 <li><a href="#/professor">Home</a></li>
-                <li><a href="#/professorResearch">Projects</a></li>
+        <!--         <li><a href="#/professorResearch">Projects</a></li> -->
               </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
@@ -47,15 +47,15 @@
 
 <table class="table" width="75%">
 
-<tr><th>Project</th><th>Funding</th><th>Students</th><th>Students</th><th>Setting</th></tr>
+<tr><th>Project</th><th>Funding</th><th>Students</th><th>Setting</th></tr>
 <tr ng-repeat="project in projects">
       <td>{{ project.title }}</td><td>{{ project.funding }}</td><td>
-        
-      <p ng-repeat ="st in project.student">{{st}}</p> 
+        {{project.student}}
+      <!-- <p ng-repeat ="st in project.student">{{st}}</p>  -->
 
       </td>
-      <td> <button class="btn btn-success" data-target="#viewModalStudent" data-toggle="modal" ng-click="display(project.student)">Manage Students</button> </td>
-      <td> <button class="btn btn-success" >Edit Research</button> </td>
+      <!-- <td> <button class="btn btn-success" data-target="#viewModalEdit" data-toggle="modal" ng-click="display(project.student)">Manage Students</button> </td> -->
+      <td> <button class="btn btn-success" data-target="#viewModalEdit" data-toggle="modal" ng-click="display(project.student)">Edit Research</button> </td>
     </tr>
 
 </table>
@@ -117,7 +117,7 @@
 
 
 <!-- Edit Students-->
- <div class="modal fade" tabindex="-1" id="viewModalStudent"
+ <div class="modal fade" tabindex="-1" id="viewModalEdit"
         data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -125,7 +125,7 @@
                 <button type="button" class="close" data-dismiss="modal">
                     &times;
                 </button>
-                <h4 class="modal-title">Student Management</h4>
+                <h4 class="modal-title">Research Setting</h4>
             </div>
             <div class="modal-body">
                 <div class="img-wrapper clearfix">
