@@ -3,7 +3,7 @@ angular.module('mainController',[])
 .controller('mainCtrl', ['$scope', '$http', '$log','$window','$cookies','$location', function($scope,$window,$cookies, $http, $log,$location) {
 	$scope.role="none"
 	$scope.tempUsr={}
-	
+
 	$scope.users=[
 	{username:'Pedro',password:'pedro',role:'student'},
 	{username:'Juan',password:'galleta',role:'recruiter'},
@@ -26,7 +26,7 @@ angular.module('mainController',[])
 			$('#loginModal').modal('hide');
 			$('.modal-backdrop').remove();
 			$scope.role=$scope.users[i].role
-			$location.path('/'+$scope.users[i].role)
+			$location.path('/' + $scope.users[i].role)
 		}
 	}
 	$scope.signUp=function(usr){
@@ -41,7 +41,7 @@ angular.module('mainController',[])
 	$scope.roleSet=function(rol){
 		return $scope.role===rol;
 	}
-	
-	
+
+
 
 }])
