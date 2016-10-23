@@ -50,15 +50,19 @@ router.delete('/events/:id', function(req, res, next) {
   });
 
 router.get('/profile', function(req, res, next) {
-    console.log('entre')
+    console.log('entre al recruiter profile')
     res.json(recruiter);
 
 });
 router.put('/profile/update', function(req, res, next) {
-    console.log('entre')
+    console.log('actualize recruiter')
      if(!req.body.hasOwnProperty('name') || !req.body.hasOwnProperty('lastname')
-    || !req.body.hasOwnProperty('email'))
+    || !req.body.hasOwnProperty('email')){
+       res.statusCode = 400;
+      return res.send('Error: Missing fields for recruiter.');
+     }
       recruiter=req.body;
+    
     res.json(recruiter);
 
 });

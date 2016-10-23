@@ -26,6 +26,9 @@ app.listen(app.get('port'), function() {
 });
 
 
+var auth = require('./routes/authRoutes');
+app.use('/auth', auth);
+
 var recruiter = require('./routes/recruiterRoutes');
 app.use('/recruiter', recruiter);
 

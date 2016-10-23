@@ -112,7 +112,7 @@
                         <input ng-model="tempUsr.confirmPassword" class="form-control" placeholder="Confirm Password"
                                 type="password" id="inputPassword" />
                     </div>
-                    <div class="form-group">
+                    <div >
                     	<label for="role">Role</label><br>
                         <label class="radio-inline"><input ng-model="tempUsr.role" value="student" type="radio" name="optradio">Student</label>
 						<label class="radio-inline"><input type="radio" ng-model="tempUsr.role" value="recruiter" name="optradio">Recruiter</label>
@@ -125,8 +125,13 @@
                                 type="email" id="inputEmail" />
                     </div>
                     <div class="form-group">
-                
-                        <button class="btn btn-primary" ng-click="browse()">Browse Resume/CV</button>
+                     <label for="inputPassword">Browse CV/Resume</label>
+                        <form action="images/upload" id="Resume" enctype="multipart/form-data">
+                            
+                             <input type="file" name="images" />
+                             
+                        </form>
+
                     </div>
 
                 </form>
