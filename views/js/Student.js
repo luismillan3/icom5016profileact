@@ -1,6 +1,6 @@
 angular.module('student',[])
 
-.controller('studentResearchController', ['$scope', '$http', '$log', '$filter', function($scope, $http, $log, filter) {
+.controller('studentResearchController', ['$cookieStore','$scope', '$http', '$log', '$filter', function($cookieStore,$scope, $http, $log, filter) {
 
     $scope.departments = [{id:1, name: "ICOM"},
       {id:2, name: "INEL"},

@@ -84,7 +84,7 @@ angular.module('recruiter',[])
 
      $scope.getEvents();
 
-}]).controller('recruiterSearchController', ['$scope', '$http', '$log', function($scope, $http, $log) {
+}]).controller('recruiterSearchController', ['$cookieStore','$scope', '$http', '$log', function($cookieStore,$scope, $http, $log) {
 	$scope.selectedStudent={}
 	$scope.results=[]
 	$scope.criteria={}
@@ -98,6 +98,7 @@ angular.module('recruiter',[])
 		{value:"INQU"}]
 
 	  $scope.getStudents = function () {
+      console.log($cookieStore.get('username'))
             $http.get('/recruiter/search')
             .success(function (data, status) {
                 $scope.students = data;

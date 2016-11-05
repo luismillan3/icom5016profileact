@@ -91,13 +91,18 @@ angular.module('mainController',[])
 
 }])
 
-.controller('signInController', ['$scope', '$http', '$log','$location','$window', function($scope, $http,$location,$window, $log) {
+.controller('signInController', ['$cookies','$cookieStore','$scope', '$http', '$log','$location','$window', 
+	function($cookieStore,$scope, $http,$location,$window, $log) {
 	
 		
 	$scope.tempUsr={}
 
 	$scope.user={}
 	$scope.login=function(usr){
+		 var someSessionObj = { 'innerObj' : 'somesessioncookievalue'};	
+		
+    $cookieStore.put('username', 'gatosvolando');
+   	console.log($cookieStore.get('username'))
 		$scope.temUsr={}
 		
 		$http.post('/auth/login', usr )
