@@ -1,4 +1,112 @@
-<div class="container">
-	<h1>Sign Up Page</h1>
-	<p>Here we are going to have a sign up form</p>
+<div class="row">
+<div class="col-sm-4">
+	 <div class="header">
+                
+                		<h3 class="title">Student?</h3>
+           			 </div>
+	 	
+	 <form>
+                   
+                    <div class="form-group">
+                        <label for="inputUserName">Username</label>
+                        <input ng-model="tempUsr.username" class="form-control" placeholder="Login Username"
+                                type="text" id="inputUserName" />
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword">Password</label>
+                        <input ng-model="tempUsr.password" class="form-control" placeholder="New Password"
+                                type="password" id="inputPassword" />
+                    </div>
+                      <div class="form-group">
+                        <label for="inputPasswordConfirmation">Confirm Password</label>
+                        <input ng-model="tempUsr.confirmPassword" class="form-control" placeholder="Confirm Password"
+                                type="password" id="inputPassword" />
+                    </div>
+                    <div class="form-group">
+                        <label for="gpa">GPA</label>
+                        <input ng-model="tempUsr.gpa" class="form-control" placeholder="GPA ?/4.0"
+                                type="number" id="number" />
+                    </div>
+                     <div class="form-group">
+                       <select  class="form-control" ng-model="tempUsr.major">
+						<option ng-repeat="major in majors">{{major.value}}</option>
+						</select>
+                    </div>
+                     <div class="form-group">
+                        <label for="inputPassword">email</label>
+                        <input ng-model="tempUsr.email" class="form-control" placeholder="Input email"
+                                type="email" id="inputEmail" />
+                    </div>
+                     <button type="submit" class="btn btn-primary"  ng-click="signUpStudent(tempUsr)">SignUp</button>
+                    </form>
+               </div>
+                    <div class="col-sm-4">
+                     <div class="header">
+                
+                <h3 class="title">Recruiter?</h3>
+            </div>
+	 
+	 <form>
+	 		
+                    <div class="form-group">
+                        <label for="inputUserName">Username</label>
+                        <input ng-model="tempUsr.username" class="form-control" placeholder="Login Username"
+                                type="text" id="inputUserName" />
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword">Password</label>
+                        <input ng-model="tempUsr.password" class="form-control" placeholder="New Password"
+                                type="password" id="inputPassword" />
+                    </div>
+                     <div class="form-group">
+                        <label for="inputPasswordConfirmation">Confirm Password</label>
+                        <input ng-model="tempUsr.confirmPassword" class="form-control" placeholder="Confirm Password"
+                                type="password" id="inputPassword" />
+                    </div>
+                     <div class="form-group">
+                        <label for="inputPassword">Company</label>
+                        <input ng-model="tempUsr.company" class="form-control" placeholder="Enter Company"
+                                type="text" />
+                    </div>
+                     <div class="form-group">
+                        <label for="inputPassword">email</label>
+                        <input ng-model="tempUsr.email" class="form-control" placeholder="Input email"
+                                type="email" id="inputEmail" />
+                    </div>
+                     <button type="submit" class="btn btn-primary"  ng-click="signUpRecruiter(tempUsr)">SignUp</button>
+                    </form>
+                    </div>
+                    <div class="col-sm-4">
+                     <div class="header">
+                
+               			 <h3 class="modal-title">Professor?</h3>
+           			 </div>
+                    
+	 <form>
+                   
+                    <div class="form-group">
+                        <label for="inputUserName">Username</label>
+                        <input ng-model="tempUsr.username" class="form-control" placeholder="Login Username"
+                                type="text" id="inputUserName" />
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword">Password</label>
+                        <input ng-model="tempUsr.password" class="form-control" placeholder="New Password"
+                                type="password" id="inputPassword" />
+                    </div>
+                     <div class="form-group">
+                        <label for="inputPasswordConfirmation">Confirm Password</label>
+                        <input ng-model="tempUsr.confirmPassword" class="form-control" placeholder="Confirm Password"
+                                type="password" id="inputPassword" />
+                    </div>
+                     <div class="form-group">
+                        <label for="inputPassword">email</label>
+                        <input ng-model="tempUsr.email" class="form-control" placeholder="Input email"
+                                type="email" id="inputEmail" />
+                    </div>
+                     <button type="submit" class="btn btn-primary"  ng-click="signUpProfessor(tempUsr)">SignUp</button>
+                    </form>
+                   
+
+</div>
 </div>

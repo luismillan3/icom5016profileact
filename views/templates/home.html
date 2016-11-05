@@ -11,10 +11,10 @@
                         <hr class="intro-divider">
                         <ul class="list-inline intro-social-buttons">
                             <li>
-                                <a data-target="#loginModal" data-toggle="modal" class="btn btn-default btn-lg"></span></i> <span class="network-name">Log In</span></a>
+                                <a  href="#/signin" class="btn btn-default btn-lg"></span></i> <span class="network-name">Log In</span></a>
                             </li>
                             <li>
-                                <a data-target="#signupModal" data-toggle="modal" class="btn btn-default btn-lg"> <span class="network-name">Sign Up</span></a>
+                                <a href="#/signup" class="btn btn-default btn-lg"> <span class="network-name">Sign Up</span></a>
                             </li>
                         </ul>
                     </div>
@@ -50,97 +50,3 @@
 
     </div>
 
-    <!-- login modal -->
-        <div class="modal fade" tabindex="-1" id="loginModal"
-        data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                    &times;
-                </button>
-                <h4 class="modal-title">Login</h4>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="inputUserName">Username</label>
-                        <input ng-model="tempUsr.username" class="form-control" placeholder="Login Username"
-                                type="text" id="inputUserName" />
-                    </div>
-                    <div class="form-group">
-                        <label for="inputPassword">Password</label>
-                        <input ng-model="tempUsr.password" class="form-control" placeholder="Login Password"
-                                type="password" id="inputPassword" />
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" ng-click="login(tempUsr)">Login</button>
-                <button type="button" class="btn btn-primary"
-                        data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
- <!-- login modal -->
-        <div class="modal fade" tabindex="-1" id="signupModal"
-        data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                    &times;
-                </button>
-                <h4 class="modal-title">Sign Up</h4>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="inputUserName">Username</label>
-                        <input ng-model="tempUsr.username" class="form-control" placeholder="Login Username"
-                                type="text" id="inputUserName" />
-                    </div>
-                    <div class="form-group">
-                        <label for="inputPassword">Password</label>
-                        <input ng-model="tempUsr.password" class="form-control" placeholder="New Password"
-                                type="password" id="inputPassword" />
-                    </div>
-                     <div class="form-group">
-                        <label for="inputPasswordConfirmation">Confirm Password</label>
-                        <input ng-model="tempUsr.confirmPassword" class="form-control" placeholder="Confirm Password"
-                                type="password" id="inputPassword" />
-                    </div>
-                    <div >
-                    	<label for="role">Role</label><br>
-                        <label class="radio-inline"><input ng-model="tempUsr.role" value="student" type="radio" name="optradio">Student</label>
-						<label class="radio-inline"><input type="radio" ng-model="tempUsr.role" value="recruiter" name="optradio">Recruiter</label>
-						<label class="radio-inline"><input  ng-model="tempUsr.role" value="professor" type="radio" name="optradio">Professor</label>
-                    </div>
-
-                     <div class="form-group">
-                        <label for="inputPassword">email</label>
-                        <input ng-model="tempUsr.email" class="form-control" placeholder="Input email"
-                                type="email" id="inputEmail" />
-                    </div>
-                    <div class="form-group">
-                     <label for="inputPassword">Browse CV/Resume</label>
-                        <form action="images/upload" id="Resume" enctype="multipart/form-data">
-                            
-                             <input type="file" name="images" />
-                             
-                        </form>
-
-                    </div>
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary"  ng-click="signUp(tempUsr)">SignUp</button>
-                <button type="button" class="btn btn-primary"
-                        data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
