@@ -12,11 +12,17 @@ var events = [
         { id:5,title: 'Mario Bros in the House',description:"Awesome Event",date:"10/12/16 10:00"}
       ]
 var students = [
-        { studentName: 'Marcel',studentLastName:"Fuentes",gpa:3.53,major:"BIOL"},
-        { studentName: 'Maria',studentLastName:"Del Valle",gpa:3.32,major:"COMP"},
-        { studentName: 'Kelvin',studentLastName:"Pelota",gpa:2.74,major:"ICOM"},
-        { studentName: 'Nerymar',studentLastName:"Cucuza",gpa:2.9,major:"INEL"},
-        { studentName: 'Cafralin',studentLastName:"Pelora",gpa:3.94,major:"ININ"}
+        { id:1,studentName: 'Marcel',studentLastName:"Fuentes",gpa:3.53,major:"BIOL"},
+        { id:2,studentName: 'Maria',studentLastName:"Del Valle",gpa:3.32,major:"COMP"},
+        { id:3,studentName: 'Kelvin',studentLastName:"Pelota",gpa:2.74,major:"ICOM"},
+        { id:4,studentName: 'Nerymar',studentLastName:"Cucuza",gpa:2.9,major:"INEL"},
+        { id:5,studentName: 'Cafralin',studentLastName:"Pelora",gpa:3.94,major:"ININ"}
+      ]
+
+var addedStudents = [
+        
+        { id:1,studentName: 'Maria',studentLastName:"Del Valle",gpa:3.32,major:"COMP"},
+        { id:2,studentName: 'Cafralin',studentLastName:"Pelora",gpa:3.94,major:"ININ"}
       ]
 
 router.get('/events', function(req, res, next) {
@@ -55,6 +61,7 @@ router.get('/profile', function(req, res, next) {
 
 });
 router.put('/profile/update', function(req, res, next) {
+
     console.log('actualize recruiter')
      if(!req.body.hasOwnProperty('name') || !req.body.hasOwnProperty('lastname')
     || !req.body.hasOwnProperty('email')){
@@ -72,8 +79,31 @@ router.get('/search', function(req, res, next) {
     res.json(students);
 
 });
+router.get('/added', function(req, res, next) {
+    console.log('entre')
+    res.json(addedStudents);
 
+});
+router.delete('/added/:id', function(req, res, next) {
 
+  console.log("From delete route");
+  console.log(req.params.id);
+  for(var i=0;i<addedStudents.length;i++){
+    if(addedStudents[i].id==req.params.id){
+        addedStudents.splice(i,1);
+    }
+  }
+  res.json(addedStudents);
+  });
+
+router.post('/added', function(req, res, next) {
+  console.log("trying to add student")
+    req.body.id=addedStudents.length+1;
+    addedStudents.push(req.body)
+
+  
+
+});
 //     var newCar = new Car(req.body.make, req.body.model, req.body.year, req.body.description, req.body.price);
 //     console.log("New Car: " + JSON.stringify(newCar));
 //     newCar.id = carNextId++;

@@ -18,6 +18,7 @@
                 <li ><a href="#/recruiterEvent">Events</a></li>
                 <li><a href="#/recruiterSearch">Search Students</a></li>
                 <li><a href="#/recruiterFolder">Student Folder</a></li>
+                <li><a href="#/recruiterFolder">Student Folder</a></li>
                 <li><a href="#/research">Projects</a></li> 
               </ul>
             </div><!-- /.navbar-collapse -->
@@ -25,45 +26,14 @@
         </nav>
 <div class="container">
 
-	<h1>Search Students</h1>
+	<h1>Student Folder</h1>
 	
-
-	<form class="form-horizontal" id="eventForm" ng-submit="searchStudents(criteria)">
-		<div class="form-group">
-			<label for="title" class="col-sm-2 control-label">Major</label>
-
-			<div class="col-sm-10">
-
-				<select  class="form-control" ng-model="criteria.major">
-				<option ng-repeat="major in majors">{{major.value}}</option>
-				</select>
-
-				<!-- <input type="text" ng-model="criteria.major" class="form-control"> -->
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="description" class="col-sm-2 control-label">GPA</label>
-			<div class="col-sm-10">
-				<input type="number" class="form-control" ng-model="criteria.gpa"  ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01">
-			</div>
-		</div>
-		<!-- <div class="form-group">
-			<datetimepicker data-ng-model="data.date" ></datetimepicker>
-		</div> -->
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" value="submit" class="btn btn-primary">Search</button>
-			</div>
-		</div>
-	</form>
-
-
 	<table class="table table-striped">
 	 	<tr>
-	 		<th>Name</th><th>Major</th><th>GPA</th><th>View</th>
+	 		<th>Name</th><th>Major</th><th>GPA</th><th>View/Remove</th>
 	 	</tr>
-	 	<tr ng-repeat="student in results">
-	 		<td>{{ student.studentName }} {{student.studentLastName}}</td><td>{{ student.major }}</td><td>{{ student.gpa }}</td><td><button class="btn btn-success" data-target="#viewModal" data-toggle="modal"ng-click="display(student)">Look!</button></td>
+	 	<tr ng-repeat="student in students">
+	 		<td>{{ student.studentName }} {{student.studentLastName}}</td><td>{{ student.major }}</td><td>{{ student.gpa }}</td><td><button class="btn btn-success" data-target="#viewModal" data-toggle="modal" ng-click="display(student)">Look!</button><button type="button" class="btn btn-danger" ng-click="removeStudent(selectedStudent.id)">Remove</button></td>
 	 	</tr>
 	</table>
 <!-- student template pop up -->
@@ -91,7 +61,6 @@
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary">View Resume</button>
-                <button type="button" ng-click="addStudentToFolder(selectedStudent)" class="btn btn-primary">Add</button>
                 <button type="button" class="btn btn-primary"
                         data-dismiss="modal">Close</button>
             </div>

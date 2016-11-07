@@ -113,6 +113,18 @@ angular.module('recruiter',[])
       $scope.display=function(student){
       	$scope.selectedStudent=student;
       }
+      $scope.addStudentToFolder=function(student){
+      
+        
+       $http.post('/recruiter/added', student )
+            .success(function (data) {
+                console.log("Added to folder")
+            })
+            .error(function (data, status, header, config) {
+                console.log(data, status);
+            console.log("could not add to folder")
+            });
+        };
       $scope.searchStudents=function(criteria){
       	$scope.results=[]
       	$scope.criteria={}
@@ -139,5 +151,39 @@ angular.module('recruiter',[])
       }
       $scope.getStudents();
 
+
+}]).controller('recruiterStudentFolder', ['$scope', '$http', '$log', function($scope, $http, $log) {
+
+    //TODO cambiar esto
+  $scope.selectedStudent={}
+  $scope.students=[]
+  console.log("entre")
+    $scope.display=function(student){
+        $scope.selectedStudent=student;
+      }
+    $scope.getStudents = function () {
+      
+            $http.get('/recruiter/added')
+            .success(function (data, status) {
+                $scope.students = data;
+            })
+            .error(function (data, status) {
+              console.log(data, status);
+            console.log("Could not get students")
+            });
+        };
+     
+  
+     $scope.removeStudent=function(id){
+      $http.delete('/recruiter/added/'+id).success(function (data) {
+                $scope.students = data;
+            })
+            .error(function (data, status, header, config) {
+                console.log(data, status);
+            console.log("could not remove student from folder")
+            })
+      };
+
+     $scope.getStudents();
 
 }])

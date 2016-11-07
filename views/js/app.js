@@ -36,6 +36,11 @@ var app=angular.module('app', ['ngRoute','ngCookies','ngMaterial','xeditable','m
 		templateUrl: '/templates/recruiterSearch.html',
 		controller: 'recruiterSearchController'
 	})
+	 .when('/recruiterFolder',{
+	 	templateUrl: '/templates/recruiterAddedStudents.html',
+		controller: 'recruiterStudentFolder'
+	 })
+
 	.when('/professor', {
 		templateUrl: '/templates/professor.html',
 		controller: 'professorController'
