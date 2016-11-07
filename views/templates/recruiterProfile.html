@@ -24,46 +24,35 @@
           </div><!-- /.container-fluid -->
         </nav>
 <div class="container">
-
-	<h1>Profile</h1>
-
-
 	<br>
-
 	<center>
-<img src="img/user.png" height="300px" ><br>
-<h2>{{recruiter.name}} {{recruiter.lastname}}</h2>
-</center>
+        <img src="img/user.png" height="300px" ><br>
+        <h2>{{recruiter.name}} {{recruiter.lastname}}</h2>
+    </center>
 
-<div class="container">
-<div class="panel panel-default">
-<div class="panel-heading">Profile</div>
-<div class="panel-body">
-<center>
- <div class="form-group">
-                     <label for="inputPassword">Upload Profile Pic</label>
-                        <form action="images/upload" id="profilepic" enctype="multipart/form-data">
+    <h2>Profile</h2>
+    <center>
+        <div class="form-group">
+            <label for="inputPassword">Upload Profile Pic</label>
+            <form action="images/upload" id="profilepic" enctype="multipart/form-data">
+                <input type="file" name="images" />
+            </form>
+        </div>
 
-                             <input type="file" name="images" />
-
-                        </form>
-
-                    </div>
-<table class="table" width="75%">
-
-<tr><th>Company</th><th>Email</th><th></th></tr>
-<tr>
-      <td>{{ recruiter.company }}</td><td>{{ recruiter.email }}</td><td>
-      	<button class="btn btn-primary" ng-click="frmToggle()">Edit</button>
-      </td>
-    </tr>
-<!-- <tr><td><a href="research_pofile.html"> Shark Buoy</a></td><td>$300.00</td><td>Luis Millan</td></tr> -->
-
-
-</table>
-</center>
-</div>
-</div>
+        <table class="table" width="75%">
+            <tr>
+                <th>Company</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td>{{ recruiter.company }}</td><td>{{ recruiter.email }}</td><td>
+                  	<button class="btn btn-primary" ng-click="frmToggle()">Edit</button>
+                </td>
+            </tr>
+        <!-- <tr><td><a href="research_pofile.html"> Shark Buoy</a></td><td>$300.00</td><td>Luis Millan</td></tr> -->
+        </table>
+    </center>
 </div>
 
 

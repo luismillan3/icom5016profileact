@@ -16,7 +16,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-left">
                 <li><a href="#/professor">Home</a></li>
-        <!--         <li><a href="#/professorResearch">Projects</a></li> -->
+                <li><a href="#/professorResearch">Projects</a></li>
               </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
@@ -32,44 +32,40 @@
 
 
 
-
 <div class="container">
-<div class="panel panel-default">
-<div class="panel-heading">Current Research  
+    <hr>
+    <h2>Active Research Projects</h2>
+    <div class="pull-right">
+        <button class="btn btn-success" data-target="#viewModalAddResearch" data-toggle="modal" ng-click="display(projects)">Add New Research</button>
+    </div>
+    <br><br>
 
-<div class="pull-right"> <button class="btn btn-success" data-target="#viewModalAddResearch" data-toggle="modal" ng-click="display(projects)">Add New Research</button></div>
+    <center>
+        <table class="table" width="75%">
 
-<br><br>
-</div>
-<div class="panel-body">
-<center>
+            <tr>
+                <th>Project</th>
+                <th>Funding</th>
+                <th>Students</th>
+                <th>Setting</th>
+            </tr>
+            <tr ng-repeat="project in projects">
+                <td>{{ project.title }}</td><td>{{ project.funding }}</td><td>
+                    <p ng-repeat="student in project.students">{{student.name}}</p>
+                </td>
+                  <!-- <td> <button class="btn btn-success" data-target="#viewModalEdit" data-toggle="modal" ng-click="display(project.student)">Manage Students</button> </td> -->
+                <td> <button class="btn btn-success" data-target="#viewModalEdit" data-toggle="modal" ng-click="display(project.student)">Edit Research</button> </td>
+            </tr>
 
-
-<table class="table" width="75%">
-
-<tr><th>Project</th><th>Funding</th><th>Students</th><th>Setting</th></tr>
-<tr ng-repeat="project in projects">
-      <td>{{ project.title }}</td><td>{{ project.funding }}</td><td>
-        {{project.student}}
-      <!-- <p ng-repeat ="st in project.student">{{st}}</p>  -->
-
-      </td>
-      <!-- <td> <button class="btn btn-success" data-target="#viewModalEdit" data-toggle="modal" ng-click="display(project.student)">Manage Students</button> </td> -->
-      <td> <button class="btn btn-success" data-target="#viewModalEdit" data-toggle="modal" ng-click="display(project.student)">Edit Research</button> </td>
-    </tr>
-
-</table>
-</center>
-</div>
-</div>
+        </table>
+    </center>
 </div>
 
 
 
 
 <!-- Add Option -->
-  <div class="modal fade" tabindex="-1" id="viewModalAddResearch"
-        data-keyboard="false" data-backdrop="static">
+<div class="modal fade" tabindex="-1" id="viewModalAddResearch" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -81,31 +77,26 @@
             <div class="modal-body">
                 <div class="img-wrapper clearfix">
                    <form  id="addProjectForm" ng-submit="addProject(project)">
-                    
+
                     <div class="form-group">
-              <label for="title">Title:</label>
-              <input type="text" ng-model = "project.title" class="form-control" id="title">
-            </div>
-            <div class="form-group">
-              <label for="smry">Funding</label>
-              <input type="text" ng-model = "project.funding"  class="form-control" id="smry">
-          </div>
+                        <label for="title">Title:</label>
+                        <input type="text" ng-model = "project.title" class="form-control" id="title">
+                    </div>
+                    <div class="form-group">
+                        <label for="smry">Funding</label>
+                        <input type="text" ng-model = "project.funding"  class="form-control" id="smry">
+                    </div>
 
-          <div class="form-group">
-              <label for="studnt">Student:</label>
-              <input type="text" ng-model = "project.student" class="form-control" id="studnt">
-          </div>
-
-      
-
-
-                   
+                    <div class="form-group">
+                        <label for="studnt">Student:</label>
+                        <input type="text" ng-model = "project.student" class="form-control" id="studnt">
+                    </div>
                 </div>
-    
- 
+
+
             </div>
             <div class="modal-footer">
-               
+
                 <button type="submit" ng-click="addProject(project)" class="btn btn-primary">Done</button>
                 <button type="button" class="btn btn-primary"
                         data-dismiss="modal">Close</button>
@@ -125,25 +116,32 @@
                 <button type="button" class="close" data-dismiss="modal">
                     &times;
                 </button>
-                <h4 class="modal-title">Research Setting</h4>
+                <h4 class="modal-title">Update Research Information</h4>
             </div>
             <div class="modal-body">
                 <div class="img-wrapper clearfix">
-                  <table class="table">
-                    <tr ng-repeat = "Students in selectedStudent"><td>{{Students}}</td>
+                    <form  id="updateProjectForm" ng-submit="updateProject(project)">
+                        <div class="form-group">
+                            <label for="titleE">Title:</label>
+                            <input type="text" ng-model = "project.title" class="form-control" id="titleE">
+                        </div>
+                        <div class="form-group">
+                            <label for="smryE">Funding:</label>
+                            <input type="text" ng-model = "project.funding"  class="form-control" id="smryE">
+                        </div>
 
-                    <td><button type="button" class="btn btn-warning">X</button></td></tr>
+                        <div class="form-group">
+                            <label for="studntE">Student:</label>
+                            <input type="text" ng-model = "project.student" class="form-control" id="studntE">
+                        </div>
 
-                  </table>
+
+                        <button type="submit" ng-click="updateProject(project)" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-primary"
+                                data-dismiss="modal">Close</button>
+
+                    </form>
                 </div>
-    
- 
-            </div>
-            <div class="modal-footer">
-               
-                <button type="button" class="btn btn-primary">Done</button>
-                <button type="button" class="btn btn-primary"
-                        data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

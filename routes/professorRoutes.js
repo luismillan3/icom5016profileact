@@ -3,8 +3,22 @@ var router = express.Router();
 var pg = require('pg');//para la base de datos luego
 
 var projects =[
-        { id:1,title: 'Gatos de ataque, para el Army',funding:100,student:'Luis Millan, Juan Guzman'},
-        { id:2,title: 'Quadcopter Fastfood Delivery',funding:69,student:'Fernando Arocho,Scarlett Johanson'},
+        { id:1,
+          title: 'Gatos de ataque, para el Army',
+          funding:100,
+          students: [
+              {name: 'Luis Millan'},
+              {name: 'Jennifer Anniston'}
+          ],
+        },
+        { id:2,
+          title: 'Quadcopter Fastfood Delivery',
+          funding:69,
+          students: [
+              {name: 'Fernando Arocho'},
+              {name: 'Scarlett Johanson'}
+          ],
+        },
       ]
 
 
