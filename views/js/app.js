@@ -1,7 +1,12 @@
 
-var app=angular.module('app', ['ngRoute','ngCookies','ngMaterial','xeditable','mainController', 'professor','student','recruiter','research'])
+var app = angular.module('app', ['ngRoute','ngCookies','ngMaterial','xeditable','mainController', 'professor','student','recruiter','research'])
 
-.config(function($routeProvider) {
+.config(function($routeProvider, $mdThemingProvider) {
+
+	$mdThemingProvider.theme('default')
+    .primaryPalette('teal')
+    .accentPalette('orange');
+
 	$routeProvider
 	.when('/', {
 		templateUrl: '/templates/home.html',
@@ -56,4 +61,4 @@ var app=angular.module('app', ['ngRoute','ngCookies','ngMaterial','xeditable','m
 	.otherwise({
 		templateUrl: '/templates/404.html'
 	})
-})
+});
