@@ -36,7 +36,7 @@
                              {{ student.lastName || 'empty' }}
                     </span>
                     <span ng-show="editableForm1.$visible">
-                        <md-button class="btn btn-default" id="nameEdit" type="submit" ng-disabled="editableForm1.$waiting">
+                        <md-button class="btn btn-default" id="nameEdit" type="submit" ng-disabled="editableForm1.$waiting" ng-click="frmHide()">
                           Save
                         </md-button>
 
@@ -51,7 +51,7 @@
             <md-button type="button" class="btn btn-default" ng-click="editableForm1.$show()" ng-show="!editableForm1.$visible">
                 Edit
             </md-button>
-            <md-button type="submit" class="btn btn-default" ng-show="editableForm1.$visible" ng-click="updateProfile(); editableForm1.$cancel()">
+            <md-button type="submit" class="btn btn-default" ng-show="editableForm1.$visible" ng-click="updateProfile(); editableForm1.$cancel(); frmHide()">
                 Done
             </md-button>
         </span>
@@ -62,43 +62,50 @@
     <md-divider ></md-divider>
     <br>
 
-    <div class="container">
-        <div class="panel panel-default">
-            <div class="panel-heading">Profile</div>
-            <div class="panel-body">
-                <center>
-                    <form editable-form name="tableform" onaftersave="updateProfile()">
-                        <table class="table" width="75%" >
-                            <tr><th>Major</th><th>Resume</th></tr>
-                            <tr display="row">
-                                <td flex>
-                                    <span editable-text="student.major" e-name="name" e-form="tableform" >
-                                        {{ student.major || 'empty' }}
-                                    </span>
-                                </td flex>
-                                <td><!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#resumeModal">
-                                      View Resume
-                                    </button>
-                                </td>
-                            </tr>
-                        </table>
-                        <!-- buttons -->
-                        <div class="btn-edit">
-                            <button type="button" class="btn btn-default" ng-show="!tableform.$visible" ng-click="tableform.$show()">
-                                edit
-                            </button>
-                        </div>
-                        <div class="btn-form" ng-show="tableform.$visible">
-                            <button type="button" ng-disabled="tableform.$waiting" ng-click="updateProfile()" class="btn btn-default pull-right">add row</button>
-                            <button type="submit" ng-disabled="tableform.$waiting" class="btn btn-primary">save</button>
-                            <button type="button" ng-disabled="tableform.$waiting" ng-click="tableform.$cancel()" class="btn btn-default">cancel</button>
-                        </div>
-                    </form>
+    <div class="container-fluid">
+        <h2>Profile</h2>
 
-                </center>
+        <form editable-form name="tableform" onaftersave="updateProfile()">
+            <table class="table studentProfileTable" >
+                <tr layout="row">
+                    <th flex>Major</th>
+                    <th flex>GPA</th>
+                    <th flex>Resume</th>
+                </tr>
+                <tr layout="row">
+                    <td flex>
+                        <span editable-text="student.major" e-name="name" e-form="tableform" >
+                            {{ student.major || 'empty' }}
+                        </span>
+                    </td>
+
+                    <td flex>
+                        <span editable-text="student.major" e-name="name" e-form="tableform" >
+                            {{ student.gpa || 'empty' }}
+                        </span>
+                    </td>
+
+                    <td flex><!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#resumeModal">
+                          View Resume
+                        </button>
+                    </td>
+                </tr>
+            </table>
+            <!-- buttons -->
+            <div class="btn-edit">
+                <button type="button" class="btn btn-default" ng-show="!tableform.$visible" ng-click="tableform.$show()">
+                    edit
+                </button>
             </div>
-        </div>
+            <div class="btn-form" ng-show="tableform.$visible">
+                <button type="button" ng-disabled="tableform.$waiting" ng-click="updateProfile()" class="btn btn-default pull-right">add row</button>
+                <button type="submit" ng-disabled="tableform.$waiting" class="btn btn-primary">save</button>
+                <button type="button" ng-disabled="tableform.$waiting" ng-click="tableform.$cancel()" class="btn btn-default">cancel</button>
+            </div>
+        </form>
+
+
     </div>
 
     <br>

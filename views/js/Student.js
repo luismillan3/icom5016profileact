@@ -188,6 +188,10 @@ angular.module('student',[])
         $('#projectForm').slideToggle();
     }
 
+    $scope.frmHide = function() {
+        $('#projectForm').hide();
+    }
+
     $scope.display=function(project){
         $scope.selectedProject=project;
     }
