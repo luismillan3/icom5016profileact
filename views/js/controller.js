@@ -43,10 +43,7 @@ angular.module('mainController',[])
 		
 
 	}
-	$scope.roleSet=function(rol){
-		return $scope.role===rol;
-	}
-
+	
 
 
 }])
@@ -64,29 +61,50 @@ angular.module('mainController',[])
 		{value:"INQU"}]
 	
 	$scope.signUpStudent=function(usr){
-		window.location='/#/student'}
-	$scope.signUpRecruiter=function(usr){
-		window.location='/#/recruiter'}
-	$scope.signUpProfessor=function(usr){
-		window.location='/#/professor'}
-		// $scope.temUsr={}
-		// $http.post('/auth/signup', usr )
+		// $http.post('/auth/signup/student', usr )
   //           .success(function (data) {
+  //           	console.log(data)
   //               $scope.user = data;
-  //                $('#signupModal').modal('hide');
-  //  		 		$('.modal-backdrop').remove();
+		// 		$cookieStore.put('role', $scope.user.role);
+		// 		$cookieStore.put('userID', $scope.user.userID);
 		// 		window.location='/#/'+$scope.user.role
-               
   //           })
   //           .error(function (data, status, header, config) {
   //               console.log(data, status);
-  //       		console.log("could not log in")
+  //       		console.log("could not login")
   //           });
-		
-		
-
-//	}
-
+            window.location='/#/student' 
+	}
+	$scope.signUpRecruiter=function(usr){
+		// $http.post('/auth/signup/recruiter', usr )
+  //           .success(function (data) {
+  //           	console.log(data)
+  //               $scope.user = data;
+		// 		$cookieStore.put('role', $scope.user.role);
+		// 		$cookieStore.put('userID', $scope.user.userID);
+		// 		window.location='/#/'+$scope.user.role
+  //           })
+  //           .error(function (data, status, header, config) {
+  //               console.log(data, status);
+  //       		console.log("could not login")
+  //           });
+            window.location='/#/recruiter'
+	}
+	$scope.signUpProfessor=function(usr){
+		// $http.post('/auth/signup/recruiter', usr )
+  //           .success(function (data) {
+  //           	console.log(data)
+  //               $scope.user = data;
+		// 		$cookieStore.put('role', $scope.user.role);
+		// 		$cookieStore.put('userID', $scope.user.userID);
+		// 		window.location='/#/'+$scope.user.role
+  //           })
+  //           .error(function (data, status, header, config) {
+  //               console.log(data, status);
+  //       		console.log("could not login")
+  //           });
+            window.location='/#/professor'
+	}
 
 
 }])
@@ -99,7 +117,7 @@ angular.module('mainController',[])
 
 	$scope.user={}
 	$scope.login=function(usr){
-		 var someSessionObj = { 'innerObj' : 'somesessioncookievalue'};	
+		 
 		
     $cookieStore.put('username', 'gatosvolando');
    	console.log($cookieStore.get('username'))
@@ -109,7 +127,8 @@ angular.module('mainController',[])
             .success(function (data) {
             	console.log(data)
                 $scope.user = data;
-			
+				$cookieStore.put('role', $scope.user.role);
+				$cookieStore.put('userID', $scope.user.userID);
 				window.location='/#/'+$scope.user.role
             })
             .error(function (data, status, header, config) {

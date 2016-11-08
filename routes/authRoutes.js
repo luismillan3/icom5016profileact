@@ -3,9 +3,9 @@ var router = express.Router();
 var pg = require('pg');//para la base de datos luego
 
  var users=[
-  {username:'Pedro',password:'pedro',role:'student',email:'pedro@gmail.com'},
-  {username:'Juan',password:'galleta',role:'recruiter',email:'juan@gmail.com'},
-  {username:'Rogelio',password:'marie',role:'professor',email:'rogelio@gmail.com'}
+  {userID:1,username:'Pedro',password:'pedro',role:'student',email:'pedro@gmail.com'},
+  {userID:2,username:'Juan',password:'galleta',role:'recruiter',email:'juan@gmail.com'},
+  {userID:3,username:'Rogelio',password:'marie',role:'professor',email:'rogelio@gmail.com'}
 
   ]
 
@@ -28,7 +28,7 @@ router.post('/login', function(req, res, next) {
 
 });
 
-router.post('/signup', function(req, res, next) {
+router.post('/signup/student', function(req, res, next) {
     console.log(req.body)
      if(!req.body.hasOwnProperty('username') || !req.body.hasOwnProperty('password')
       || !req.body.hasOwnProperty('email'))
@@ -41,6 +41,34 @@ router.post('/signup', function(req, res, next) {
     res.json(req.body);
 
 });
+
+router.post('/signup/recruiter', function(req, res, next) {
+    console.log(req.body)
+     if(!req.body.hasOwnProperty('username') || !req.body.hasOwnProperty('password')
+      || !req.body.hasOwnProperty('email'))
+     {
+      res.statusCode = 400;
+      return res.send('Error: Missing fields for event.');
+    }
+   
+    users.push(req.body)
+    res.json(req.body);
+
+});
+router.post('/signup/professor', function(req, res, next) {
+    console.log(req.body)
+     if(!req.body.hasOwnProperty('username') || !req.body.hasOwnProperty('password')
+      || !req.body.hasOwnProperty('email'))
+     {
+      res.statusCode = 400;
+      return res.send('Error: Missing fields for event.');
+    }
+   
+    users.push(req.body)
+    res.json(req.body);
+
+});
+
 
 
 
