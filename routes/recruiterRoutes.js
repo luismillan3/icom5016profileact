@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var pg = require('pg');//para la base de datos luego
+const database_URL= 'postgres://xwozcfrzmmekkv:zvyT7_TOODaNOop6XdZN2wddOU@ec2-54-243-204-57.compute-1.amazonaws.com:5432/d2ubph0nje9jmv'
+pg.defaults.ssl = true;
 
 
 var recruiter={name:"Alejandro",lastname:"Martinez",email:"ale.ma@raytheon.com",company:"Raytheon"}
@@ -55,9 +57,21 @@ router.delete('/events/:id', function(req, res, next) {
   res.json(events);
   });
 
-router.get('/profile', function(req, res, next) {
-    console.log('entre al recruiter profile')
-    res.json(recruiter);
+router.post('/profile', function(req, res, next) {
+  console.log(req.body)
+     pg.connect(database_URL, function(err, client, done) {
+    client.query('SELECT * FROM users natural join recruiter  where userid=$1',[req.body.userid], function(err, result) {
+      
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+      res.json(result.rows);
+      console.log(result.rows)
+      done();
+    });
+  });
+    // console.log('entre al recruiter profile')
+    // res.json(recruiter);
 
 });
 router.put('/profile/update', function(req, res, next) {

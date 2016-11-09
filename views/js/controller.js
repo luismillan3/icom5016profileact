@@ -1,52 +1,5 @@
 angular.module('mainController',[])
 
-.controller('mainCtrl', ['$scope', '$http', '$log','$location','$window', function($scope, $http,$location,$window, $log) {
-	
-	$scope.tempUsr={}
-
-	$scope.user={}
-	$scope.login=function(usr){
-		$scope.temUsr={}
-		
-		$http.post('/auth/login', usr )
-            .success(function (data) {
-            	console.log(data)
-                $scope.user = data;
-                $('#loginModal').modal('hide');
-				$('.modal-backdrop').remove();
-			
-				window.location='/#/'+$scope.user.role
-            })
-            .error(function (data, status, header, config) {
-                console.log(data, status);
-        		console.log("could not login")
-            }); 
-     	
-       
-		
-	}
-	$scope.signUp=function(usr){
-		$scope.temUsr={}
-		$http.post('/auth/signup', usr )
-            .success(function (data) {
-                $scope.user = data;
-                 $('#signupModal').modal('hide');
-   		 		$('.modal-backdrop').remove();
-				window.location='/#/'+$scope.user.role
-               
-            })
-            .error(function (data, status, header, config) {
-                console.log(data, status);
-        		console.log("could not log in")
-            });
-		
-		
-
-	}
-	
-
-
-}])
 .controller('signUpController', ['$scope', '$http', '$log','$location','$window', function($scope, $http,$location,$window, $log) {
 	
 	$scope.tempUsr={}
@@ -73,6 +26,7 @@ angular.module('mainController',[])
   //               console.log(data, status);
   //       		console.log("could not login")
   //           });
+  			console.log("gatos volando")
             window.location='/#/student' 
 	}
 	$scope.signUpRecruiter=function(usr){
@@ -109,7 +63,7 @@ angular.module('mainController',[])
 
 }])
 
-.controller('signInController', ['$cookies','$cookieStore','$scope', '$http', '$log','$location','$window', 
+.controller('signInController', ['$cookieStore','$scope', '$http', '$log','$location','$window', 
 	function($cookieStore,$scope, $http,$location,$window, $log) {
 	
 		
@@ -119,16 +73,17 @@ angular.module('mainController',[])
 	$scope.login=function(usr){
 		 
 		
-    $cookieStore.put('username', 'gatosvolando');
-   	console.log($cookieStore.get('username'))
+    // $cookieStore.put('username', 'gatosvolando');
+   	// console.log($cookieStore.get('username'))
 		$scope.temUsr={}
 		
 		$http.post('/auth/login', usr )
+		//TODO anadir sanitacion si no se encuentra ningun valor,, se puede hacer en node
             .success(function (data) {
-            	console.log(data)
-                $scope.user = data;
+            	console.log(data[0])
+                $scope.user = data[0];
 				$cookieStore.put('role', $scope.user.role);
-				$cookieStore.put('userID', $scope.user.userID);
+				$cookieStore.put('userid', $scope.user.userid);
 				window.location='/#/'+$scope.user.role
             })
             .error(function (data, status, header, config) {

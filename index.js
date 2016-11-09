@@ -3,7 +3,8 @@ var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
 var pg = require('pg');
-
+pg.defaults.ssl = true;
+var database="postgres://xwozcfrzmmekkv:zvyT7_TOODaNOop6XdZN2wddOU@ec2-54-243-204-57.compute-1.amazonaws.com:5432/d2ubph0nje9jmv"
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -46,7 +47,7 @@ app.use('/student', student);
 
 
 app.get('/db', function (request, response) {
-  pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+  pg.connect(database, function(err, client, done) {
     client.query('SELECT * FROM admin_users', function(err, result) {
       done();
       if (err)

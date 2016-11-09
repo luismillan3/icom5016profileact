@@ -1,6 +1,6 @@
 angular.module('recruiter',[])
 
-.controller('recruiterProfileController', ['$scope', '$http', '$log', function($scope, $http,$location, $log) {
+.controller('recruiterProfileController', ['$cookieStore','$scope', '$http', '$log', function($cookieStore,$scope, $http,$location, $log) {
 
 	$scope.newr={}
     $scope.recruiter={}
@@ -13,9 +13,13 @@ angular.module('recruiter',[])
 	    window.location=path;
 	}
 	$scope.getRecruiter = function () {
-            $http.get('/recruiter/profile')
+            
+            //chequiar rol, sino es recruiter tirar homepage
+            var userid={'userid':$cookieStore.get('userid')}            
+            console.log(userid)
+            $http.post('/recruiter/profile',userid)
             .success(function (data, status) {
-                $scope.recruiter = data;
+                $scope.recruiter = data[0];
             })
             .error(function (data, status) {
             	console.log(data, status);
@@ -115,7 +119,7 @@ angular.module('recruiter',[])
       }
       $scope.addStudentToFolder=function(student){
       
-        
+
        $http.post('/recruiter/added', student )
             .success(function (data) {
                 console.log("Added to folder")

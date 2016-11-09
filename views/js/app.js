@@ -10,7 +10,6 @@ var app = angular.module('app', ['ngRoute','ngCookies','ngMaterial','xeditable',
 	$routeProvider
 	.when('/', {
 		templateUrl: '/templates/home.html',
-		controller: 'mainCtrl'
 	})
 	.when('/signin', {
 		templateUrl: '/templates/sign_in.html',
