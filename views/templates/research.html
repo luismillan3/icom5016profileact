@@ -15,7 +15,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-left">
                 <li><a href="#/recruiter">Home</a></li>
-                <li ><a href="#/recruiterEvent">Events</a></li>
+                <li><a href="#/recruiterEvent">Events</a></li>
                 <li><a href="#/recruiterSearch">Search Students</a></li>
                 <li><a href="#/recruiterFolder">Student Folder</a></li>
                 <li><a href="#/research">Projects</a></li>
@@ -45,7 +45,7 @@
                 <td>{{ research.advisor }}</td>
                 <td>
                     <!-- <a class="waves-effect waves-light btn modal-trigger" href="#viewModal">Look!</a> -->
-                    <md-button class="btn btn-success" data-target="#viewModal" data-toggle="modal" ng-click="display(research)">Look!</md-button>
+                    <md-button class="md-default md-raised" ng-click="showAdvanced($event, research)">Look!</md-button>
                 </td>
                 <td>
                     <md-button class="btn btn-success" data-target="#viewModalDonate" data-toggle="modal" ng-click="display(research)">Donate</md-button>
@@ -57,15 +57,26 @@
 
 </div>
 
-<!-- Research template pop up -->
-<div class="modal" tabindex="-1" id="viewModal"
-        data-keyboard="false" data-backdrop="static">
 
-        <!-- <div class="modal-content">
+<!-- <div id="modal1" class="modal">
+    <div class="modal-content">
       <h4>Modal Header</h4>
       <p>A bunch of text</p>
     </div>
     <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div> -->
+
+<!-- Research template pop up -->
+<div class="modal" tabindex="-1" id="viewModal"
+        data-keyboard="false" data-backdrop="static">
+<!--
+        <div class="modal-content">
+      <h4>Modal Header</h4>
+      <p>A bunch of text</p>
+    </div> -->
+    <!-- <div class="modal-footer">
       <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
     </div> -->
     <div class="modal-dialog modal-sm">
@@ -147,6 +158,3 @@
         </div>
     </div>
 </div>
-
-
-

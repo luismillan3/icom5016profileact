@@ -2,6 +2,7 @@ angular.module('recruiter',[])
 
 .controller('recruiterProfileController', ['$cookieStore','$scope', '$http', '$log', function($cookieStore,$scope, $http,$location, $log) {
 
+
 	$scope.newr={}
     $scope.recruiter={}
 
@@ -13,9 +14,9 @@ angular.module('recruiter',[])
 	    window.location=path;
 	}
 	$scope.getRecruiter = function () {
-            
+
             //chequiar rol, sino es recruiter tirar homepage
-            var userid={'userid':$cookieStore.get('userid')}            
+            var userid={'userid':$cookieStore.get('userid')}
             console.log(userid)
             $http.post('/recruiter/profile',userid)
             .success(function (data, status) {
@@ -39,6 +40,9 @@ angular.module('recruiter',[])
             });
         };
         $scope.getRecruiter();
+
+
+
 
 }]).controller('recruiterEventController', ['$scope', '$http', '$log', function($scope, $http, $log) {
 
@@ -118,7 +122,6 @@ angular.module('recruiter',[])
       	$scope.selectedStudent=student;
       }
       $scope.addStudentToFolder=function(student){
-      
 
        $http.post('/recruiter/added', student )
             .success(function (data) {
@@ -166,7 +169,7 @@ angular.module('recruiter',[])
         $scope.selectedStudent=student;
       }
     $scope.getStudents = function () {
-      
+
             $http.get('/recruiter/added')
             .success(function (data, status) {
                 $scope.students = data;
@@ -176,8 +179,8 @@ angular.module('recruiter',[])
             console.log("Could not get students")
             });
         };
-     
-  
+
+
      $scope.removeStudent=function(id){
       $http.delete('/recruiter/added/'+id).success(function (data) {
                 $scope.students = data;

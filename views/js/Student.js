@@ -192,9 +192,7 @@ angular.module('student',[])
         $('#projectForm').hide();
     }
 
-    $scope.display=function(project){
-        $scope.selectedProject=project;
-    }
+
 
     $scope.showAdvanced = function(ev,project) {
       $mdDialog.show({
