@@ -1,10 +1,13 @@
 angular.module('professor',[])
 
-.controller('professorController', ['$scope', '$http', '$log', function($scope, $http, $log) {
+.controller('professorController', ['$scope', '$http', '$log', '$mdDialog', function($scope, $http, $log, $mdDialog) {
 	$scope.profesora={name:"Clarita la Shark",lastName:"Diaz",title:"PhD"}
 
     $scope.project = {}
 	$scope.projects = []
+    $scope.research = {}
+    $scope.researchstudents = []
+    $scope.researchstudent = {}
 	// $scope.projects = [
  //        { id:1,title: 'Gatos de ataque para el Army',funding:100,student:["Luis Millan","Juan Guzman"]},
  //        { id:2,title: 'Smart food',funding:69,student:["Fernando Arocho","Scarlett Johanson"]},
@@ -20,6 +23,19 @@ angular.module('professor',[])
         .success(function (data, status) {
             $scope.projects = data;
              //console.log(data, status)
+        })
+        .error(function (data, status) {
+            console.log(data, status);
+            console.log("Could not get all projectazos")
+        });
+    };
+
+    $scope.getProjectsStudents = function (researchstudent) {
+        $http.get('/investigacionprof/researchStudents')
+        .success(function (data, status) {
+             $scope.researchstudents = data;
+            return data;
+             //console.log(data)
         })
         .error(function (data, status) {
             console.log(data, status);
@@ -60,6 +76,46 @@ angular.module('professor',[])
     };
 
 $scope.getProjects();
+$scope.getProjectsStudents();
+
+$scope.showAdvanced = function(ev,research) {
+      $mdDialog.show({
+        controller: DialogController,
+        templateUrl: 'components/updateResearchDialog.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+      })
+      .then(function() {
+
+      }, function() {
+        $scope.status = 'You cancelled the dialog.';
+      });
+
+      selectedResearch=research
+
+      allStudents = $scope.researchstudents
+  
+
+     
+    };
+
+    function DialogController($scope, $mdDialog) {
+        $scope.hide = function() {
+            $mdDialog.hide();
+        };
+
+        $scope.cancel = function() {
+            $mdDialog.cancel();
+        };
+
+        $scope.answer = function(answer) {
+            $mdDialog.hide(answer);
+        };
+        $scope.selectedResearch=selectedResearch;
+        $scope.students = allStudents;
+    }
 
 
 }]).controller('pResearchController', ['$scope', '$http', '$log', function($scope, $http, $log) {

@@ -26,9 +26,9 @@ $scope.project={}
 
         $scope.getProjectazo();
 
-    // $scope.display=function(project){
-    //     $scope.selectedProject=project;
-    // }
+    $scope.display=function(project){
+        $scope.selectedResearch=project;
+    }
 
     $scope.showAdvanced = function(ev,project) {
       $mdDialog.show({

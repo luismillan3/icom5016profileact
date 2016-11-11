@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var pg = require('pg');//para la base de datos luego
+const database_URL= 'postgres://xwozcfrzmmekkv:zvyT7_TOODaNOop6XdZN2wddOU@ec2-54-243-204-57.compute-1.amazonaws.com:5432/d2ubph0nje9jmv'
+pg.defaults.ssl = true;
 
 var projects =[
         { id:1,
@@ -23,8 +25,22 @@ var projects =[
 
 
 router.get('/projects', function(req, res, next) {
-    console.log('trying')
-    res.json(projects);
+    console.log('trying papehhh')
+    var projectID = 0;
+    pg.connect(database_URL, function(err, client, done) {
+    client.query('SELECT * FROM research', function(err, result) {
+      
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+      res.json(result.rows);
+  		
+      console.log(result.rows[0].title)
+      done();
+    });
+  });
+
+  //.  res.json(projects);
 });
 
 router.post('/projects', function(req, res, next) {
@@ -40,7 +56,23 @@ router.post('/projects', function(req, res, next) {
 
 });
 
+router.get('/researchStudents', function(req, res, next) {
+    console.log('Students Papeh')
+    var projectID = 0;
+    pg.connect(database_URL, function(err, client, done) {
+    client.query('SELECT * FROM student', function(err, result) {
+      
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+      res.json(result.rows);
+      // console.log(result.rows)
+      done();
+    });
+  });
 
+  //.  res.json(projects);
+});
 
 
 

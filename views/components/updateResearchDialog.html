@@ -1,0 +1,74 @@
+
+  <md-dialog aria-label="{{selectedResearch.title}}" style="width: 500px">
+    <form ng-cloak>
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <h2>{{selectedProject.title}}</h2>
+          <span flex></span>
+          <md-button class="md-icon-button" ng-click="cancel()">
+            <md-icon md-svg-src="img/icons/cancel.svg" aria-label="Close dialog"></md-icon>
+          </md-button>
+        </div>
+      </md-toolbar>
+
+      <md-dialog-content>
+        <div class="md-dialog-content">
+          <h2></h2>
+
+
+          <form  id="updateProjectForm" ng-submit="updateProject(project)">
+                        <div class="form-group">
+                            <label for="titleE">Title:</label>
+                            <input type="text" ng-model = "project.title" class="form-control" id="titleE" placeholder="{{project.title}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="smryE">Funding:</label>
+                            <input type="text" ng-model = "project.funding"  class="form-control" id="smryE">
+                        </div>
+
+                        
+                            <!--label for="studntE">Student:</label-->
+                            <!--input type="text" ng-model = "project.student" class="form-control" id="studntE"-->
+
+                        <!--  <md-select class="selectpicker">
+                          <md-option>Mustard</md-option>
+                          <md-option>Ketchup</md-option>
+                          <md-option>Relish</md-option>
+                        </md-select> -->
+
+                       <!--  <md-input-container>
+                          <label>State</label>
+                          <md-select ng-model="ctrl.userState">
+                            <md-option><em>None</em></md-option>
+                            <md-option>Mustard</md-option>
+                            <md-option>Ketchup</md-option>
+                            <md-option>Relish</md-option><md-option>Mustard</md-option>
+                            <md-option>Ketchup</md-option>
+                            <md-option>Relish</md-option>
+                          </md-select>
+                        </md-input-container> -->
+
+                        <md-select ng-model="researchstudent" placeholder="Select student to add" class="md-no-underline">
+                         <md-option ng-repeat="researchstudent in students" ng-value="researchstudent.name">
+                            {{researchstudent.email}}
+                         </md-option>
+                        <!--   <md-option value="sword">Sword</md-option>
+                          <md-option value="wand">Wand</md-option>
+                          <md-option value="pen">Pen?</md-option> -->
+                        </md-select>  <button type="submit" ng-click="" class="btn btn-primary">Add Student</button>
+                        <br><br><br>
+
+
+                        <button type="submit" ng-click="updateProject(project)" class="btn btn-primary">Submit</button>
+
+                    </form>
+        </div>
+      </md-dialog-content>
+
+      <md-dialog-actions layout="row">
+        <md-button ng-click="answer('useful')">
+          Close
+        </md-button>
+      </md-dialog-actions>
+    </form>
+  </md-dialog>
