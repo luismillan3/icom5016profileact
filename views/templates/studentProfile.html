@@ -121,6 +121,19 @@
 
         </div>
         <div id="addProject">
+
+            <table class="projectTable">
+                <tr ng-repeat="project in student.projects">
+                    <td>
+                        <md-button class="md-primary md-raised" ng-click="showAdvanced($event, project)">
+                          <img width="200px" height="200px" src="{{project.picture}}">
+                        </md-button>
+                        <p>{{project.title}}</p>
+                    </td>
+                    <td><p class="description">{{project.description}}</p></td>
+                </tr>
+            </table>
+
             <form id="projectForm" name="projectForm" ng-submit="addProject(project)" hidden>
 
 
@@ -145,17 +158,6 @@
             </form>
         </div>
 
-        <div class="row" >
-            <ul  >
-
-                <li ng-repeat="project in student.projects" class="col-md-4 col-sm-6 col-xs-12">
-                    <md-button class="md-primary md-raised" ng-click="showAdvanced($event, project)">
-                      <img width="200px" height="200px" src="{{project.picture}}">
-                    </md-button>
-                    <p>{{project.title}}</p>
-                </li>
-            </ul>
-        </div>
 
     </section>
 

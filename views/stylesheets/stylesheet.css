@@ -89,6 +89,14 @@ html, body{
     margin-bottom: 2em;
 }
 
+.projectTable p{
+    text-align: center;
+}
+
+.projectTable .description{
+    text-align: justify;
+}
+
 .formItems{
     margin: 1em 0;
 }
@@ -96,6 +104,7 @@ html, body{
 li {
     list-style: none;
 }
+
 .studentInfo li{
     padding: 20px;
     margin: 0 20px;

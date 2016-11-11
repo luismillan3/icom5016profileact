@@ -3,10 +3,9 @@
     <form ng-cloak>
       <md-toolbar>
         <div class="md-toolbar-tools">
-          <h2>{{selectedProject.title}}</h2>
+          <h2>{{selectedProject.name}}</h2>
           <span flex></span>
           <md-button class="md-icon-button" ng-click="cancel()">
-            <md-icon md-svg-src="img/icons/cancel.svg" aria-label="Close dialog"></md-icon>
           </md-button>
         </div>
       </md-toolbar>
@@ -14,9 +13,12 @@
       <md-dialog-content>
         <div class="md-dialog-content">
           <h2></h2>
-          <p>{{selectedProject.description}}</p>
+          <img style="margin: auto; max-width: 100%;" alt="Lush mango tree" src="img/user.png" height="300px">
 
-          <img style="margin: auto; max-width: 100%;" alt="Lush mango tree" src="{{selectedProject.picture}}">
+          <p>{{selectedProject.advisor}}</p>
+          <p>{{selectedProject.advisor}}</p>
+          <p>{{selectedProject.advisor}}</p>
+
 
 
           </p>
