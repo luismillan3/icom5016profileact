@@ -125,11 +125,12 @@ angular.module('student',[])
         $scope.selectedEvent=selectedEvent;
     }
 
-}]).controller('studentProfileController', ['$scope', '$http', '$log', '$mdDialog', function($scope, $http, $log, $mdDialog, $location) {
+}]).controller('studentProfileController', [ '$cookieStore','$scope', '$http', '$log', '$mdDialog', function($cookieStore, $scope, $http, $log, $mdDialog, $location ) {
 
 
-    $scope.newr={}
+    $scope.newStudent={}
     $scope.student={}
+    $scope.project={}
 
     $scope.frmToggle = function() {
         $('#profileForm').slideToggle();
@@ -138,16 +139,63 @@ angular.module('student',[])
       console.log(path);
       window.location=path;
     }
+    // $scope.getStudent = function () {
+    //         $http.get('/student/profile')
+    //         .success(function (data, status) {
+    //             $scope.student = data;
+    //         })
+    //         .error(function (data, status) {
+    //             console.log(data, status);
+    //             console.log("Could not get all")
+    //         });
+    // };
+
+
+
     $scope.getStudent = function () {
-            $http.get('/student/profile')
-            .success(function (data, status) {
-                $scope.student = data;
-            })
-            .error(function (data, status) {
-                console.log(data, status);
-                console.log("Could not get all")
-            });
+        //chequiar rol, sino es student tirar homepage
+        var userid={'userid':$cookieStore.get('userid')}
+        console.log(userid)
+        $http.post('/student/profile',userid)
+        .success(function (data, status) {
+            $scope.student = data[0];
+            console.log($scope.student)
+        })
+        .error(function (data, status) {
+        	console.log(data, status);
+    		console.log("Could not get student Info")
+        });
     };
+
+    $scope.getProjects = function () {
+        //chequiar rol, sino es student tirar homepage
+        var userid={'userid':$cookieStore.get('userid')}
+        console.log(userid)
+        $http.post('/student/projects',userid)
+        .success(function (data, status) {
+            $scope.projects = data;
+            console.log($scope.projects)
+        })
+        .error(function (data, status) {
+        	console.log(data, status);
+    		console.log("Could not get all projects")
+        });
+    };
+
+    // $scope.getProjects = function () {
+    //     $http.get('/student/projects')
+    //     .success(function (data, status) {
+    //         $scope.projects = data;
+    //          //console.log(data, status)
+    //     })
+    //     .error(function (data, status) {
+    //         console.log(data, status);
+    //         console.log("Could not get all projectazos")
+    //     });
+    // };
+
+    $scope.getStudent();
+    $scope.getProjects();
     // $scope.updateProfile=function(re){
     //     console.log(re)
     //     $scope.newr={}
@@ -161,7 +209,7 @@ angular.module('student',[])
     //         console.log("could not add event")
     //     });
     // };
-    $scope.project={}
+
      $scope.addProject=function(re){
         $scope.project={}
         re.id=$scope.student.projects.length+1;
@@ -177,7 +225,7 @@ angular.module('student',[])
             console.log("could not add event")
         });
     };
-    $scope.getStudent();
+
 
     // $scope.addProject = function(project){
     //   this.project.id = projects.length

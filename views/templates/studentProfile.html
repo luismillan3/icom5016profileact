@@ -33,7 +33,7 @@
                             {{ student.name || 'empty' }}
                     </span>
                     <span editable-text="student.lastName" e-name="name" e-form="textBtnForm" >
-                             {{ student.lastName || 'empty' }}
+                             {{ student.lastname || 'empty' }}
                     </span>
                     <span ng-show="editableForm1.$visible">
                         <md-button class="btn btn-default" id="nameEdit" type="submit" ng-disabled="editableForm1.$waiting" ng-click="frmHide()">
@@ -75,12 +75,12 @@
                 <tr layout="row">
                     <td flex>
                         <span editable-text="student.major" e-name="name" e-form="tableform" >
-                            {{ student.major || 'empty' }}
+                            {{ student.majorid || 'empty' }}
                         </span>
                     </td>
 
                     <td flex>
-                        <span editable-text="student.major" e-name="name" e-form="tableform" >
+                        <span editable-text="student.gpa" e-name="name" e-form="tableform" >
                             {{ student.gpa || 'empty' }}
                         </span>
                     </td>
@@ -122,15 +122,17 @@
         </div>
         <div id="addProject">
 
-            <table class="projectTable">
-                <tr ng-repeat="project in student.projects">
-                    <td>
-                        <md-button class="md-primary md-raised" ng-click="showAdvanced($event, project)">
-                          <img width="200px" height="200px" src="{{project.picture}}">
-                        </md-button>
-                        <p>{{project.title}}</p>
+            <table class="projectTable" >
+                <tr ng-repeat="project in projects" layout="row">
+                    <td flex="25">
+                        <div>
+                            <md-button class="md-primary md-raised" ng-click="showAdvanced($event, project)">
+                                <img width="200px" height="200px" src="{{project.picture}}">
+                            </md-button>
+                            <p>{{project.title}}</p>
+                        </div>
                     </td>
-                    <td><p class="description">{{project.description}}</p></td>
+                    <td flex="75"><p class="description">{{project.description}}</p></td>
                 </tr>
             </table>
 

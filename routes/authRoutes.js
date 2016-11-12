@@ -18,7 +18,7 @@ router.post('/login', function(req, res, next) {
       res.statusCode = 400;
       return res.send('Error: Missing fields for event.');
     }
- 
+
   // // Get a Postgres client from the connection pool
   // pg.connect(database_URL, (err, client, done) => {
   //   // Handle connection errors
@@ -47,7 +47,7 @@ router.post('/login', function(req, res, next) {
 // query.on('end', () => { client.end(); });
     pg.connect(database_URL, function(err, client, done) {
     client.query('SELECT * FROM users where username=$1 and password=$2',[req.body.username, req.body.password], function(err, result) {
-      
+
       if (err)
        { console.error(err); response.send("Error " + err); }
       else
@@ -63,7 +63,7 @@ router.post('/login', function(req, res, next) {
     //     break;
     //   }
     // }
-    
+
 
 });
 
@@ -75,7 +75,7 @@ router.post('/signup/student', function(req, res, next) {
       res.statusCode = 400;
       return res.send('Error: Missing fields for event.');
     }
-   
+
     users.push(req.body)
     res.json(req.body);
 
@@ -89,7 +89,7 @@ router.post('/signup/recruiter', function(req, res, next) {
       res.statusCode = 400;
       return res.send('Error: Missing fields for event.');
     }
-   
+
     users.push(req.body)
     res.json(req.body);
 
@@ -102,21 +102,10 @@ router.post('/signup/professor', function(req, res, next) {
       res.statusCode = 400;
       return res.send('Error: Missing fields for event.');
     }
-   
+
     users.push(req.body)
     res.json(req.body);
 
 });
-
-
-  
-
-
-
-
-
-
-
-
 
 module.exports = router;

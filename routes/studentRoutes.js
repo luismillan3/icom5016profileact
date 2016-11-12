@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var pg = require('pg');//para la base de datos luego
+const database_URL= 'postgres://xwozcfrzmmekkv:zvyT7_TOODaNOop6XdZN2wddOU@ec2-54-243-204-57.compute-1.amazonaws.com:5432/d2ubph0nje9jmv'
+pg.defaults.ssl = true;
 
 
 var student = {name:"Bartolo",
@@ -42,25 +44,51 @@ var students = [
       ]
 
 
-router.get('/profile', function(req, res, next) {
-    console.log('Student funciona')
-    res.json(student);
+// router.get('/profile', function(req, res, next) {
+//     console.log('Student funciona')
+//     res.json(student);
+//
+// });
 
+
+
+
+
+
+
+
+router.post('/profile', function(req, res, next) {
+    console.log(req.body)
+    pg.connect(database_URL, function(err, client, done) {
+        client.query('SELECT * FROM users natural join student where userid=$1',[req.body.userid], function(err, result) {
+
+            if (err)
+             { console.error(err); response.send("Error " + err); }
+            else
+            res.json(result.rows);
+            console.log(result.rows)
+            done();
+        });
+    });
 });
 
 
 
 router.post('/projects', function(req, res, next) {
-    console.log(req.body)
-    if(!req.body.hasOwnProperty('title') || !req.body.hasOwnProperty('description')){
-      res.statusCode = 400;
-      return res.send('Error: Missing fields for event.');
-    }
-    req.body.picture= "https://yellowpencil.com/assets/blog/banners/banner-angularjs.jpg"
-    student.projects.push(req.body)
+    console.log('Projects Papeh')
+    var projectID = 0;
+    pg.connect(database_URL, function(err, client, done) {
+        client.query('SELECT description, title, image FROM projects natural join student natural join users where users.userid=$1 and student.userid = users.userid and projects.student_id = student.studentid', 
+        [req.body.userid],
+        function(err, result) {
 
-    res.json(student.projects);
-    console.log(req.body)
+          if (err)
+           { console.error(err); response.send("Error " + err); }
+          else
+          res.json(result.rows);
+          done();
+        });
+    });
 
 });
 
