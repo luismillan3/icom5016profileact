@@ -67,7 +67,7 @@ angular.module('professor',[])
         $('#viewModalAddResearch').modal("hide");
        // e.id=$scope.projects.length+1;
         console.log(e)
-        var sending = {title:e.title,fund:e.funding,pid:$cookieStore.get('userid')}
+        var sending = {title:e.title,fund:e.funding}
         $http.post('/investigacionprof/projects', sending)
         .success(function (data) {
             $scope.projects = data;

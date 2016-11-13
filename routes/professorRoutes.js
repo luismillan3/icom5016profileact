@@ -51,7 +51,7 @@ router.post('/projects', function(req, res, next) {
     //   return res.send('Error: Missing fields for event.');
     // }
           pg.connect(database_URL, function(err, client, done) {
-    client.query('INSERT INTO research (title,funding,userid) VALUES ($1,$2,$3)',[req.body.title,req.body.fund,req.body.pid], function(err, result) {
+    client.query('INSERT INTO research (title,funding) VALUES ($1,$2)',[req.body.title,req.body.fund], function(err, result) {
       
       if (err)
        { console.error(err); response.send("Error " + err); }
@@ -173,29 +173,6 @@ router.post('/researchChanges', function(req, res, next) {
 });
 
 
-router.post('/newResearch', function(req, res, next) {
-    
-    console.log(req.body);
-    // if(!req.body.hasOwnProperty('title')|| !req.body.hasOwnProperty('funding')  || !req.body.hasOwnProperty('id')) {
-    //   res.statusCode = 400;
-    //   return res.send('Error: Missing fields for event.');
-    // }
-
-    pg.connect(database_URL, function(err, client, done) {
-      //Aqui esta req.body.pid quee s userid pero no se puede usar todavia
-    client.query('INSERT INTO research (title,funding) VALUES ($1,$2)',[req.body.title,req.body.funding], function(err, result) {
-      
-      if (err)
-       { console.error(err); response.send("Error " + err); }
-      else
-      res.json(result.rows);
-      //console.log(result.rows)
-      done();
-    });
-  });
-
-
-});
 
 
 
