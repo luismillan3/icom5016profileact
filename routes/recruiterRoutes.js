@@ -31,7 +31,12 @@ var updateRecruiter='UPDATE recruiter set name=$1, lastname=$2, email=$3, compan
 var getEvents='SELECT eventid,title,description,date from users natural join recruiter natural join event where userid=$1';
 var getRecruiterID='SELECT recruiterid FROM users natural join recruiter where userid=$1';
 var insertEvent='INSERT INTO event(title,description,date,recruiterid) values($1,$2,$3,$4)';
-var deleteEvent = "DELETE FROM event WHERE eventid=$1"
+var deleteEvent = 'DELETE FROM event WHERE eventid=$1';
+var getAllStudents='SELECT * FROM student natural join major';
+var getAddedStudents='SELECT * from recruiterfolder natural join student natural join major where recruiterid=$1';
+var deleteAddedStudent = 'DELETE FROM recruiterfolder WHERE entryid=$1';
+var addingStudentToFolder='INSERT INTO recruiterfolder  (recruiterid, studentid) SELECT $1, $2 WHERE  NOT EXISTS ( SELECT recruiterid,studentid FROM recruiterfolder WHERE recruiterid = $1 and studentid=$2 )'
+
 router.post('/events', function(req, res, next) {
      console.log(req.body)
      pg.connect(database_URL, function(err, client, done) {
@@ -158,7 +163,7 @@ router.put('/profile/update', function(req, res, next) {
 router.get('/search', function(req, res, next) {
      
      pg.connect(database_URL, function(err, client, done) {
-    client.query('SELECT * FROM student natural join major', function(err, result) {
+    client.query(getAllStudents, function(err, result) {
       
       if (err)
        { console.error(err); response.send("Error " + err); }
@@ -170,27 +175,81 @@ router.get('/search', function(req, res, next) {
   });
 
 });
-router.get('/added', function(req, res, next) {
-    console.log('entre')
-    res.json(addedStudents);
+router.post('/added', function(req, res, next) {
+    var recruiterid=0;
+    console.log(req.body)
+     pg.connect(database_URL, function(err, client, done) {
+    client.query(getRecruiterID,[req.body.userid], function(err, result) {
+      
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+      
+      recruiterid=result.rows[0].recruiterid;
+      
+      console.log(recruiterid)
+      done();
+       client.query(getAddedStudents,[recruiterid], function(err, result) {
+      
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+        console.log(result.rows)
+       res.json(result.rows);
+      done();
+    });
+    });
+    
+  });
 
 });
 router.delete('/added/:id', function(req, res, next) {
+  console.log("trying to delete")
+  pg.connect(database_URL, function(err, client, done) {
 
-  console.log("From delete route");
-  console.log(req.params.id);
-  for(var i=0;i<addedStudents.length;i++){
-    if(addedStudents[i].id==req.params.id){
-        addedStudents.splice(i,1);
-    }
-  }
-  res.json(addedStudents);
+      if (err) {
+          return console.error('error fetching client from pool', err);
+      }
+      client.query(deleteAddedStudent, [req.params.id], function(err, result) {
+          //call `done()` to release the client back to the pool
+
+          if (err) {
+              res.send(err);
+          }
+          res.json("OK");
+          done();
+      });
+    
+  });
   });
 
-router.post('/added', function(req, res, next) {
+router.post('/adding', function(req, res, next) {
+   pg.connect(database_URL, function(err, client, done) {
+    client.query(getRecruiterID,[req.body.userid], function(err, result) {
+      
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+      
+      recruiterid=result.rows[0].recruiterid;
+      
+      console.log(recruiterid)
+      done();
+       client.query(addingStudentToFolder,[recruiterid,req.body.studentid], function(err, result) {
+      
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+        
+       res.json("OK");
+      done();
+    });
+    });
+    
+  });
   console.log("trying to add student")
-    req.body.id=addedStudents.length+1;
-    addedStudents.push(req.body)
+    // req.body.id=addedStudents.length+1;
+    // addedStudents.push(req.body)
 
   
 

@@ -137,8 +137,9 @@ angular.module('recruiter',[])
       	$scope.selectedStudent=student;
       }
       $scope.addStudentToFolder=function(student){
-
-       $http.post('/recruiter/added', student )
+        var info={userid:$cookieStore.get('userid'),
+                  studentid:student.studentid}
+       $http.post('/recruiter/adding', info )
             .success(function (data) {
                 console.log("Added to folder")
             })
@@ -174,7 +175,7 @@ angular.module('recruiter',[])
       $scope.getStudents();
 
 
-}]).controller('recruiterStudentFolder', ['$scope', '$http', '$log', function($scope, $http, $log) {
+}]).controller('recruiterStudentFolder', ['$cookieStore','$scope', '$http', '$log', function($cookieStore,$scope, $http, $log) {
 
     //TODO cambiar esto
   $scope.selectedStudent={}
@@ -184,9 +185,10 @@ angular.module('recruiter',[])
         $scope.selectedStudent=student;
       }
     $scope.getStudents = function () {
-
-            $http.get('/recruiter/added')
+           var userid={'userid':$cookieStore.get('userid')}
+            $http.post('/recruiter/added',userid)
             .success(function (data, status) {
+                console.log(data)
                 $scope.students = data;
             })
             .error(function (data, status) {
@@ -197,8 +199,9 @@ angular.module('recruiter',[])
 
 
      $scope.removeStudent=function(id){
+      console.log(id)
       $http.delete('/recruiter/added/'+id).success(function (data) {
-                $scope.students = data;
+                $scope.getStudents()
             })
             .error(function (data, status, header, config) {
                 console.log(data, status);
