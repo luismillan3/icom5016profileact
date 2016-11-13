@@ -5,14 +5,20 @@ angular.module('mainController',[])
 	$scope.tempUsr={}
 
 	$scope.user={}
-	$scope.majors=[{value:"ICOM"},
-		{value:"INEL"},
-		{value:"INSO"},
-		{value:"INME"},
-		{value:"INCI"},
-		{value:"ININ"},
-		{value:"INQU"}]
-	
+	$scope.majors=[];
+	 $scope.getMajor = function () {
+      
+            $http.get('/auth/major')
+            .success(function (data, status) {
+                $scope.majors = data;
+                
+            })
+            .error(function (data, status) {
+              console.log(data, status);
+            console.log("Could not get major")
+            });
+        };
+     $scope.getMajor();
 	$scope.signUpStudent=function(usr){
 		// $http.post('/auth/signup/student', usr )
   //           .success(function (data) {

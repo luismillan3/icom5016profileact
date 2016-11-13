@@ -36,6 +36,7 @@ var getAllStudents='SELECT * FROM student natural join major';
 var getAddedStudents='SELECT * from recruiterfolder natural join student natural join major where recruiterid=$1';
 var deleteAddedStudent = 'DELETE FROM recruiterfolder WHERE entryid=$1';
 var addingStudentToFolder='INSERT INTO recruiterfolder  (recruiterid, studentid) SELECT $1, $2 WHERE  NOT EXISTS ( SELECT recruiterid,studentid FROM recruiterfolder WHERE recruiterid = $1 and studentid=$2 )'
+var getAllResearch='Select * FROM research natural join professor'
 
 router.post('/events', function(req, res, next) {
      console.log(req.body)
@@ -253,6 +254,21 @@ router.post('/adding', function(req, res, next) {
 
   
 
+});
+
+router.get('/research/get', function(req, res, next) {
+    console.log("Coji los research")
+     pg.connect(database_URL, function(err, client, done) {
+    client.query(getAllResearch, function(err, result) {
+      
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+      res.json(result.rows);
+      console.log(result.rows)
+      done();
+    });
+  });
 });
 //     var newCar = new Car(req.body.make, req.body.model, req.body.year, req.body.description, req.body.price);
 //     console.log("New Car: " + JSON.stringify(newCar));

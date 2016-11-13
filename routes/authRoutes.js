@@ -10,7 +10,21 @@ pg.defaults.ssl = true;
   {userID:3,username:'Rogelio',password:'marie',role:'professor',email:'rogelio@gmail.com'}
 
   ]
+router.get('/major', function(req, res, next) {
+    
+   pg.connect(database_URL, function(err, client, done) {
+    client.query('SELECT * FROM major', function(err, result) {
 
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+      res.json(result.rows);
+      console.log(result.rows)
+      done();
+    });
+  });
+
+});
 router.post('/login', function(req, res, next) {
     console.log('entre al login')
      if(!req.body.hasOwnProperty('username') || !req.body.hasOwnProperty('password'))
@@ -19,32 +33,7 @@ router.post('/login', function(req, res, next) {
       return res.send('Error: Missing fields for event.');
     }
 
-  // // Get a Postgres client from the connection pool
-  // pg.connect(database_URL, (err, client, done) => {
-  //   // Handle connection errors
-  //   if(err) {
-  //     done();
-  //     console.log(err);
-  //     return res.status(500).json({success: false, data: err});
-  //   }
-  //   // SQL Query > Select Data
-  //   const query = client.query('SELECT * FROM users;');
-  //   // Stream results back one row at a time
-  //   query.on('row', (row) => {
-  //     results.push(row);
-  //   });
-  //   // After all data is returned, close connection and return results
-  //   query.on('end', () => {
-  //     done();
-  //     console.log(results);
-  //   });
-  // });
-//  const results = [];
-// const client = new pg.Client(database_URL);
-// client.connect();
-// const query = client.query(
-//   'select * from users');
-// query.on('end', () => { client.end(); });
+  
     pg.connect(database_URL, function(err, client, done) {
     client.query('SELECT * FROM users where username=$1 and password=$2',[req.body.username, req.body.password], function(err, result) {
 
@@ -56,13 +45,6 @@ router.post('/login', function(req, res, next) {
       done();
     });
   });
-    // for(var i=0;i<users.length;i++){
-    //   if(req.body.username==users[i].username && req.body.password==users[i].password){
-    //   return res.json(users[i])
-    //     key=true
-    //     break;
-    //   }
-    // }
 
 
 });

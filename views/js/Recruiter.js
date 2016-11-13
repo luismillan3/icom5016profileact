@@ -112,13 +112,21 @@ angular.module('recruiter',[])
 	$scope.results=[]
 	$scope.criteria={}
 	$scope.students=[]
-	$scope.majors=[{value:"ICOM"},
-		{value:"INEL"},
-		{value:"INSO"},
-		{value:"INME"},
-		{value:"INCI"},
-		{value:"ININ"},
-		{value:"INQU"}]
+	$scope.majors=[]
+
+
+    $scope.getMajor = function () {
+      
+            $http.get('/auth/major')
+            .success(function (data, status) {
+                $scope.majors = data;
+                
+            })
+            .error(function (data, status) {
+              console.log(data, status);
+            console.log("Could not get major")
+            });
+        };
 
 	  $scope.getStudents = function () {
       console.log($cookieStore.get('username'))
@@ -173,6 +181,7 @@ angular.module('recruiter',[])
       	}
       }
       $scope.getStudents();
+      $scope.getMajor();
 
 
 }]).controller('recruiterStudentFolder', ['$cookieStore','$scope', '$http', '$log', function($cookieStore,$scope, $http, $log) {
@@ -211,39 +220,34 @@ angular.module('recruiter',[])
 
      $scope.getStudents();
 
-}]).controller('recruiterResearch', ['$scope', '$http', '$log', function($scope, $http, $log) {
+}]).controller('recruiterResearch', ['$scope', '$http', '$log','$mdDialog', function($scope, $http, $log,$mdDialog) {
 
     //TODO cambiar esto
-  $scope.selectedStudent={}
-  $scope.students=[]
+  $scope.selectedResearch={}
+  $scope.researches=[]
   console.log("entre")
     $scope.display=function(student){
         $scope.selectedStudent=student;
       }
-    $scope.getStudents = function () {
-
-            $http.get('/recruiter/added')
+     $scope.getResearch = function () {
+            $http.get('recruiter/research/get')
             .success(function (data, status) {
-                $scope.students = data;
+                $scope.researches = data;
+                 console.log(data)
             })
             .error(function (data, status) {
-              console.log(data, status);
-            console.log("Could not get students")
+                console.log(data, status);
+                console.log("Could not get all projectazos")
             });
         };
 
+      
 
-     $scope.removeStudent=function(id){
-      $http.delete('/recruiter/added/'+id).success(function (data) {
-                $scope.students = data;
-            })
-            .error(function (data, status, header, config) {
-                console.log(data, status);
-            console.log("could not remove student from folder")
-            })
-      };
+    $scope.display=function(project){
+        $scope.selectedResearch=project;
+    }
 
-     $scope.getStudents();
+     $scope.getResearch();
 
 }])
 

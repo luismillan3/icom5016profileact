@@ -18,7 +18,7 @@
                 <li><a href="#/recruiterEvent">Events</a></li>
                 <li><a href="#/recruiterSearch">Search Students</a></li>
                 <li><a href="#/recruiterFolder">Student Folder</a></li>
-                <li><a href="#/research">Projects</a></li>
+                <li><a href="#/recruiterResearch">Projects</a></li>
               </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
@@ -39,16 +39,16 @@
         </thead>
 
         <tbody>
-            <tr ng-repeat="research in projectazos | filter: query">
-                <td>{{ research.name }}</td>
-                <td>{{ research.department }}</td>
-                <td>{{ research.advisor }}</td>
+            <tr ng-repeat="research in researches | filter: query">
+                <td>{{ research.title }}</td>
+                <td>{{ research.description }}</td>
+                <td>{{ research.name }} {{research.lastname}}</td>
                 <td>
                     <!-- <a class="waves-effect waves-light btn modal-trigger" href="#viewModal">Look!</a> -->
-                    <md-button class="md-default md-raised" ng-click="showAdvanced($event, research)">Look!</md-button>
+                    <md-button class="md-default md-raised" data-target="#viewModal"  data-toggle="modal" ng-click="display(research)">Look!</md-button>
                 </td>
                 <td>
-                    <md-button class="btn btn-success" data-target="#viewModalDonate" data-toggle="modal" ng-click="display(research)">Donate</md-button>
+                    <md-button class="btn btn-success" data-target="#viewModalDonate" data-toggle="modal" ng-click="display(research)" >Donate</md-button>
                 </td>
             </tr>
         </tbody>
@@ -71,21 +71,14 @@
 <!-- Research template pop up -->
 <div class="modal" tabindex="-1" id="viewModal"
         data-keyboard="false" data-backdrop="static">
-<!--
-        <div class="modal-content">
-      <h4>Modal Header</h4>
-      <p>A bunch of text</p>
-    </div> -->
-    <!-- <div class="modal-footer">
-      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-    </div> -->
+
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
                     &times;
                 </button>
-                <h4 class="modal-title">{{selectedResearch.name}}</h4>
+                <h4 class="modal-title">{{selectedResearch.title}}</h4>
             </div>
             <div class="modal-body">
                 <div class="img-wrapper clearfix">
@@ -93,15 +86,13 @@
                 </div>
 
 		<div class="form-group">
-			<h3><strong>Advisor:</strong> {{selectedResearch.advisor}}</h3>
-		</div>
-		<div class="form-group">
-			<h3><strong>Department:</strong> {{selectedResearch.department}}</h3>
+			<h4><strong>Advisor:</strong> {{selectedResearch.name}} {{selectedResearch.lastname}}</h4>
+            <button type="submit" class="btn btn-primary">View Resume</button>
+                <button type="button" class="btn btn-primary ">Add</button>
 		</div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">View Resume</button>
-                <button type="button" class="btn btn-primary">Add</button>
+                
                 <button type="button" class="btn btn-primary"
                         data-dismiss="modal">Close</button>
             </div>
@@ -118,7 +109,7 @@
                 <button type="button" class="close" data-dismiss="modal">
                     &times;
                 </button>
-                <h4 class="modal-title">Make a Donation to {{selectedResearch.name}}</h4>
+                <h4 class="modal-title">Make a Donation to {{selectedResearch.title}}</h4>
             </div>
             <div class="modal-body">
                 <div class="img-wrapper clearfix">
@@ -143,7 +134,7 @@
                 </div>
 
 		<div class="form-group">
-			<h3><strong>Advisor:</strong> {{selectedResearch.advisor}}</h3>
+			<h3><strong>Advisor:</strong> {{selectedResearch.name}} {{selectedResearch.lastname}} </h3>
 		</div>
 		<div class="form-group">
 			<h3><strong>Department:</strong> {{selectedResearch.department}}</h3>
