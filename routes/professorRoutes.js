@@ -75,17 +75,48 @@ router.get('/researchStudents', function(req, res, next) {
 });
 
 router.post('/researchStudents', function(req, res, next) {
-    console.log("Hello Im trying to add somthing")
-    if(!req.body.hasOwnProperty('title') || !req.body.hasOwnProperty('funding')
-    || !req.body.hasOwnProperty('student')) {
+    
+    if(!req.body.hasOwnProperty('rese')|| !req.body.hasOwnProperty('student')) {
       res.statusCode = 400;
       return res.send('Error: Missing fields for event.');
     }
-    projects.push(req.body)
+    pg.connect(database_URL, function(err, client, done) {
+    client.query('INSERT INTO research_student_rel (studentid,rid) VALUES ($1,$2)',[req.body.student,req.body.rese], function(err, result) {
+      
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+      res.json(result.rows);
+      //console.log(result.rows)
+      done();
+    });
+  });
 
-    res.json(projects);
 
 });
+
+router.post('/removeResearchstudents', function(req, res, next) {
+    
+    if(!req.body.hasOwnProperty('rese')|| !req.body.hasOwnProperty('student')) {
+      res.statusCode = 400;
+      return res.send('Error: Missing fields for event.');
+    }
+    pg.connect(database_URL, function(err, client, done) {
+    client.query('DELETE FROM research_student_rel WHERE studentid = $1 AND rid = $2',[req.body.student,req.body.rese], function(err, result) {
+      
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+      res.json(result.rows);
+      //console.log(result.rows)
+      done();
+    });
+  });
+
+
+});
+
+
 
 
   router.get('/singleProjectStudents', function(req, res, next) {

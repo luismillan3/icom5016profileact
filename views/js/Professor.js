@@ -155,25 +155,57 @@ $scope.showAdvanced = function(ev,research) {
             $mdDialog.hide(answer);
         };
 
-        $scope.addStudentProject=function(elparamero, elsegundoparamero){
-        console.log(elparamero);
-        console.log(elsegundoparamero);
+        $scope.addStudentProject=function(estudiante, research){
+        console.log("Intentando anadir estudiante");
+       
+
+
+
+          var srrelation = { student:estudiante,rese: research};
+
+                $http.post('/investigacionprof/researchstudents', srrelation)
+                .success(function (data, status) {
+                    
+                
+            //return data;
+        })
+        .error(function (data, status) {
+            console.log(data, status);
+            console.log("Error finding students in research " + status + "--" + data)
+        });
+
+
+
+        $scope.hide();
+        
+        $scope.getProjects();
+
+
+    };
+
+          $scope.removeStudentProject=function(estudiante, research){
+     
+          var srrelation = { student:estudiante,rese: research};
+
+                $http.post('/investigacionprof/removeResearchstudents', srrelation)
+                .success(function (data, status) {
+                    
+                
+            //return data;
+        })
+        .error(function (data, status) {
+            console.log(data, status);
+            console.log("Error finding students in research " + status + "--" + data)
+        });
+
+
+
         $scope.hide();
         $scope.getProjects();
 
-        // $('#viewModalAddResearch').modal("hide");
-        // e.id=$scope.projects.length+1;
-        // console.log(e)
 
-        // $http.post('/investigacionprof/projects', e )
-        // .success(function (data) {
-        //     $scope.projects = data;
-        // })
-        // .error(function (data, status, header, config) {
-        //     console.log(data, status);
-        // console.log("could not add event")
-        // });
     };
+
         //$scope.getStudentsPerProjects(selectedResearch);
         $scope.selectedResearch=selectedResearch;
      

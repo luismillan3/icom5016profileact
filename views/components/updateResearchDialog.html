@@ -17,17 +17,21 @@
 
  <form  id="updateProjectForm" ng-submit="updateProject(project)">
                         
-                        <h1>Aqui ira algo pero uff me salio lo de los estudiantes</h1>
+                        <h1>Please select student for add or remove</h1>
                         <md-select id = "vally" ng-model="myStudent" ng-change ="studentSelected(myStudent)" placeholder="Select student to add" class="md-no-underline">
                          <md-option ng-repeat="researchstudent in students" ng-value="researchstudent.studentid" >
-                            {{researchstudent.name}}
+                            {{researchstudent.email}}
 
                            <!--   <button style="float: right;" class="btn btn-primary" ng-click="addStudentProject(researchstudent.name)">Add Student</button> -->
                          </md-option>
       
                         </md-select> 
 
-                         <button type="submit" ng-click="addStudentProject(SelectedStudent, selectedResearch.rid)" class="btn btn-primary">Add Student</button>
+                         <button type="submit" ng-click="addStudentProject(SelectedStudent, selectedResearch.rid)" class="btn btn-primary">Add Student</button> 
+
+                         <button type="submit" ng-click="removeStudentProject(SelectedStudent, selectedResearch.rid)" class="btn btn-primary">Remove Student</button>
+
+
                         <br><br><br>
 
 

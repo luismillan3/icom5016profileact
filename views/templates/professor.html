@@ -50,10 +50,10 @@
                 <th>Setting</th>
             </tr>
             <tr ng-repeat="project in projects" >
-                <td>{{ project.title }}</td><td>{{ project.funding }}</td><td>
+                <td>{{ project.title }}</td><td>$ {{ project.funding }}</td><td>
 
                 <ul><li ng-repeat="s in studentsInProjects" 
-                ng-if="project.rid == s.rid">{{s.name}}</li></ul>
+                ng-if="project.rid == s.rid">{{s.name}} {{s.lastname}}</li></ul>
                  <!--    <button class="btn btn-success" ng-click="showAdvanced($event, project)">View Students</button> -->
                 </td>
                   <!-- <td> <button class="btn btn-success" data-target="#viewModalEdit" data-toggle="modal" ng-click="display(project.student)">Manage Students</button> </td> -->
