@@ -34,7 +34,7 @@
 
 <div class="container">
     <hr>
-    <h2>Active Research Projects</h2>
+    <h2>Active Research Projects </h2>
     <div class="pull-right">
         <button class="btn btn-success" data-target="#viewModalAddResearch" data-toggle="modal" ng-click="display(projects)">Add New Research</button>
     </div>
@@ -49,9 +49,12 @@
                 <th>Students</th>
                 <th>Setting</th>
             </tr>
-            <tr ng-repeat="project in projects">
+            <tr ng-repeat="project in projects" >
                 <td>{{ project.title }}</td><td>{{ project.funding }}</td><td>
-                    <p ng-repeat="student in project.students">{{student.name}}</p>
+
+                <ul><li ng-repeat="s in studentsInProjects" 
+                ng-if="project.rid == s.rid">{{s.name}}</li></ul>
+                 <!--    <button class="btn btn-success" ng-click="showAdvanced($event, project)">View Students</button> -->
                 </td>
                   <!-- <td> <button class="btn btn-success" data-target="#viewModalEdit" data-toggle="modal" ng-click="display(project.student)">Manage Students</button> </td> -->
                 <td> <button class="btn btn-success" ng-click="showAdvanced($event, project)">Edit Research</button> </td>
@@ -61,12 +64,6 @@
     </center>
 </div>
 
-
-<!--  <ul>
-            <li ng-repeat="researchstudent in researchstudents">
-              {{researchstudent.name}}
-            </li>
-            <li> el negro </li> -->
 
 
 

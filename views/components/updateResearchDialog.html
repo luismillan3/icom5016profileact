@@ -15,52 +15,24 @@
         <div class="md-dialog-content">
           <h2></h2>
 
-
-          <form  id="updateProjectForm" ng-submit="updateProject(project)">
-                        <div class="form-group">
-                            <label for="titleE">Title:</label>
-                            <input type="text" ng-model = "project.title" class="form-control" id="titleE" placeholder="{{project.title}}">
-                        </div>
-                        <div class="form-group">
-                            <label for="smryE">Funding:</label>
-                            <input type="text" ng-model = "project.funding"  class="form-control" id="smryE">
-                        </div>
-
-
-                            <!--label for="studntE">Student:</label-->
-                            <!--input type="text" ng-model = "project.student" class="form-control" id="studntE"-->
-
-                        <!--  <md-select class="selectpicker">
-                          <md-option>Mustard</md-option>
-                          <md-option>Ketchup</md-option>
-                          <md-option>Relish</md-option>
-                        </md-select> -->
-
-                       <!--  <md-input-container>
-                          <label>State</label>
-                          <md-select ng-model="ctrl.userState">
-                            <md-option><em>None</em></md-option>
-                            <md-option>Mustard</md-option>
-                            <md-option>Ketchup</md-option>
-                            <md-option>Relish</md-option><md-option>Mustard</md-option>
-                            <md-option>Ketchup</md-option>
-                            <md-option>Relish</md-option>
-                          </md-select>
-                        </md-input-container> -->
-
-                        <md-select ng-model="researchstudent" placeholder="Select student to add" class="md-no-underline">
-                         <md-option ng-repeat="researchstudent in students" ng-value="researchstudent.name">
+ <form  id="updateProjectForm" ng-submit="updateProject(project)">
+                        
+                        <h1>Aqui ira algo pero uff me salio lo de los estudiantes</h1>
+                        <md-select id = "vally" ng-model="myStudent" ng-change ="studentSelected(myStudent)" placeholder="Select student to add" class="md-no-underline">
+                         <md-option ng-repeat="researchstudent in students" ng-value="researchstudent.studentid" >
                             {{researchstudent.name}}
+
+                           <!--   <button style="float: right;" class="btn btn-primary" ng-click="addStudentProject(researchstudent.name)">Add Student</button> -->
                          </md-option>
-                        <!--   <md-option value="sword">Sword</md-option>
-                          <md-option value="wand">Wand</md-option>
-                          <md-option value="pen">Pen?</md-option> -->
-                        </md-select>  <button type="submit" ng-click="" class="btn btn-primary">Add Student</button>
+      
+                        </md-select> 
+
+                         <button type="submit" ng-click="addStudentProject(SelectedStudent, selectedResearch.rid)" class="btn btn-primary">Add Student</button>
                         <br><br><br>
 
 
-                        <button type="submit" ng-click="updateProject(project)" class="btn btn-primary">Submit</button>
-
+                       <!--  <button type="submit" ng-click="updateProject(project)" class="btn btn-primary">Submit</button>
+ -->
                     </form>
         </div>
       </md-dialog-content>

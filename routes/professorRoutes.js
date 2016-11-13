@@ -66,7 +66,7 @@ router.get('/researchStudents', function(req, res, next) {
        { console.error(err); response.send("Error " + err); }
       else
       res.json(result.rows);
-      // console.log(result.rows)
+      //console.log(result.rows)
       done();
     });
   });
@@ -74,6 +74,37 @@ router.get('/researchStudents', function(req, res, next) {
   //.  res.json(projects);
 });
 
+router.post('/researchStudents', function(req, res, next) {
+    console.log("Hello Im trying to add somthing")
+    if(!req.body.hasOwnProperty('title') || !req.body.hasOwnProperty('funding')
+    || !req.body.hasOwnProperty('student')) {
+      res.statusCode = 400;
+      return res.send('Error: Missing fields for event.');
+    }
+    projects.push(req.body)
+
+    res.json(projects);
+
+});
+
+
+  router.get('/singleProjectStudents', function(req, res, next) {
+    //console.log("El id papeh -?> " + req.body.rid);
+ // console.log(req.body)
+
+    pg.connect(database_URL, function(err, client, done) {
+    //client.query('SELECT name FROM student NATURAL JOIN research_student_rel NATURAL JOIN research WHERE rid = $1',[req.body.rid], function(err, result) {
+      client.query('SELECT * FROM student NATURAL JOIN research_student_rel NATURAL JOIN research', function(err, result) { 
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+      res.json(result.rows);
+      //console.log(result.rows)
+      done();
+    });
+  });
+
+  });
 
 
 module.exports = router;
