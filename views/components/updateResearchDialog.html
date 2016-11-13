@@ -17,8 +17,8 @@
 
  <form  id="updateProjectForm" ng-submit="updateProject(project)">
                         
-                        <h1>Please select student for add or remove</h1>
-                        <md-select id = "vally" ng-model="myStudent" ng-change ="studentSelected(myStudent)" placeholder="Select student to add" class="md-no-underline">
+                        <h1>Please select student for add or remove for {{selectedResearch.title}}</h1>
+                        <md-select id = "vally" ng-model="myStudent" ng-change ="studentSelected(myStudent)" placeholder="Select student to add/remove" class="md-no-underline">
                          <md-option ng-repeat="researchstudent in students" ng-value="researchstudent.studentid" >
                             {{researchstudent.email}}
 
@@ -26,6 +26,8 @@
                          </md-option>
       
                         </md-select> 
+                        <br><br>
+
 
                          <button type="submit" ng-click="addStudentProject(SelectedStudent, selectedResearch.rid)" class="btn btn-primary">Add Student</button> 
 
@@ -33,8 +35,17 @@
 
 
                         <br><br><br>
+                        <label for = "resTitle">Research Title</label>
+                           <input type = "text" ng-model = "resTitle" ng-value = "selectedResearch.title" ng-change = "changeTitle(resTitle)" >
+
+                            <label for = "resFunds">Funds</label>
+                           <input type = "text" ng-model = "resFunds" ng-value = "selectedResearch.funding" ng-change = "changeFunds(resFunds)">
+                          <br><br><br>
 
 
+                                <button type="submit" ng-click="submitResearchChanges(changedTitle,changedFund, selectedResearch.rid)" class="btn btn-primary">Done Editing</button>
+
+                                 <button type="submit" ng-click="removeResearch(selectedResearch.rid)" class="btn btn-danger">Delete Research</button>
                        <!--  <button type="submit" ng-click="updateProject(project)" class="btn btn-primary">Submit</button>
  -->
                     </form>

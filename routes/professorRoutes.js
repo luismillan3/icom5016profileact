@@ -44,15 +44,24 @@ router.get('/projects', function(req, res, next) {
 });
 
 router.post('/projects', function(req, res, next) {
-    console.log("Hello Im trying to add somthing")
-    if(!req.body.hasOwnProperty('title') || !req.body.hasOwnProperty('funding')
-    || !req.body.hasOwnProperty('student')) {
-      res.statusCode = 400;
-      return res.send('Error: Missing fields for event.');
-    }
-    projects.push(req.body)
-
-    res.json(projects);
+    console.log("req.body")
+    // if(!req.body.hasOwnProperty('title') || !req.body.hasOwnProperty('funding')
+    // ) {
+    //   res.statusCode = 400;
+    //   return res.send('Error: Missing fields for event.');
+    // }
+          pg.connect(database_URL, function(err, client, done) {
+    client.query('INSERT INTO research (title,funding,userid) VALUES ($1,$2,$3)',[req.body.title,req.body.fund,req.body.pid], function(err, result) {
+      
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+      res.json(result.rows);
+      //console.log(result.rows)
+      done();
+    });
+  });
+    
 
 });
 
@@ -115,6 +124,78 @@ router.post('/removeResearchstudents', function(req, res, next) {
 
 
 });
+
+
+router.post('/removeResearch', function(req, res, next) {
+    
+    // if(!req.body.hasOwnProperty('rese')|| !req.body.hasOwnProperty('student')) {
+    //   res.statusCode = 400;
+    //   return res.send('Error: Missing fields for event.');
+    // }
+    pg.connect(database_URL, function(err, client, done) {
+    client.query('DELETE FROM research WHERE  rid = $1',[req.body.rid], function(err, result) {
+      
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+      res.json(result.rows);
+      //console.log(result.rows)
+      done();
+    });
+  });
+
+
+});
+
+
+router.post('/researchChanges', function(req, res, next) {
+    
+    console.log(req.body);
+    // if(!req.body.hasOwnProperty('title')|| !req.body.hasOwnProperty('funding')  || !req.body.hasOwnProperty('id')) {
+    //   res.statusCode = 400;
+    //   return res.send('Error: Missing fields for event.');
+    // }
+
+    console.log("Hey almenos llegue");
+    pg.connect(database_URL, function(err, client, done) {
+    client.query('UPDATE research SET title = $1,funding = $2 WHERE rid = $3',[req.body.title,req.body.funding,req.body.rid], function(err, result) {
+      
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+      res.json(result.rows);
+     // console.log(result.rows)
+      done();
+    });
+  });
+
+
+});
+
+
+router.post('/newResearch', function(req, res, next) {
+    
+    console.log(req.body);
+    // if(!req.body.hasOwnProperty('title')|| !req.body.hasOwnProperty('funding')  || !req.body.hasOwnProperty('id')) {
+    //   res.statusCode = 400;
+    //   return res.send('Error: Missing fields for event.');
+    // }
+
+    pg.connect(database_URL, function(err, client, done) {
+    client.query('INSERT INTO research (title,funding,userid) VALUES ($1,$2,$3)',[req.body.title,req.body.funding,req.body.pid], function(err, result) {
+      
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+      res.json(result.rows);
+      //console.log(result.rows)
+      done();
+    });
+  });
+
+
+});
+
 
 
 

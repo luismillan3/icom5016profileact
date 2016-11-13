@@ -1,6 +1,6 @@
 angular.module('professor',[])
 
-.controller('professorController', ['$scope', '$http', '$log', '$mdDialog', function($scope, $http, $log, $mdDialog) {
+.controller('professorController', ['$scope', '$http', '$log', '$mdDialog','$cookieStore', function($scope, $http, $log, $mdDialog,$cookieStore) {
 	$scope.profesora={name:"Clarita la Shark",lastName:"Diaz",title:"PhD"}
 
     $scope.project = {}
@@ -65,10 +65,10 @@ angular.module('professor',[])
     $scope.addProject=function(e){
 
         $('#viewModalAddResearch').modal("hide");
-        e.id=$scope.projects.length+1;
+       // e.id=$scope.projects.length+1;
         console.log(e)
-
-        $http.post('/investigacionprof/projects', e )
+        var sending = {title:e.title,fund:e.funding,pid:$cookieStore.get('userid')}
+        $http.post('/investigacionprof/projects', sending)
         .success(function (data) {
             $scope.projects = data;
         })
@@ -206,6 +206,60 @@ $scope.showAdvanced = function(ev,research) {
 
     };
 
+
+
+          $scope.submitResearchChanges=function(titulo, fund, id){
+     
+          var changes = { title:titulo, funding:fund, rid:id};
+
+                $http.post('/investigacionprof/researchChanges', changes)
+                .success(function (data, status) {
+                    
+                
+            //return data;
+        })
+        .error(function (data, status) {
+            console.log(data, status);
+            console.log("Error finding students in research " + status + "--" + data)
+        });
+
+
+
+        $scope.hide();
+        $scope.getProjects();
+
+
+    };
+
+
+     $scope.removeResearch=function(id){
+     
+          var changes = { rid:id};
+    
+                $http.post('/investigacionprof/removeResearch', changes)
+                .success(function (data, status) {
+                    
+                
+            //return data;
+        })
+        .error(function (data, status) {
+            console.log(data, status);
+            console.log("Error finding students in research " + status + "--" + data)
+        });
+
+
+
+        $scope.hide();
+        $scope.getProjects();
+
+
+    };
+
+
+
+
+
+
         //$scope.getStudentsPerProjects(selectedResearch);
         $scope.selectedResearch=selectedResearch;
      
@@ -215,6 +269,21 @@ $scope.showAdvanced = function(ev,research) {
             $scope.SelectedStudent = myStudent;
         }
 
+          $scope.changeTitle = function(thetitle){
+            $scope.changedTitle = thetitle;
+        }
+
+          $scope.changeFunds = function(thefunding){
+            $scope.changedFund = thefunding;
+        }
+
+        $scope.addNewFunding = function(newTitle){
+            $scope.NuevoTitle = newTitle;
+        }
+
+         $scope.addNewTitle = function(newFunding){
+            $scope.NuevoFunding = newFunding;
+        }
 
 
     }

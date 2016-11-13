@@ -91,10 +91,7 @@
                         <input type="text" ng-model = "project.funding"  class="form-control" id="smry">
                     </div>
 
-                    <div class="form-group">
-                        <label for="studnt">Student:</label>
-                        <input type="text" ng-model = "project.student" class="form-control" id="studnt">
-                    </div>
+                
                 </div>
 
 
@@ -126,28 +123,18 @@
                 <div class="img-wrapper clearfix">
                     <form  id="updateProjectForm" ng-submit="updateProject(project)">
                         <div class="form-group">
-                            <label for="titleE">Title:</label>
-                            <input type="text" ng-model = "project.title" class="form-control" id="titleE">
+                            <label for="newTitle">Title:</label>
+                            <input type="text" ng-model = "newTitle" class="form-control" id="titleE" ng-change="addNewTitle(newTitle)">
                         </div>
                         <div class="form-group">
-                            <label for="smryE">Funding:</label>
-                            <input type="text" ng-model = "project.funding"  class="form-control" id="smryE">
+                            <label for="newFunding">Funding:</label>
+                            <input type="text" ng-model = "newFunding"  class="form-control" id="smryE" ng-change="addNewFunding(newFunding)">
                         </div>
 
-                        <div class="form-group">
-                            <!--label for="studntE">Student:</label-->
-                            <!--input type="text" ng-model = "project.student" class="form-control" id="studntE"-->
-
-                         <select class="selectpicker">
-                          <option>Mustard</option>
-                          <option>Ketchup</option>
-                          <option>Relish</option>
-                        </select>
-
-                        </div>
+             
 
 
-                        <button type="submit" ng-click="updateProject(project)" class="btn btn-primary">Submit</button>
+                        <button type="submit" ng-click="addNewResearch(NuevoTitle)" class="btn btn-primary">Submit</button>
                         <button type="button" class="btn btn-primary"
                                 data-dismiss="modal">Close</button>
 
