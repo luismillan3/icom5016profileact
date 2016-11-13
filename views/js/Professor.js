@@ -156,14 +156,10 @@ $scope.showAdvanced = function(ev,research) {
         };
 
         $scope.addStudentProject=function(estudiante, research){
-        console.log("Intentando anadir estudiante");
-       
-
-
 
           var srrelation = { student:estudiante,rese: research};
 
-                $http.post('/investigacionprof/researchstudents', srrelation)
+                $http.post('/investigacionprof/researchStudents', srrelation)
                 .success(function (data, status) {
                     
                 

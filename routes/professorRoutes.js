@@ -182,7 +182,8 @@ router.post('/newResearch', function(req, res, next) {
     // }
 
     pg.connect(database_URL, function(err, client, done) {
-    client.query('INSERT INTO research (title,funding,userid) VALUES ($1,$2,$3)',[req.body.title,req.body.funding,req.body.pid], function(err, result) {
+      //Aqui esta req.body.pid quee s userid pero no se puede usar todavia
+    client.query('INSERT INTO research (title,funding) VALUES ($1,$2)',[req.body.title,req.body.funding], function(err, result) {
       
       if (err)
        { console.error(err); response.send("Error " + err); }
@@ -211,7 +212,7 @@ router.post('/newResearch', function(req, res, next) {
        { console.error(err); response.send("Error " + err); }
       else
       res.json(result.rows);
-      //console.log(result.rows)
+      console.log(result.rows)
       done();
     });
   });
