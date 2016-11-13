@@ -28,15 +28,28 @@ angular.module('recruiter',[])
             });
         };
    $scope.updateProfile=function(re){
+      if(re.name==null){
+        re.name=$scope.recruiter.name
+      }
+      if(re.lastname==null){
+        re.lastname=$scope.recruiter.lastname
+      }
+       if(re.email==null){
+        re.email=$scope.recruiter.email
+      }  
+      if(re.company==null){
+        re.company=$scope.recruiter.company
+      }   
     	 console.log(re)
+        re.userid=$cookieStore.get('userid')
     	 $scope.newr={}
      	 $http.put('/recruiter/profile/update', re )
             .success(function (data) {
-                $scope.recruiter = data;
+                $scope.getRecruiter();
             })
             .error(function (data, status, header, config) {
                 console.log(data, status);
-        		console.log("could not add event")
+        		console.log("could not update profile")
             });
         };
         $scope.getRecruiter();
@@ -44,7 +57,7 @@ angular.module('recruiter',[])
 
 
 
-}]).controller('recruiterEventController', ['$scope', '$http', '$log', function($scope, $http, $log) {
+}]).controller('recruiterEventController', ['$cookieStore','$scope', '$http', '$log', function($cookieStore,$scope, $http, $log) {
 
     $scope.frmToggle = function() {
         $('#eventForm').slideToggle();
@@ -53,7 +66,8 @@ angular.module('recruiter',[])
     $scope.events = []
 
      $scope.getEvents = function () {
-            $http.get('/recruiter/events')
+        var userid={'userid':$cookieStore.get('userid')}
+            $http.post('/recruiter/events',userid)
             .success(function (data, status) {
                 $scope.events = data;
             })
@@ -63,12 +77,13 @@ angular.module('recruiter',[])
             });
         };
     $scope.addEvent=function(e){
-    	e.id=$scope.events.length+1;
+    	e.userid=$cookieStore.get('userid')
     	 console.log(e)
 
-     	 $http.post('/recruiter/events', e )
+     	 $http.post('/recruiter/events/add', e )
             .success(function (data) {
-                $scope.events = data;
+              console.log("recibi la data")
+              $scope.getEvents()
             })
             .error(function (data, status, header, config) {
                 console.log(data, status);
@@ -81,8 +96,8 @@ angular.module('recruiter',[])
      // 	$scope.event=[];
      // }
      $scope.removeEvent=function(id){
-     	$http.delete('/recruiter/events/'+id).success(function (data) {
-                $scope.events = data;
+     	$http.delete('/recruiter/events/delete/'+id).success(function (data) {
+                $scope.getEvents();
             })
             .error(function (data, status, header, config) {
                 console.log(data, status);
@@ -139,12 +154,12 @@ angular.module('recruiter',[])
 
       		// if(criteria==null)break;
       		if(criteria.gpa!=null &&criteria.major!=null){
-      			if ($scope.students[i].major==criteria.major&&$scope.students[i].gpa>=criteria.gpa){
+      			if ($scope.students[i].value==criteria.major&&$scope.students[i].gpa>=criteria.gpa){
       				$scope.results.push($scope.students[i])
       		}
       		}
       		else if(criteria.gpa==null &&criteria.major!=null){
-      			if ($scope.students[i].major==criteria.major){
+      			if ($scope.students[i].value==criteria.major){
       				$scope.results.push($scope.students[i])
       		}
       		}
@@ -193,4 +208,39 @@ angular.module('recruiter',[])
 
      $scope.getStudents();
 
+}]).controller('recruiterResearch', ['$scope', '$http', '$log', function($scope, $http, $log) {
+
+    //TODO cambiar esto
+  $scope.selectedStudent={}
+  $scope.students=[]
+  console.log("entre")
+    $scope.display=function(student){
+        $scope.selectedStudent=student;
+      }
+    $scope.getStudents = function () {
+
+            $http.get('/recruiter/added')
+            .success(function (data, status) {
+                $scope.students = data;
+            })
+            .error(function (data, status) {
+              console.log(data, status);
+            console.log("Could not get students")
+            });
+        };
+
+
+     $scope.removeStudent=function(id){
+      $http.delete('/recruiter/added/'+id).success(function (data) {
+                $scope.students = data;
+            })
+            .error(function (data, status, header, config) {
+                console.log(data, status);
+            console.log("could not remove student from folder")
+            })
+      };
+
+     $scope.getStudents();
+
 }])
+

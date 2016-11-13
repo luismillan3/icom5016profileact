@@ -63,7 +63,7 @@
 	 		<th>Name</th><th>Major</th><th>GPA</th><th>View</th>
 	 	</tr>
 	 	<tr ng-repeat="student in results">
-	 		<td>{{ student.studentName }} {{student.studentLastName}}</td><td>{{ student.major }}</td><td>{{ student.gpa }}</td><td><button class="btn btn-success" data-target="#viewModal" data-toggle="modal"ng-click="display(student)">Look!</button></td>
+	 		<td>{{ student.name }} {{student.lastname}}</td><td>{{ student.value }}</td><td>{{ student.gpa }}</td><td><button class="btn btn-success" data-target="#viewModal" data-toggle="modal"ng-click="display(student)">Look!</button></td>
 	 	</tr>
 	</table>
 <!-- student template pop up -->
@@ -75,7 +75,7 @@
                 <button type="button" class="close" data-dismiss="modal">
                     &times;
                 </button>
-                <h4 class="modal-title">{{selectedStudent.studentName}} {{selectedStudent.studentLastName}}</h4>
+                <h4 class="modal-title">{{selectedStudent.name}} {{selectedStudent.lastname}}</h4>
             </div>
             <div class="modal-body">
                 <div class="img-wrapper clearfix">
@@ -83,7 +83,7 @@
                 </div>
 		
 		<div class="form-group">
-			<h3><strong>Major:</strong> {{selectedStudent.major}}</h3>
+			<h3><strong>Major:</strong> {{selectedStudent.value}}</h3>
 		</div>
 		<div class="form-group">
 			<h3><strong>GPA:</strong> {{selectedStudent.gpa}}</h3>

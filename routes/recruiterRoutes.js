@@ -26,42 +26,88 @@ var addedStudents = [
         { id:1,studentName: 'Maria',studentLastName:"Del Valle",gpa:3.32,major:"COMP"},
         { id:2,studentName: 'Cafralin',studentLastName:"Pelora",gpa:3.94,major:"ININ"}
       ]
-
-router.get('/events', function(req, res, next) {
-    console.log('entre')
-    res.json(events);
+var getRecruiter='SELECT name,lastname,email,company FROM users natural join recruiter  where userid=$1';
+var updateRecruiter='UPDATE recruiter set name=$1, lastname=$2, email=$3, company=$4 where recruiterid=$5';
+var getEvents='SELECT eventid,title,description,date from users natural join recruiter natural join event where userid=$1';
+var getRecruiterID='SELECT recruiterid FROM users natural join recruiter where userid=$1';
+var insertEvent='INSERT INTO event(title,description,date,recruiterid) values($1,$2,$3,$4)';
+var deleteEvent = "DELETE FROM event WHERE eventid=$1"
+router.post('/events', function(req, res, next) {
+     console.log(req.body)
+     pg.connect(database_URL, function(err, client, done) {
+    client.query(getEvents,[req.body.userid], function(err, result) {
+      
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+      res.json(result.rows);
+      console.log(result.rows)
+      done();
+    });
+  });
 
 });
 
-router.post('/events', function(req, res, next) {
+router.post('/events/add', function(req, res, next) {
     console.log(req.body)
+    var recruiterid=0;
     if(!req.body.hasOwnProperty('title') || !req.body.hasOwnProperty('description')
     || !req.body.hasOwnProperty('date')) {
       res.statusCode = 400;
       return res.send('Error: Missing fields for event.');
     }
-    events.push(req.body)
-
-    res.json(events);
-
+     console.log(req.body)
+     pg.connect(database_URL, function(err, client, done) {
+    client.query(getRecruiterID,[req.body.userid], function(err, result) {
+      
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+      
+      recruiterid=result.rows[0].recruiterid;
+      console.log(result.rows)
+      console.log(recruiterid)
+      done();
+       client.query(insertEvent,[req.body.title, req.body.description,req.body.date,recruiterid], function(err, result) {
+      
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+       res.json("OK");
+      done();
+    });
+    });
+    
+  });
 });
-router.delete('/events/:id', function(req, res, next) {
+router.delete('/events/delete/:id', function(req, res, next) {
 
+  
   console.log("From delete route");
   console.log(req.params.id);
-  for(var i=0;i<events.length;i++){
-    if(events[i].id==req.params.id){
-        events.splice(i,1);
-    }
-  }
-  res.json(events);
+  pg.connect(database_URL, function(err, client, done) {
+
+      if (err) {
+          return console.error('error fetching client from pool', err);
+      }
+      client.query(deleteEvent, [req.params.id], function(err, result) {
+          //call `done()` to release the client back to the pool
+
+          if (err) {
+              res.send(err);
+          }
+          res.json("OK");
+          done();
+      });
+    
+  });
   });
 
 router.post('/profile', function(req, res, next) {
   console.log(req.body)
      pg.connect(database_URL, function(err, client, done) {
-    client.query('SELECT * FROM users natural join recruiter  where userid=$1',[req.body.userid], function(err, result) {
-      
+    client.query(getRecruiter,[req.body.userid], function(err, result) {
+      //hacer otro query para enviar solo informacion del recruiter
       if (err)
        { console.error(err); response.send("Error " + err); }
       else
@@ -82,15 +128,46 @@ router.put('/profile/update', function(req, res, next) {
        res.statusCode = 400;
       return res.send('Error: Missing fields for recruiter.');
      }
-      recruiter=req.body;
+    var recruiterid=0;
+    console.log(req.body)
+     pg.connect(database_URL, function(err, client, done) {
+    client.query(getRecruiterID,[req.body.userid], function(err, result) {
+      
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+      
+      recruiterid=result.rows[0].recruiterid;
+      
+      console.log(recruiterid)
+      done();
+       client.query(updateRecruiter,[req.body.name, req.body.lastname,req.body.email,req.body.company,recruiterid], function(err, result) {
+      
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+       res.json("OK");
+      done();
+    });
+    });
     
-    res.json(recruiter);
+  });
 
 });
 
 router.get('/search', function(req, res, next) {
-    console.log('entre')
-    res.json(students);
+     
+     pg.connect(database_URL, function(err, client, done) {
+    client.query('SELECT * FROM student natural join major', function(err, result) {
+      
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+      res.json(result.rows);
+      console.log(result.rows)
+      done();
+    });
+  });
 
 });
 router.get('/added', function(req, res, next) {
