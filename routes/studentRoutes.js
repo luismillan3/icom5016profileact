@@ -60,7 +60,7 @@ var students = [
 router.post('/profile', function(req, res, next) {
     console.log(req.body)
     pg.connect(database_URL, function(err, client, done) {
-        client.query('SELECT * FROM users natural join student where userid=$1',[req.body.userid], function(err, result) {
+        client.query('SELECT * FROM users natural join student natural join major where userid=$1',[req.body.userid], function(err, result) {
 
             if (err)
              { console.error(err); response.send("Error " + err); }

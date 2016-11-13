@@ -5,27 +5,6 @@ const database_URL= 'postgres://xwozcfrzmmekkv:zvyT7_TOODaNOop6XdZN2wddOU@ec2-54
 pg.defaults.ssl = true;
 
 
-var recruiter={name:"Alejandro",lastname:"Martinez",email:"ale.ma@raytheon.com",company:"Raytheon"}
-var events = [
-        { id:1,title: 'Master HTML/CSS/Javascript',description:"Awesome Event",date:"10/12/16 10:00"},
-        { id:2,title: 'Raytheon Session',description:"Awesome Event",date:"10/12/16 10:00"},
-        { id:3,title: 'Johns Hopkins Session',description:"Awesome Event",date:"10/12/16 10:00"},
-        { id:4,title: 'Boeing Company',description:"Awesome Event",date:"10/12/16 10:00"},
-        { id:5,title: 'Mario Bros in the House',description:"Awesome Event",date:"10/12/16 10:00"}
-      ]
-var students = [
-        { id:1,studentName: 'Marcel',studentLastName:"Fuentes",gpa:3.53,major:"BIOL"},
-        { id:2,studentName: 'Maria',studentLastName:"Del Valle",gpa:3.32,major:"COMP"},
-        { id:3,studentName: 'Kelvin',studentLastName:"Pelota",gpa:2.74,major:"ICOM"},
-        { id:4,studentName: 'Nerymar',studentLastName:"Cucuza",gpa:2.9,major:"INEL"},
-        { id:5,studentName: 'Cafralin',studentLastName:"Pelora",gpa:3.94,major:"ININ"}
-      ]
-
-var addedStudents = [
-        
-        { id:1,studentName: 'Maria',studentLastName:"Del Valle",gpa:3.32,major:"COMP"},
-        { id:2,studentName: 'Cafralin',studentLastName:"Pelora",gpa:3.94,major:"ININ"}
-      ]
 var getRecruiter='SELECT name,lastname,email,company FROM users natural join recruiter  where userid=$1';
 var updateRecruiter='UPDATE recruiter set name=$1, lastname=$2, email=$3, company=$4 where recruiterid=$5';
 var getEvents='SELECT eventid,title,description,date from users natural join recruiter natural join event where userid=$1';
