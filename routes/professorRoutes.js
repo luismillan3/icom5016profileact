@@ -25,7 +25,7 @@ var projects =[
 
 
 router.get('/projects', function(req, res, next) {
-    console.log('trying papehhh')
+    //console.log('trying papehhh')
     var projectID = 0;
     pg.connect(database_URL, function(err, client, done) {
     client.query('SELECT * FROM research', function(err, result) {
@@ -35,7 +35,7 @@ router.get('/projects', function(req, res, next) {
       else
       res.json(result.rows);
   		
-      console.log(result.rows[0].title)
+      //console.log(result.rows[0].title)
       done();
     });
   });
@@ -44,14 +44,9 @@ router.get('/projects', function(req, res, next) {
 });
 
 router.post('/projects', function(req, res, next) {
-    console.log("req.body")
-    // if(!req.body.hasOwnProperty('title') || !req.body.hasOwnProperty('funding')
-    // ) {
-    //   res.statusCode = 400;
-    //   return res.send('Error: Missing fields for event.');
-    // }
+
           pg.connect(database_URL, function(err, client, done) {
-    client.query('INSERT INTO research (title,funding) VALUES ($1,$2)',[req.body.title,req.body.fund], function(err, result) {
+    client.query('INSERT INTO research (title,description,professorid) VALUES ($1,$2,$3)',[req.body.title,req.body.desc,req.body.pid], function(err, result) {
       
       if (err)
        { console.error(err); response.send("Error " + err); }
@@ -66,7 +61,7 @@ router.post('/projects', function(req, res, next) {
 });
 
 router.get('/researchStudents', function(req, res, next) {
-    console.log('Students Papeh')
+    
     var projectID = 0;
     pg.connect(database_URL, function(err, client, done) {
     client.query('SELECT * FROM student', function(err, result) {
@@ -83,6 +78,28 @@ router.get('/researchStudents', function(req, res, next) {
   //.  res.json(projects);
 });
 
+
+router.post('/professorData', function(req, res, next) {
+    
+
+    pg.connect(database_URL, function(err, client, done) {
+    client.query('SELECT * FROM users NATURAL JOIN professor WHERE userid = $1',[req.body.uid], function(err, result) {
+      
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+      res.json(result.rows);
+      //console.log(result.rows)
+      done();
+    });
+  });
+
+
+});
+
+
+
+
 router.post('/researchStudents', function(req, res, next) {
     
     if(!req.body.hasOwnProperty('rese')|| !req.body.hasOwnProperty('student')) {
@@ -90,7 +107,7 @@ router.post('/researchStudents', function(req, res, next) {
       return res.send('Error: Missing fields for event.');
     }
     pg.connect(database_URL, function(err, client, done) {
-    client.query('INSERT INTO research_student_rel (studentid,rid) VALUES ($1,$2)',[req.body.student,req.body.rese], function(err, result) {
+    client.query('INSERT INTO research_student_rel (studentid,rid) SELECT $1, $2 WHERE  NOT EXISTS ( SELECT studentid,rid FROM research_student_rel WHERE studentid = $1 and rid=$2 )',[req.body.student,req.body.rese], function(err, result) {
       
       if (err)
        { console.error(err); response.send("Error " + err); }
@@ -133,14 +150,16 @@ router.post('/removeResearch', function(req, res, next) {
     //   return res.send('Error: Missing fields for event.');
     // }
     pg.connect(database_URL, function(err, client, done) {
-    client.query('DELETE FROM research WHERE  rid = $1',[req.body.rid], function(err, result) {
+    client.query('DELETE FROM research WHERE rid = $1',[req.body.rid], function(err, result) {
       
       if (err)
        { console.error(err); response.send("Error " + err); }
-      else
+      else{
       res.json(result.rows);
       //console.log(result.rows)
       done();
+
+    }
     });
   });
 
@@ -150,14 +169,46 @@ router.post('/removeResearch', function(req, res, next) {
 
 router.post('/researchChanges', function(req, res, next) {
     
-    console.log(req.body);
+   // console.log(req.body);
     // if(!req.body.hasOwnProperty('title')|| !req.body.hasOwnProperty('funding')  || !req.body.hasOwnProperty('id')) {
     //   res.statusCode = 400;
     //   return res.send('Error: Missing fields for event.');
     // }
 
-    console.log("Hey almenos llegue");
+   //console.log(''req.body)
+
+   if(req.body.hasOwnProperty('title') && !req.body.hasOwnProperty('description')) {
     pg.connect(database_URL, function(err, client, done) {
+    client.query('UPDATE research SET title = $1 WHERE rid = $2',[req.body.title,req.body.rid], function(err, result) {
+      
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+      res.json(result.rows);
+     // console.log(result.rows)
+      done();
+    });
+  });
+
+}
+
+else if (!req.body.hasOwnProperty('title') && req.body.hasOwnProperty('description')){
+    pg.connect(database_URL, function(err, client, done) {
+    client.query('UPDATE research SET description = $1 WHERE rid = $2',[req.body.description,req.body.rid], function(err, result) {
+      
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+      res.json(result.rows);
+     // console.log(result.rows)
+      done();
+    });
+  });
+
+}
+
+else {
+      pg.connect(database_URL, function(err, client, done) {
     client.query('UPDATE research SET title = $1,funding = $2 WHERE rid = $3',[req.body.title,req.body.funding,req.body.rid], function(err, result) {
       
       if (err)
@@ -169,6 +220,8 @@ router.post('/researchChanges', function(req, res, next) {
     });
   });
 
+
+}
 
 });
 
@@ -189,7 +242,7 @@ router.post('/researchChanges', function(req, res, next) {
        { console.error(err); response.send("Error " + err); }
       else
       res.json(result.rows);
-      console.log(result.rows)
+      //console.log(result.rows)
       done();
     });
   });

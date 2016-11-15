@@ -38,12 +38,12 @@
                         <label for = "resTitle">Research Title</label>
                            <input type = "text" ng-model = "resTitle" ng-value = "selectedResearch.title" ng-change = "changeTitle(resTitle)" >
 
-                            <label for = "resFunds">Funds</label>
-                           <input type = "text" ng-model = "resFunds" ng-value = "selectedResearch.funding" ng-change = "changeFunds(resFunds)">
+                            <label for = "resDesc">Funds</label>
+                           <input type = "text" ng-model = "resDesc" ng-value = "selectedResearch.description" ng-change = "changeDesc(resDesc)">
                           <br><br><br>
 
 
-                                <button type="submit" ng-click="submitResearchChanges(changedTitle,changedFund, selectedResearch.rid)" class="btn btn-primary">Done Editing</button>
+                                <button type="submit" ng-click="submitResearchChanges(changedTitle,changedDesc, selectedResearch.rid)" class="btn btn-primary">Done Editing</button>
 
                                  <button type="submit" ng-click="removeResearch(selectedResearch.rid)" class="btn btn-danger">Delete Research</button>
                        <!--  <button type="submit" ng-click="updateProject(project)" class="btn btn-primary">Submit</button>

@@ -1,7 +1,8 @@
 angular.module('professor',[])
 
 .controller('professorController', ['$scope', '$http', '$log', '$mdDialog','$cookieStore', function($scope, $http, $log, $mdDialog,$cookieStore) {
-	$scope.profesora={name:"Clarita la Shark",lastName:"Diaz",title:"PhD"}
+	
+    $scope.profesora={name:"Clarita la Shark",lastName:"Diaz",title:"PhD"}
 
     $scope.project = {}
 	$scope.projects = []
@@ -10,6 +11,7 @@ angular.module('professor',[])
     $scope.researchstudent = {}
     $scope.studentsInProjects = []
     $scope.studentInProject = {}
+    $scope.professor = {}
 
 	// $scope.projects = [
  //        { id:1,title: 'Gatos de ataque para el Army',funding:100,student:["Luis Millan","Juan Guzman"]},
@@ -67,7 +69,7 @@ angular.module('professor',[])
         $('#viewModalAddResearch').modal("hide");
        // e.id=$scope.projects.length+1;
         console.log(e)
-        var sending = {title:e.title,fund:e.funding}
+        var sending = {title:e.title,desc:e.description,pid:$scope.professor.professorid}
         $http.post('/investigacionprof/projects', sending)
         .success(function (data) {
             $scope.projects = data;
@@ -78,6 +80,23 @@ angular.module('professor',[])
         });
     };
 
+     $scope.getProfessor=function(){
+
+       // $('#viewModalAddResearch').modal("hide");
+       // e.id=$scope.projects.length+1;
+       // console.log(e)
+        var sending = {uid:$cookieStore.get('userid')}
+
+        console.log("Profeeeee " + sending);
+        $http.post('/investigacionprof/professorData', sending)
+        .success(function (data) {
+            $scope.professor = data[0];
+        })
+        .error(function (data, status, header, config) {
+            console.log(data, status);
+        console.log("could not add event")
+        });
+    };
 
       
 
@@ -98,6 +117,7 @@ angular.module('professor',[])
     };
 
 $scope.getProjects();
+$scope.getProfessor();
 $scope.getProjectsStudents();
 $scope.getStudentsPerProjects();
 
@@ -204,10 +224,10 @@ $scope.showAdvanced = function(ev,research) {
 
 
 
-          $scope.submitResearchChanges=function(titulo, fund, id){
+          $scope.submitResearchChanges=function(titulo, desc, id){
      
-          var changes = { title:titulo, funding:fund, rid:id};
-
+          var changes = { title:titulo, description:desc, rid:id};
+          console.log('Updateeeee' + changes.title + " " + changes.funding);
                 $http.post('/investigacionprof/researchChanges', changes)
                 .success(function (data, status) {
                     
@@ -269,8 +289,8 @@ $scope.showAdvanced = function(ev,research) {
             $scope.changedTitle = thetitle;
         }
 
-          $scope.changeFunds = function(thefunding){
-            $scope.changedFund = thefunding;
+          $scope.changeDesc = function(theDesc){
+            $scope.changedDesc = theDesc;
         }
 
         $scope.addNewFunding = function(newTitle){

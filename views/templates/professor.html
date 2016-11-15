@@ -24,9 +24,9 @@
 
 
 <center>
-<h1>University of Puerto Rico at Mayaguez</h1>
-<img src="img/shark.jpg" height="300px" ><br>
-<h2>{{profesora.name}} {{profesora.lastName}} {{profesora.title}}</h2>
+<!-- <h1>University of Puerto Rico at Mayaguez</h1>
+<img src="img/shark.jpg" height="300px" ><br> -->
+<h2>{{professor.name}} PhD: Advisor</h2>
 
 </center>
 
@@ -45,12 +45,13 @@
 
             <tr>
                 <th>Project</th>
+                <th>Description</th>
                 <th>Funding</th>
                 <th>Students</th>
                 <th>Setting</th>
             </tr>
             <tr ng-repeat="project in projects" >
-                <td>{{ project.title }}</td><td>$ {{ project.funding }}</td><td>
+                <td>{{ project.title }}</td><td>{{ project.description }}</td><td>$ {{ project.funding }}</td><td>
 
                 <ul><li ng-repeat="s in studentsInProjects" 
                 ng-if="project.rid == s.rid">{{s.name}} {{s.lastname}}</li></ul>
@@ -87,8 +88,8 @@
                         <input type="text" ng-model = "project.title" class="form-control" id="title">
                     </div>
                     <div class="form-group">
-                        <label for="smry">Funding</label>
-                        <input type="text" ng-model = "project.funding"  class="form-control" id="smry">
+                        <label for="smry">Description</label>
+                        <input type="text" ng-model = "project.description"  class="form-control" id="smry">
                     </div>
 
                 
