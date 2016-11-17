@@ -78,7 +78,7 @@ router.post('/projects', function(req, res, next) {
     console.log('Projects Papeh')
     var projectID = 0;
     pg.connect(database_URL, function(err, client, done) {
-        client.query('SELECT description, title, image FROM projects natural join student natural join users where users.userid=$1 and student.userid = users.userid and projects.student_id = student.studentid', 
+        client.query('SELECT description, title, image FROM projects natural join student natural join users where users.userid=$1 and student.userid = users.userid and projects.student_id = student.studentid',
         [req.body.userid],
         function(err, result) {
 
@@ -91,6 +91,57 @@ router.post('/projects', function(req, res, next) {
     });
 
 });
+
+router.get('/events', function(req, res, next) {
+    console.log('events Papeh')
+    var projectID = 0;
+    pg.connect(database_URL, function(err, client, done) {
+        client.query('select title, description, event.date, recruiterid, recruiter.company from event natural join recruiter where event.recruiterid = recruiter.recruiterid',
+        function(err, result) {
+
+          if (err)
+           { console.error(err); response.send("Error " + err); }
+          else
+          res.json(result.rows);
+          done();
+        });
+    });
+});
+
+router.post('/myResearch', function(req, res, next) {
+    console.log('research del estudiante Papeh')
+
+    pg.connect(database_URL, function(err, client, done) {
+        client.query('SELECT rsr.rid, rsr.studentid, rsr.professorid, rprof.title, rprof.description as description, s.name, p.name as pFirstName, p.lastname as pLastName, rsr.student_role as role FROM research_student_rel AS rsr LEFT JOIN professor AS p ON rsr.professorid = p.professorid LEFT JOIN research AS rprof ON p.professorid = rprof.professorid LEFT JOIN student AS s ON s.studentid = rsr.studentid LEFT JOIN users AS u ON u.userid = s.userid WHERE u.userid = $1',
+        [req.body.userid],
+        function(err, result) {
+
+          if (err)
+           { console.error(err); response.send("Error " + err); }
+          else
+          res.json(result.rows);
+          done();
+        });
+    });
+});
+
+router.get('/research', function(req, res, next) {
+    console.log('research Papeh')
+    var projectID = 0;
+    pg.connect(database_URL, function(err, client, done) {
+        client.query('select title, description, funding, professor.name, professor.lastname from research natural join professor where research.professorid = professor.professorid',
+        function(err, result) {
+
+          if (err)
+           { console.error(err); response.send("Error " + err); }
+          else
+          res.json(result.rows);
+          done();
+        });
+    });
+});
+
+
 
 
 // router.delete('/events/:id', function(req, res, next) {

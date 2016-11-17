@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="db3dd63a-211e-432a-9cbd-0cff24ebcbb6" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/js/Student.js" afterPath="$PROJECT_DIR$/views/js/Student.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/recruiterRoutes.js" afterPath="$PROJECT_DIR$/routes/recruiterRoutes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/scripts&amp;css.html" afterPath="$PROJECT_DIR$/views/scripts&amp;css.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/templates/studentProfile.html" afterPath="$PROJECT_DIR$/views/templates/studentProfile.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/templates/studentResearch.html" afterPath="$PROJECT_DIR$/views/templates/studentResearch.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/studentRoutes.js" afterPath="$PROJECT_DIR$/routes/studentRoutes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/stylesheets/stylesheet.css" afterPath="$PROJECT_DIR$/views/stylesheets/stylesheet.css" />
     </list>
     <ignored path="icom5016profileact.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,7 +27,7 @@
       <file leaf-file-name="sign_up.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/templates/sign_up.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
+            <state vertical-scroll-proportion="0.0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -42,7 +37,7 @@
       <file leaf-file-name="studentProfile.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/templates/studentProfile.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
+            <state vertical-scroll-proportion="0.0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -52,7 +47,7 @@
       <file leaf-file-name="recruiterRoutes.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/recruiterRoutes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.23636363">
+            <state vertical-scroll-proportion="0.0">
               <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
               <folding />
             </state>
@@ -67,6 +62,13 @@
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
       <projects_view />
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Bundled (Maven 3)" />
+      </MavenGeneralSettings>
     </option>
   </component>
   <component name="NamedScopeManager">
@@ -99,7 +101,9 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -180,8 +184,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -350,7 +352,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/recruiterRoutes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23636363">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/templates/sign_up.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/templates/studentProfile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/recruiterRoutes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
           <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
           <folding />
         </state>

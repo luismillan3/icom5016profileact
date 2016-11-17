@@ -126,8 +126,8 @@
                 <tr ng-repeat="project in projects" layout="row">
                     <td flex="25">
                         <div>
-                            <md-button class="md-primary md-raised" ng-click="showAdvanced($event, project)">
-                                <img width="200px" height="200px" src="{{project.picture}}">
+                            <md-button class="md-raised" ng-click="showAdvanced($event, project)">
+                                <img width="200px" height="200px" src="{{project.image}}">
                             </md-button>
                             <p>{{project.title}}</p>
                         </div>
@@ -173,17 +173,17 @@
             <thead>
                 <tr>
                     <th>Title</th>
-                    <th>Department</th>
+                    <th>Description</th>
                     <th>Advisor</th>
                     <th>Role</th>
                 </tr>
             </thead>
 
             <tbody>
-                <tr ng-repeat="r in student.research">
-                    <td>{{ r.name }}</td>
-                    <td>{{ r.department }}</td>
-                    <td>{{ r.advisor }}</td>
+                <tr ng-repeat="r in researchProjects">
+                    <td>{{ r.title }}</td>
+                    <td>{{ r.description }}</td>
+                    <td>{{ r.pfirstname }} {{ r.plastname }}</td>
                     <td>{{ r.role }}</td>
                 </tr>
             </tbody>
