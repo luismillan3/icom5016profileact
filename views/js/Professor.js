@@ -23,10 +23,13 @@ angular.module('professor',[])
     }
 
 
-    $scope.getProjects = function () {
-        $http.get('/investigacionprof/projects')
+    $scope.getProjects = function (proff) {
+     
+        console.log("Filas y columnas"+$scope.professor.professorid);
+        $http.post('/investigacionprof/projectsByProf', proff)
         .success(function (data, status) {
             $scope.projects = data;
+            
              //console.log(data, status)
         })
         .error(function (data, status) {
@@ -82,15 +85,15 @@ angular.module('professor',[])
 
      $scope.getProfessor=function(){
 
-       // $('#viewModalAddResearch').modal("hide");
-       // e.id=$scope.projects.length+1;
-       // console.log(e)
         var sending = {uid:$cookieStore.get('userid')}
 
         console.log("Profeeeee " + sending);
         $http.post('/investigacionprof/professorData', sending)
         .success(function (data) {
             $scope.professor = data[0];
+            $scope.getProjects(data[0]);
+            // console.log(data[0]);
+            //$cookieStore.put('professorid', $scope.professor.professorid);
         })
         .error(function (data, status, header, config) {
             console.log(data, status);
@@ -116,7 +119,6 @@ angular.module('professor',[])
         });
     };
 
-$scope.getProjects();
 $scope.getProfessor();
 $scope.getProjectsStudents();
 $scope.getStudentsPerProjects();
@@ -139,6 +141,7 @@ $scope.showAdvanced = function(ev,research) {
       $mdDialog.show({
         controller: DialogController,
         templateUrl: 'components/updateResearchDialog.html',
+        scope: $scope,
         parent: angular.element(document.body),
         targetEvent: ev,
         clickOutsideToClose:true,
@@ -177,7 +180,7 @@ $scope.showAdvanced = function(ev,research) {
 
         $scope.addStudentProject=function(estudiante, research){
 
-          var srrelation = { student:estudiante,rese: research};
+          var srrelation = { student:estudiante,rese: research, pid:$scope.professor.professorid};
 
                 $http.post('/investigacionprof/researchStudents', srrelation)
                 .success(function (data, status) {
@@ -194,7 +197,8 @@ $scope.showAdvanced = function(ev,research) {
 
         $scope.hide();
         
-        $scope.getProjects();
+        //$scope.getProfessor();
+       
 
 
     };

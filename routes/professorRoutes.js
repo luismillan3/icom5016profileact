@@ -24,11 +24,12 @@ var projects =[
       ]
 
 
-router.get('/projects', function(req, res, next) {
+router.post('/projectsByProf', function(req, res, next) {
     //console.log('trying papehhh')
+   // console.log("AQui :" + req.body);
     var projectID = 0;
     pg.connect(database_URL, function(err, client, done) {
-    client.query('SELECT * FROM research', function(err, result) {
+    client.query('SELECT * FROM research WHERE professorid = $1',[req.body.professorid], function(err, result) {
       
       if (err)
        { console.error(err); response.send("Error " + err); }
@@ -107,7 +108,7 @@ router.post('/researchStudents', function(req, res, next) {
       return res.send('Error: Missing fields for event.');
     }
     pg.connect(database_URL, function(err, client, done) {
-    client.query('INSERT INTO research_student_rel (studentid,rid) SELECT $1, $2 WHERE  NOT EXISTS ( SELECT studentid,rid FROM research_student_rel WHERE studentid = $1 and rid=$2 )',[req.body.student,req.body.rese], function(err, result) {
+    client.query('INSERT INTO research_student_rel (studentid,rid,professorid) SELECT $1, $2, $3 WHERE  NOT EXISTS ( SELECT studentid,rid,professorid FROM research_student_rel WHERE studentid = $1 and rid=$2 and professorid = $3)',[req.body.student,req.body.rese,req.body.pid], function(err, result) {
       
       if (err)
        { console.error(err); response.send("Error " + err); }
