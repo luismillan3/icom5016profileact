@@ -15,23 +15,23 @@ A.	Recruiters (Companies and Graduate Schools)
 
 ## Division of Labor:
 
-Fernando:
-  ●	Student Profile
-  ●	Sign Up Form
-  ●	Sign in From
+#### Fernando:
+  1. Student Profile
+  2. Sign Up Form
+  3. Sign in From
 
 
 
-Wilfredo:
-  ●	Main Page 
-  ●	Transactions
-  ●	Recruiter Profile
+#### Wilfredo:
+  1. Main Page 
+  2. Transactions
+  3. Recruiter Profile
 
  
-Luis:
-  ●	Admin Profiles
-  ●	Password Recovery
-  ●	Research and Projects profiles
+#### Luis:
+  1. Admin Profiles
+  2. Password Recovery
+  3. Research and Projects profiles
 
 ## Installation
 
