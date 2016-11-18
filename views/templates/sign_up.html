@@ -1,34 +1,25 @@
 
 <div layout="row" id="registration" class="container">
 
-		<h4 flex="10"> Are you a:</h4>
-		<form flex="90" layout="row">
-			<p flex>
-		    	<md-button class="primaryBtn"><label for="studentSignUp">Student?</label></md-button>
-		    	<input class="with-gap" id="studentSignUp" type="radio" name="content" ng-model="content" value="studentSignUp">
-			</p>
-			<p flex>
-		    	<md-button class="primaryBtn"><label for="recruiterSignUp">Recruiter?</label></md-button>
-				<input class="with-gap" id="recruiterSignUp" type="radio" name="content" ng-model="content" value="recruiterSignUp">
-			</p>
-			<p flex>
-		    	<md-button class="primaryBtn"><label for="professorSignUp">Professor?</label></md-button>
-				<input class="with-gap" id="professorSignUp" type="radio" name="content" ng-model="content" value="professorSignUp">
-				</md-button>
-			</p>
-			<!-- <md-radio-group ng-model="data.group1">
+	<h4 flex="10"> Are you a:</h4>
+	<form flex="90" layout="row">
+		<p flex>
+			<md-button class="primaryBtn"><label for="studentSignUp">Student?</label></md-button>
+			<input class="with-gap" id="studentSignUp" type="radio" name="content" ng-model="content" value="studentSignUp">
+		</p>
+		<p flex>
+			<md-button class="primaryBtn"><label for="recruiterSignUp">Recruiter?</label></md-button>
+			<input class="with-gap" id="recruiterSignUp" type="radio" name="content" ng-model="content" value="recruiterSignUp">
+		</p>
+		<p flex>
+			<md-button class="primaryBtn"><label for="professorSignUp">Professor?</label></md-button>
+			<input class="with-gap" id="professorSignUp" type="radio" name="content" ng-model="content" value="professorSignUp">
+		</md-button>
+	</p>
 
-		      <md-radio-button  id="studentSignUp" type="radio" name="content" ng-model="content" value="studentSignUp">Apple</md-radio-button>
-		      <md-radio-button id="recruiterSignUp" type="radio" name="content" ng-model="content" value="recruiterSignUp"> Banana </md-radio-button>
-		      <md-radio-button id="professorSignUp" type="radio" name="content" ng-model="content" value="professorSignUp">Mango</md-radio-button>
-
-		    </md-radio-group> -->
-		</form>
+</form>
 
 </div>
-
-
-	<!-- <md-radio-button id="researchSignUp" value="researchSignUp" -->
 
 <div class="row">
 
@@ -40,111 +31,111 @@
 
 		<form>
 
-	        <div class="form-group">
-	            <label for="inputUserName">Username</label>
-	            <input ng-model="tempUsr.username" class="form-control" placeholder="Login Username"
-	                    type="text" id="inputUserName" />
-	        </div>
-	        <div class="form-group">
-	            <label for="inputPassword">Password</label>
-	            <input ng-model="tempUsr.password" class="form-control" placeholder="New Password"
-	                    type="password" id="inputPassword" />
-	        </div>
-	          <div class="form-group">
-	            <label for="inputPasswordConfirmation">Confirm Password</label>
-	            <input ng-model="tempUsr.confirmPassword" class="form-control" placeholder="Confirm Password"
-	                    type="password" id="inputPassword" />
-	        </div>
-	        <div class="form-group">
-	            <label for="gpa">GPA</label>
-	            <input ng-model="tempUsr.gpa" class="form-control" placeholder="GPA ?/4.0"
-	                    type="number" id="number" />
-	        </div>
-	         <div class="form-group">
-	           <select  class="form-control" ng-model="tempUsr.major">
-				<option ng-repeat="major in majors">{{major.value}}</option>
+			<div class="form-group">
+				<label for="inputUserName">Username</label>
+				<input ng-model="tempUsr.username" class="form-control" placeholder="Login Username"
+				type="text" id="inputUserName" />
+			</div>
+			<div class="form-group">
+				<label for="inputPassword">Password</label>
+				<input ng-model="tempUsr.password" class="form-control" placeholder="New Password"
+				type="password" id="inputPassword" />
+			</div>
+			<div class="form-group">
+				<label for="inputPasswordConfirmation">Confirm Password</label>
+				<input ng-model="tempUsr.confirmPassword" class="form-control" placeholder="Confirm Password"
+				type="password" id="inputPassword" />
+			</div>
+			<div class="form-group">
+				<label for="gpa">GPA</label>
+				<input ng-model="tempUsr.gpa" class="form-control" placeholder="GPA ?/4.0"
+				type="number" id="number" />
+			</div>
+			<div class="form-group">
+				<select  class="form-control" ng-model="tempUsr.major">
+					<option ng-repeat="major in majors">{{major.value}}</option>
 				</select>
-	        </div>
-	         <div class="form-group">
-	            <label for="inputPassword">email</label>
-	            <input ng-model="tempUsr.email" class="form-control" placeholder="Input email"
-	                    type="email" id="inputEmail" />
-	        </div>
-	         <button type="submit" class="btn btn-primary"  ng-click="signUpStudent(tempUsr)">SignUp</button>
+			</div>
+			<div class="form-group">
+				<label for="inputPassword">email</label>
+				<input ng-model="tempUsr.email" class="form-control" placeholder="Input email"
+				type="email" id="inputEmail" />
+			</div>
+			<button type="submit" class="btn btn-primary"  ng-click="signUpStudent(tempUsr)">SignUp</button>
 		</form>
 
 	</div>
 
-    <div class="col-sm-4 signUpForm" ng-show="content == 'recruiterSignUp'">
-     	<div class="header">
+	<div class="col-sm-4 signUpForm" ng-show="content == 'recruiterSignUp'">
+		<div class="header">
 
 			<h3 class="title">Recruiter</h3>
 		</div>
 
 		<form>
 
-		    <div class="form-group">
-		        <label for="inputUserName">Username</label>
-		        <input ng-model="tempUsr.username" class="form-control" placeholder="Login Username"
-		                type="text" id="inputUserName" />
-		    </div>
-		    <div class="form-group">
-		        <label for="inputPassword">Password</label>
-		        <input ng-model="tempUsr.password" class="form-control" placeholder="New Password"
-		                type="password" id="inputPassword" />
-		    </div>
-		     <div class="form-group">
-		        <label for="inputPasswordConfirmation">Confirm Password</label>
-		        <input ng-model="tempUsr.confirmPassword" class="form-control" placeholder="Confirm Password"
-		                type="password" id="inputPassword" />
-		    </div>
-		     <div class="form-group">
-		        <label for="inputPassword">Company</label>
-		        <input ng-model="tempUsr.company" class="form-control" placeholder="Enter Company"
-		                type="text" />
-		    </div>
-		     <div class="form-group">
-		        <label for="inputPassword">email</label>
-		        <input ng-model="tempUsr.email" class="form-control" placeholder="Input email"
-		                type="email" id="inputEmail" />
-		    </div>
+			<div class="form-group">
+				<label for="inputUserName">Username</label>
+				<input ng-model="tempUsr.username" class="form-control" placeholder="Login Username"
+				type="text" id="inputUserName" />
+			</div>
+			<div class="form-group">
+				<label for="inputPassword">Password</label>
+				<input ng-model="tempUsr.password" class="form-control" placeholder="New Password"
+				type="password" id="inputPassword" />
+			</div>
+			<div class="form-group">
+				<label for="inputPasswordConfirmation">Confirm Password</label>
+				<input ng-model="tempUsr.confirmPassword" class="form-control" placeholder="Confirm Password"
+				type="password" id="inputPassword" />
+			</div>
+			<div class="form-group">
+				<label for="inputPassword">Company</label>
+				<input ng-model="tempUsr.company" class="form-control" placeholder="Enter Company"
+				type="text" />
+			</div>
+			<div class="form-group">
+				<label for="inputPassword">email</label>
+				<input ng-model="tempUsr.email" class="form-control" placeholder="Input email"
+				type="email" id="inputEmail" />
+			</div>
 
-		    <button type="submit" class="btn btn-primary"  ng-click="signUpRecruiter(tempUsr)">SignUp</button>
+			<button type="submit" class="btn btn-primary"  ng-click="signUpRecruiter(tempUsr)">SignUp</button>
 
 		</form>
 	</div>
 
-    <div class="col-sm-4 signUpForm" ng-show="content == 'professorSignUp'">
-     	<div class="header">
+	<div class="col-sm-4 signUpForm" ng-show="content == 'professorSignUp'">
+		<div class="header">
 
 			<h3 class="modal-title">Professor</h3>
 		</div>
 
-	 	<form>
+		<form>
 
-            <div class="form-group">
-                <label for="inputUserName">Username</label>
-                <input ng-model="tempUsr.username" class="form-control" placeholder="Login Username"
-                        type="text" id="inputUserName" />
-            </div>
-            <div class="form-group">
-                <label for="inputPassword">Password</label>
-                <input ng-model="tempUsr.password" class="form-control" placeholder="New Password"
-                        type="password" id="inputPassword" />
-            </div>
-             <div class="form-group">
-                <label for="inputPasswordConfirmation">Confirm Password</label>
-                <input ng-model="tempUsr.confirmPassword" class="form-control" placeholder="Confirm Password"
-                        type="password" id="inputPassword" />
-            </div>
-            <div class="form-group">
-                <label for="inputPassword">email</label>
-                <input ng-model="tempUsr.email" class="form-control" placeholder="Input email"
-                        type="email" id="inputEmail" />
-            </div>
+			<div class="form-group">
+				<label for="inputUserName">Username</label>
+				<input ng-model="tempUsr.username" class="form-control" placeholder="Login Username"
+				type="text" id="inputUserName" />
+			</div>
+			<div class="form-group">
+				<label for="inputPassword">Password</label>
+				<input ng-model="tempUsr.password" class="form-control" placeholder="New Password"
+				type="password" id="inputPassword" />
+			</div>
+			<div class="form-group">
+				<label for="inputPasswordConfirmation">Confirm Password</label>
+				<input ng-model="tempUsr.confirmPassword" class="form-control" placeholder="Confirm Password"
+				type="password" id="inputPassword" />
+			</div>
+			<div class="form-group">
+				<label for="inputPassword">email</label>
+				<input ng-model="tempUsr.email" class="form-control" placeholder="Input email"
+				type="email" id="inputEmail" />
+			</div>
 
-            <button type="submit" class="btn btn-primary"  ng-click="signUpProfessor(tempUsr)">SignUp</button>
-        </form>
+			<button type="submit" class="btn btn-primary"  ng-click="signUpProfessor(tempUsr)">SignUp</button>
+		</form>
 
 	</div>
 </div>

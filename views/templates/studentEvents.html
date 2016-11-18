@@ -33,7 +33,7 @@
             <input ng-model="event.date" type="search">
         </md-input-container> -->
     </div>
-    <md-content class="md-padding" layout="row" layout-wrap style="background-color: #fff">
+    <md-content class="md-padding" layout="row" layout-wrap style="background-color: #f4f4f4">
 
         <div ng-repeat="event in events | filter:query | orderBy:event.date " layout="column" flex-xs flex-gt-xs="33">
             <md-card md-theme="{{ showDarkTheme ? 'dark-blue' : 'default' }}" md-theme-watch>
