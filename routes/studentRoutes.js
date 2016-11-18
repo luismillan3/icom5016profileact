@@ -96,7 +96,7 @@ router.get('/events', function(req, res, next) {
     console.log('events Papeh')
     var projectID = 0;
     pg.connect(database_URL, function(err, client, done) {
-        client.query('select title, description, event.date, recruiterid, recruiter.company from event natural join recruiter where event.recruiterid = recruiter.recruiterid',
+        client.query('select title, description, event.date, event.image, recruiterid, recruiter.company from event natural join recruiter where event.recruiterid = recruiter.recruiterid',
         function(err, result) {
 
           if (err)

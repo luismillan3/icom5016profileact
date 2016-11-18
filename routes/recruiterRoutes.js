@@ -18,18 +18,18 @@ var addingStudentToFolder='INSERT INTO recruiterfolder  (recruiterid, studentid)
 var getAllResearch='Select * FROM research natural join professor'
 
 router.post('/events', function(req, res, next) {
-     console.log(req.body)
-     pg.connect(database_URL, function(err, client, done) {
-    client.query(getEvents,[req.body.userid], function(err, result) {
-      
-      if (err)
-       { console.error(err); response.send("Error " + err); }
-      else
-      res.json(result.rows);
-      console.log(result.rows)
-      done();
+    console.log(req.body)
+    pg.connect(database_URL, function(err, client, done) {
+        client.query(getEvents,[req.body.userid], function(err, result) {
+
+            if (err)
+            { console.error(err); response.send("Error " + err); }
+            else
+            res.json(result.rows);
+            console.log(result.rows)
+            done();
+        });
     });
-  });
 
 });
 
@@ -38,69 +38,69 @@ router.post('/events/add', function(req, res, next) {
     var recruiterid=0;
     if(!req.body.hasOwnProperty('title') || !req.body.hasOwnProperty('description')
     || !req.body.hasOwnProperty('date')) {
-      res.statusCode = 400;
-      return res.send('Error: Missing fields for event.');
+        res.statusCode = 400;
+        return res.send('Error: Missing fields for event.');
     }
-     console.log(req.body)
-     pg.connect(database_URL, function(err, client, done) {
-    client.query(getRecruiterID,[req.body.userid], function(err, result) {
-      
-      if (err)
-       { console.error(err); response.send("Error " + err); }
-      else
-      
-      recruiterid=result.rows[0].recruiterid;
-      console.log(result.rows)
-      console.log(recruiterid)
-      done();
-       client.query(insertEvent,[req.body.title, req.body.description,req.body.date,recruiterid], function(err, result) {
-      
-      if (err)
-       { console.error(err); response.send("Error " + err); }
-      else
-       res.json("OK");
-      done();
+    console.log(req.body)
+    pg.connect(database_URL, function(err, client, done) {
+        client.query(getRecruiterID,[req.body.userid], function(err, result) {
+
+            if (err)
+            { console.error(err); response.send("Error " + err); }
+            else
+
+            recruiterid=result.rows[0].recruiterid;
+            console.log(result.rows)
+            console.log(recruiterid)
+            done();
+            client.query(insertEvent,[req.body.title, req.body.description,req.body.date,recruiterid], function(err, result) {
+
+                if (err)
+                { console.error(err); response.send("Error " + err); }
+                else
+                res.json("OK");
+                done();
+            });
+        });
+
     });
-    });
-    
-  });
 });
 router.delete('/events/delete/:id', function(req, res, next) {
 
-  
-  console.log("From delete route");
-  console.log(req.params.id);
-  pg.connect(database_URL, function(err, client, done) {
 
-      if (err) {
-          return console.error('error fetching client from pool', err);
-      }
-      client.query(deleteEvent, [req.params.id], function(err, result) {
-          //call `done()` to release the client back to the pool
+    console.log("From delete route");
+    console.log(req.params.id);
+    pg.connect(database_URL, function(err, client, done) {
 
-          if (err) {
-              res.send(err);
-          }
-          res.json("OK");
-          done();
-      });
-    
-  });
-  });
+        if (err) {
+            return console.error('error fetching client from pool', err);
+        }
+        client.query(deleteEvent, [req.params.id], function(err, result) {
+            //call `done()` to release the client back to the pool
+
+            if (err) {
+                res.send(err);
+            }
+            res.json("OK");
+            done();
+        });
+
+    });
+});
 
 router.post('/profile', function(req, res, next) {
-  console.log(req.body)
-     pg.connect(database_URL, function(err, client, done) {
-    client.query(getRecruiter,[req.body.userid], function(err, result) {
-      //hacer otro query para enviar solo informacion del recruiter
-      if (err)
-       { console.error(err); response.send("Error " + err); }
-      else
-      res.json(result.rows);
-      console.log(result.rows)
-      done();
+    console.log(req.body)
+    pg.connect(database_URL, function(err, client, done) {
+        client.query(getRecruiter,[req.body.userid], function(err, result) {
+            //hacer otro query para enviar solo informacion del recruiter
+            if (err)
+            { console.error(err); response.send("Error " + err); }
+            else
+            res.json(result.rows);
+            console.log(result.rows)
+            done();
+        });
     });
-  });
     // console.log('entre al recruiter profile')
     // res.json(recruiter);
 
@@ -108,146 +108,146 @@ router.post('/profile', function(req, res, next) {
 router.put('/profile/update', function(req, res, next) {
 
     console.log('actualize recruiter')
-     if(!req.body.hasOwnProperty('name') || !req.body.hasOwnProperty('lastname')
+    if(!req.body.hasOwnProperty('name') || !req.body.hasOwnProperty('lastname')
     || !req.body.hasOwnProperty('email')){
-       res.statusCode = 400;
-      return res.send('Error: Missing fields for recruiter.');
-     }
+        res.statusCode = 400;
+        return res.send('Error: Missing fields for recruiter.');
+    }
     var recruiterid=0;
     console.log(req.body)
-     pg.connect(database_URL, function(err, client, done) {
-    client.query(getRecruiterID,[req.body.userid], function(err, result) {
-      
-      if (err)
-       { console.error(err); response.send("Error " + err); }
-      else
-      
-      recruiterid=result.rows[0].recruiterid;
-      
-      console.log(recruiterid)
-      done();
-       client.query(updateRecruiter,[req.body.name, req.body.lastname,req.body.email,req.body.company,recruiterid], function(err, result) {
-      
-      if (err)
-       { console.error(err); response.send("Error " + err); }
-      else
-       res.json("OK");
-      done();
+    pg.connect(database_URL, function(err, client, done) {
+        client.query(getRecruiterID,[req.body.userid], function(err, result) {
+
+            if (err)
+            { console.error(err); response.send("Error " + err); }
+            else
+
+            recruiterid=result.rows[0].recruiterid;
+
+            console.log(recruiterid)
+            done();
+            client.query(updateRecruiter,[req.body.name, req.body.lastname,req.body.email,req.body.company,recruiterid], function(err, result) {
+
+                if (err)
+                { console.error(err); response.send("Error " + err); }
+                else
+                res.json("OK");
+                done();
+            });
+        });
+
     });
-    });
-    
-  });
 
 });
 
 router.get('/search', function(req, res, next) {
-     
-     pg.connect(database_URL, function(err, client, done) {
-    client.query(getAllStudents, function(err, result) {
-      
-      if (err)
-       { console.error(err); response.send("Error " + err); }
-      else
-      res.json(result.rows);
-      console.log(result.rows)
-      done();
+
+    pg.connect(database_URL, function(err, client, done) {
+        client.query(getAllStudents, function(err, result) {
+
+            if (err)
+            { console.error(err); response.send("Error " + err); }
+            else
+            res.json(result.rows);
+            console.log(result.rows)
+            done();
+        });
     });
-  });
 
 });
 router.post('/added', function(req, res, next) {
     var recruiterid=0;
     console.log(req.body)
-     pg.connect(database_URL, function(err, client, done) {
-    client.query(getRecruiterID,[req.body.userid], function(err, result) {
-      
-      if (err)
-       { console.error(err); response.send("Error " + err); }
-      else
-      
-      recruiterid=result.rows[0].recruiterid;
-      
-      console.log(recruiterid)
-      done();
-       client.query(getAddedStudents,[recruiterid], function(err, result) {
-      
-      if (err)
-       { console.error(err); response.send("Error " + err); }
-      else
-        console.log(result.rows)
-       res.json(result.rows);
-      done();
+    pg.connect(database_URL, function(err, client, done) {
+        client.query(getRecruiterID,[req.body.userid], function(err, result) {
+
+            if (err)
+            { console.error(err); response.send("Error " + err); }
+            else
+
+            recruiterid=result.rows[0].recruiterid;
+
+            console.log(recruiterid)
+            done();
+            client.query(getAddedStudents,[recruiterid], function(err, result) {
+
+                if (err)
+                { console.error(err); response.send("Error " + err); }
+                else
+                console.log(result.rows)
+                res.json(result.rows);
+                done();
+            });
+        });
+
     });
-    });
-    
-  });
 
 });
 router.delete('/added/:id', function(req, res, next) {
-  console.log("trying to delete")
-  pg.connect(database_URL, function(err, client, done) {
+    console.log("trying to delete")
+    pg.connect(database_URL, function(err, client, done) {
 
-      if (err) {
-          return console.error('error fetching client from pool', err);
-      }
-      client.query(deleteAddedStudent, [req.params.id], function(err, result) {
-          //call `done()` to release the client back to the pool
+        if (err) {
+            return console.error('error fetching client from pool', err);
+        }
+        client.query(deleteAddedStudent, [req.params.id], function(err, result) {
+            //call `done()` to release the client back to the pool
 
-          if (err) {
-              res.send(err);
-          }
-          res.json("OK");
-          done();
-      });
-    
-  });
-  });
+            if (err) {
+                res.send(err);
+            }
+            res.json("OK");
+            done();
+        });
+
+    });
+});
 
 router.post('/adding', function(req, res, next) {
-   pg.connect(database_URL, function(err, client, done) {
-    client.query(getRecruiterID,[req.body.userid], function(err, result) {
-      
-      if (err)
-       { console.error(err); response.send("Error " + err); }
-      else
-      
-      recruiterid=result.rows[0].recruiterid;
-      
-      console.log(recruiterid)
-      done();
-       client.query(addingStudentToFolder,[recruiterid,req.body.studentid], function(err, result) {
-      
-      if (err)
-       { console.error(err); response.send("Error " + err); }
-      else
-        
-       res.json("OK");
-      done();
+    pg.connect(database_URL, function(err, client, done) {
+        client.query(getRecruiterID,[req.body.userid], function(err, result) {
+
+            if (err)
+            { console.error(err); response.send("Error " + err); }
+            else
+
+            recruiterid=result.rows[0].recruiterid;
+
+            console.log(recruiterid)
+            done();
+            client.query(addingStudentToFolder,[recruiterid,req.body.studentid], function(err, result) {
+
+                if (err)
+                { console.error(err); response.send("Error " + err); }
+                else
+
+                res.json("OK");
+                done();
+            });
+        });
+
     });
-    });
-    
-  });
-  console.log("trying to add student")
+    console.log("trying to add student")
     // req.body.id=addedStudents.length+1;
     // addedStudents.push(req.body)
 
-  
+
 
 });
 
 router.get('/research/get', function(req, res, next) {
     console.log("Coji los research")
-     pg.connect(database_URL, function(err, client, done) {
-    client.query(getAllResearch, function(err, result) {
-      
-      if (err)
-       { console.error(err); response.send("Error " + err); }
-      else
-      res.json(result.rows);
-      console.log(result.rows)
-      done();
+    pg.connect(database_URL, function(err, client, done) {
+        client.query(getAllResearch, function(err, result) {
+
+            if (err)
+            { console.error(err); response.send("Error " + err); }
+            else
+            res.json(result.rows);
+            console.log(result.rows)
+            done();
+        });
     });
-  });
 });
 //     var newCar = new Car(req.body.make, req.body.model, req.body.year, req.body.description, req.body.price);
 //     console.log("New Car: " + JSON.stringify(newCar));

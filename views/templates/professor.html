@@ -16,7 +16,6 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-left">
                 <li><a href="#/professor">Home</a></li>
-                <li><a href="#/professorResearch">Projects</a></li>
               </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
@@ -55,12 +54,12 @@
             <tr ng-repeat="project in projects" >
                 <td>{{ project.title }}</td><td>{{ project.description }}</td><td>$ {{ project.funding }}</td><td>
 
-                <ul><li ng-repeat="s in studentsInProjects" 
+                <ul><li ng-repeat="s in studentsInProjects"
                 ng-if="project.rid == s.rid">{{s.name}} {{s.lastname}}</li></ul>
                  <!--    <button class="btn btn-success" ng-click="showAdvanced($event, project)">View Students</button> -->
                 </td>
                   <!-- <td> <button class="btn btn-success" data-target="#viewModalEdit" data-toggle="modal" ng-click="display(project.student)">Manage Students</button> </td> -->
-                <td> <button class="btn btn-success" 
+                <td> <button class="btn btn-success"
                 ng-click="showAdvanced($event, project)">Edit Research</button> </td>
             </tr>
 
@@ -94,7 +93,7 @@
                         <input type="text" ng-model = "project.description"  class="form-control" id="smry">
                     </div>
 
-                
+
                 </div>
 
 
@@ -134,7 +133,7 @@
                             <input type="text" ng-model = "newFunding"  class="form-control" id="smryE" ng-change="addNewFunding(newFunding)">
                         </div>
 
-             
+
 
 
                         <button type="submit" ng-click="addNewResearch(NuevoTitle)" class="btn btn-primary">Submit</button>

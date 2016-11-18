@@ -1,28 +1,28 @@
 <nav class="navbar navbar-default">
-          <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="#">ProfileAct</a>
-            </div>
+            </button>
+            <a class="navbar-brand" href="#">ProfileAct</a>
+        </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav navbar-left">
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-left">
                 <li><a href="#/recruiter">Home</a></li>
                 <li><a href="#/recruiterEvent">Events</a></li>
                 <li><a href="#/recruiterSearch">Search Students</a></li>
                 <li><a href="#/recruiterFolder">Student Folder</a></li>
                 <li><a href="#/recruiterResearch">Projects</a></li>
-              </ul>
-            </div><!-- /.navbar-collapse -->
-          </div><!-- /.container-fluid -->
-        </nav>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
 
 <div class="container">
 
@@ -34,7 +34,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Name</th><th>Major</th><th>Advisor</th><th>View</th><th>Contribution</th>
+                <th>Name</th><th>Description</th><th>Advisor</th><th>Contribution</th>
             </tr>
         </thead>
 
@@ -43,10 +43,7 @@
                 <td>{{ research.title }}</td>
                 <td>{{ research.description }}</td>
                 <td>{{ research.name }} {{research.lastname}}</td>
-                <td>
-                    <!-- <a class="waves-effect waves-light btn modal-trigger" href="#viewModal">Look!</a> -->
-                    <md-button class="md-default md-raised" data-target="#viewModal"  data-toggle="modal" ng-click="display(research)">Look!</md-button>
-                </td>
+
                 <td>
                     <md-button class="btn btn-success" data-target="#viewModalDonate" data-toggle="modal" ng-click="display(research)" >Donate</md-button>
                 </td>
@@ -58,94 +55,60 @@
 </div>
 
 
-<!-- <div id="modal1" class="modal">
+<!-- Donate Option -->
+<div class="modal fade" tabindex="-1" id="viewModalDonate"
+data-keyboard="false" data-backdrop="static">
+<div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <h4>Modal Header</h4>
-      <p>A bunch of text</p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-    </div>
-  </div> -->
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+                &times;
+            </button>
+            <h4 class="modal-title">Make a Donation to {{selectedResearch.title}}</h4>
+        </div>
+        <div class="modal-body">
+            <div class="img-wrapper clearfix">
+                <form>
 
-<!-- Research template pop up -->
-<div class="modal" tabindex="-1" id="viewModal"
-        data-keyboard="false" data-backdrop="static">
+                    <div class="form-group">
+                        <label for="cname">Company Name:</label>
+                        <input type="text" class="form-control" id="cname">
+                    </div>
+                    <div class="form-group">
+                        <label for="crdtc">Credit Card:</label>
+                        <input type="text" class="form-control" id="crdtc">
+                    </div>
 
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                    &times;
-                </button>
-                <h4 class="modal-title">{{selectedResearch.title}}</h4>
-            </div>
-            <div class="modal-body">
-                <div class="img-wrapper clearfix">
-                    <img ng-src="dummyprofilepic.png">
-                </div>
+                    <div class="form-group">
+                        <label for="qty">CSV:</label>
+                        <input type="number" class="form-control" id="qty">
+                    </div>
 
-		<div class="form-group">
-			<h4><strong>Advisor:</strong> {{selectedResearch.name}} {{selectedResearch.lastname}}</h4>
-            <button type="submit" class="btn btn-primary">View Resume</button>
-                <button type="button" class="btn btn-primary ">Add</button>
-		</div>
+                    <div class="form-group">
+                        <label for="qty">Expiration Date:</label>
+                        <input type="text" class="form-control" id="qty">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="qty">Quantity:</label>
+                        <input type="text" class="form-control" id="qty">
+                    </div>
+
+
+                </form>
             </div>
-            <div class="modal-footer">
-                
-                <button type="button" class="btn btn-primary"
-                        data-dismiss="modal">Close</button>
+
+            <div class="form-group">
+                <h3><strong>Advisor:</strong> {{selectedResearch.name}} {{selectedResearch.lastname}} </h3>
             </div>
+        
+        </div>
+        <div class="modal-footer">
+
+            <button type="button" class="btn btn-primary">Make Donation</button>
+            <button type="button" class="btn btn-primary"
+            data-dismiss="modal">Close</button>
         </div>
     </div>
 </div>
-
-<!-- Donate Option -->
-	<div class="modal fade" tabindex="-1" id="viewModalDonate"
-        data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                    &times;
-                </button>
-                <h4 class="modal-title">Make a Donation to {{selectedResearch.title}}</h4>
-            </div>
-            <div class="modal-body">
-                <div class="img-wrapper clearfix">
-                   <form>
-
-                   	<div class="form-group">
-						  <label for="cname">Company Name:</label>
-						  <input type="text" class="form-control" id="cname">
-						</div>
-						<div class="form-group">
-						  <label for="crdtc">Credit Card:</label>
-						  <input type="text" class="form-control" id="crdtc">
-					</div>
-
-					<div class="form-group">
-						  <label for="qty">Quantity:</label>
-						  <input type="text" class="form-control" id="qty">
-					</div>
-
-
-                   </form>
-                </div>
-
-		<div class="form-group">
-			<h3><strong>Advisor:</strong> {{selectedResearch.name}} {{selectedResearch.lastname}} </h3>
-		</div>
-		<div class="form-group">
-			<h3><strong>Department:</strong> {{selectedResearch.department}}</h3>
-		</div>
-            </div>
-            <div class="modal-footer">
-
-                <button type="button" class="btn btn-primary">Make Donation</button>
-                <button type="button" class="btn btn-primary"
-                        data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
 </div>

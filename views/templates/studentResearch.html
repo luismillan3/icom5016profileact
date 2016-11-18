@@ -34,7 +34,12 @@
             <th>Name</th><th>Major</th><th>Advisor</th><th>View</th>
         </tr>
         <tr ng-repeat="research in researchProjects | filter: query">
-            <td>{{ research.title }}</td><td>{{ research.description }}</td><td>{{ research.name }}</td><td><button class="btn btn-success" data-target="#viewModal" data-toggle="modal" ng-click="display(student)">Look!</button></td>
+            <td>{{ research.title }}</td>
+            <td>{{ research.description }}</td>
+            <td>{{ research.name }}</td>
+            <td>
+                <button class="btn btn-success" ng-click="display(student)">Look!</button>
+            </td>
         </tr>
     </table>
 

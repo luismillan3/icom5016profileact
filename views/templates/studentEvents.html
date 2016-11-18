@@ -35,11 +35,11 @@
     </div>
     <md-content class="md-padding" layout="row" layout-wrap style="background-color: #fff">
 
-        <div ng-repeat="event in events | filter:query | orderBy:event.date" layout="column" flex-xs flex-gt-xs="33">
+        <div ng-repeat="event in events | filter:query | orderBy:event.date " layout="column" flex-xs flex-gt-xs="33">
             <md-card md-theme="{{ showDarkTheme ? 'dark-blue' : 'default' }}" md-theme-watch>
                 <md-card-title>
                   <md-card-title-text>
-                    <span class="md-headline">{{event.name}}</span>
+                    <span class="md-headline">{{event.title}}</span>
                     <span class="md-subhead">{{event.date}}</span>
                   </md-card-title-text>
                   <md-card-title-media>
@@ -55,4 +55,3 @@
     </md-content>
 
 </div>
-

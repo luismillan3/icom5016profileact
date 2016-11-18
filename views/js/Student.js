@@ -22,13 +22,14 @@ angular.module('student',[])
 
 }]).controller('studentEventsController', ['$scope', '$http', '$log','$mdDialog', function($scope, $http, $log, $mdDialog) {
 
+    // var dateFormat = require('dateformat');
 
     $scope.getEvents = function () {
         //Get all events
         $http.get('/student/events')
         .success(function (data, status) {
             $scope.events = data;
-            console.log($scope.projects)
+            console.log($scope.events);
         })
         .error(function (data, status) {
         	console.log(data, status);
@@ -38,9 +39,21 @@ angular.module('student',[])
 
     $scope.getEvents();
 
+    $scope.getDates = function(){
+        for (var event in $scope.events) {
+            console.log(event.date)
+        }
+    }
+
+    $scope.getDates();
+
     $scope.display=function(event){
         $scope.selectedEvent=event;
     }
+
+
+
+
 
     $scope.showAlert = function(ev) {
         $mdDialog.show(

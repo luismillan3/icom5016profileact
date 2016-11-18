@@ -36,10 +36,10 @@ angular.module('recruiter',[])
       }
        if(re.email==null){
         re.email=$scope.recruiter.email
-      }  
+      }
       if(re.company==null){
         re.company=$scope.recruiter.company
-      }   
+      }
     	 console.log(re)
         re.userid=$cookieStore.get('userid')
     	 $scope.newr={}
@@ -116,11 +116,11 @@ angular.module('recruiter',[])
 
 
     $scope.getMajor = function () {
-      
+
             $http.get('/auth/major')
             .success(function (data, status) {
                 $scope.majors = data;
-                
+
             })
             .error(function (data, status) {
               console.log(data, status);
@@ -241,7 +241,7 @@ angular.module('recruiter',[])
             });
         };
 
-      
+
 
     $scope.display=function(project){
         $scope.selectedResearch=project;
@@ -249,5 +249,38 @@ angular.module('recruiter',[])
 
      $scope.getResearch();
 
-}])
 
+	 $scope.eventDialog = function(ev,project) {
+       $mdDialog.show({
+         controller: DialogController,
+         templateUrl: 'components/recruiterProjectDialog.html',
+         parent: angular.element(document.body),
+         targetEvent: ev,
+         clickOutsideToClose:true,
+         fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+       })
+       .then(function() {
+
+       }, function() {
+         $scope.status = 'You cancelled the dialog.';
+       });
+
+       selectedProject=project
+     };
+
+     function DialogController($scope, $mdDialog) {
+         $scope.hide = function() {
+             $mdDialog.hide();
+         };
+
+         $scope.cancel = function() {
+             $mdDialog.cancel();
+         };
+
+         $scope.answer = function(answer) {
+             $mdDialog.hide(answer);
+         };
+         $scope.selectedProject=selectedProject;
+     }
+
+}])
