@@ -29,9 +29,9 @@ A.	Recruiters (Companies and Graduate Schools)
 
  
 #### Luis:
-  1.Professor Page
-  2.Project Modal Donate
-  3.Professor Management 
+  1.  Professor Page
+  2.  Project Modal Donate
+  3.  Professor Management 
 
 ## Installation
 
