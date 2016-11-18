@@ -14,7 +14,7 @@ html, body{
 
 /*---------------------------------- Reusable Components ----------------------------------*/
 .md-button{
-    padding: 0px;
+    padding: 1px;
 }
 
 .md-button.primaryBtn {
@@ -29,14 +29,18 @@ html, body{
 }
 
 .md-button.primaryBtn:not([disabled]):hover {
-  background-color: #00695C;
-  color: white;
+    background-color: #00695C;
+    color: white;
 }
 
 
 /*---------------------------------- Home ----------------------------------*/
 .homeSections{
     margin: 10% 0;
+}
+
+.section-color{
+    background-color: #f4f4f4;
 }
 
 
@@ -67,7 +71,7 @@ html, body{
 }
 
 .ng-hide {
-  height: 0;
+    height: 0;
 }
 
 
@@ -128,4 +132,102 @@ li {
 md-input-container{
     margin: 0 10%;
 
+}
+
+.research{
+    padding-bottom: 10%;
+}
+
+/*-------------------------------------------------------------------*/
+/*FOOTER*/
+/*-------------------------------------------------------------------*/
+
+#wrapper {
+	min-height:100%;
+	position:relative;
+}
+#header {
+	background:#ededed;
+	padding:10px;
+}
+#content {
+	padding-bottom:100px; /* Height of the footer element */
+}
+#footer {
+	background-color: #003c32;
+	width:100%;
+	height:100px;
+	position:absolute;
+	bottom:0;
+	left:0;
+}
+
+footer{
+    color: white;
+    background-color: #003c32;
+    padding: 10px;
+    font-size: 70%;
+}
+
+.footer-nav{
+    list-style: none;
+    text-align: center;
+    padding: 1em 0 0 0;
+}
+.footer-nav li{
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.footer-nav li:last-child,
+.social-links li:last-child{
+    margin-right: 0;
+}
+
+.footer-nav li a:link,
+.footer-nav li a:visited,
+.social-links li a:link,
+.social-links li a:visited{
+    text-decoration: none;
+    border: 0;
+    color: #fff;
+}
+
+.footer-nav li a:hover,
+.footer-nav li a:active{
+    color:#ddd;
+}
+
+.social-links li a:link,
+.social-links li a:visited{
+    font-size: 120%;
+
+}
+
+.ion-social-twitter,
+.ion-social-facebook,
+.ion-social-googleplus,
+.ion-social-instagram{
+    -webkit-transition: color 0.2s;
+    transition: color 0.2s;
+}
+
+.ion-social-twitter:hover{
+    color: #00aced;
+}
+.ion-social-facebook:hover{
+    color: #3b5998;
+}
+.ion-social-googleplus:hover{
+    color: #dd4b39;
+}
+.ion-social-instagram:hover{
+    color: #125688;
+}
+
+footer p{
+    color: #fff;
+    text-align: center;
+    font-size: 90%;
+    margin-top: 30px;
 }

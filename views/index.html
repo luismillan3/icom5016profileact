@@ -1,24 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="app">
-    <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-      <title>ProfileAct</title>
-      <!-- Import all dependencies -->
-      <link rel="import" href="scripts&css.html">
-    </head>
-    <body>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>ProfileAct</title>
+    <!-- Import all dependencies -->
+    <link rel="import" href="scriptscss.html">
+</head>
+<body>
+    <!-- viewport -->
+    <div id="wrapper">
+        <div id="content">
+            <ng-view></ng-view>
+        </div>
+        <div id="footer">
+            <footer>
+                <!-- <div layout="row">
+                    <div flex>
+                        <ul class="footer-nav">
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Press</a></li>
+                            <li><a href="#">iOS App</a></li>
+                            <li><a href="#">Android App</a></li>
+                        </ul>
+                    </div>
+                </div> -->
 
- 
-
-
-
-
-<!-- viewport -->
-        <ng-view></ng-view>
-
-
-    </body>
+                <div class="row">
+                    <p>Copyright &copy; 2016 by Wilfredo, Luis, and Fernando. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
 </html>
