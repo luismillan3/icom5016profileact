@@ -4,15 +4,15 @@
 	<h4 flex="10"> Are you a:</h4>
 	<form flex="90" layout="row">
 		<p flex>
-			<md-button class="primaryBtn"><label for="studentSignUp">Student?</label></md-button>
+			<md-button class="md-raised md-primary"><label for="studentSignUp">Student?</label></md-button>
 			<input class="with-gap" id="studentSignUp" type="radio" name="content" ng-model="content" value="studentSignUp">
 		</p>
 		<p flex>
-			<md-button class="primaryBtn"><label for="recruiterSignUp">Recruiter?</label></md-button>
+			<md-button class="md-raised md-primary"><label for="recruiterSignUp">Recruiter?</label></md-button>
 			<input class="with-gap" id="recruiterSignUp" type="radio" name="content" ng-model="content" value="recruiterSignUp">
 		</p>
 		<p flex>
-			<md-button class="primaryBtn"><label for="professorSignUp">Professor?</label></md-button>
+			<md-button class="md-raised md-primary"><label for="professorSignUp">Professor?</label></md-button>
 			<input class="with-gap" id="professorSignUp" type="radio" name="content" ng-model="content" value="professorSignUp">
 		</md-button>
 	</p>
@@ -30,6 +30,17 @@
 		</div>
 
 		<form>
+
+			<div class="form-group">
+				<label for="inputFirstName">First Name</label>
+				<input ng-model="tempUsr.name" class="form-control" placeholder="First Name"
+				type="text" id="inputFirstName" />
+			</div>
+			<div class="form-group">
+				<label for="inputLastName">Last Name</label>
+				<input ng-model="tempUsr.lastname" class="form-control" placeholder="Last Name"
+				type="text" id="inputLastName" />
+			</div>
 
 			<div class="form-group">
 				<label for="inputUserName">Username</label>
@@ -52,15 +63,26 @@
 				type="number" id="number" />
 			</div>
 			<div class="form-group">
+				<label for="major">Major</label>
 				<select  class="form-control" ng-model="tempUsr.major">
-					<option ng-repeat="major in majors">{{major.value}}</option>
+					<option id="major" ng-repeat="major in majors" value="{{major.majorid}}">{{major.value}}</option>
 				</select>
 			</div>
 			<div class="form-group">
-				<label for="inputPassword">email</label>
+				<label for="inputYear">Year of Study</label>
+				<input ng-model="tempUsr.year" class="form-control" placeholder="Year"
+				type="number" id="inputYear" />
+			</div>
+			<div class="form-group">
+				<label for="inputPassword">Email</label>
 				<input ng-model="tempUsr.email" class="form-control" placeholder="Input email"
 				type="email" id="inputEmail" />
 			</div>
+			<!-- <form id="uploadForm" enctype="multipart/form-data" action="/api/photo" method="post">
+				<input type="file" name="userPhoto" />
+				<md-button class="md-raised" type="submit" name="submit">Upload Image</md-button>
+			</form> -->
+			<br>
 			<button type="submit" class="btn btn-primary"  ng-click="signUpStudent(tempUsr)">SignUp</button>
 		</form>
 
