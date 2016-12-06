@@ -4,63 +4,108 @@ var pg = require('pg');//para la base de datos luego
 const database_URL= 'postgres://xwozcfrzmmekkv:zvyT7_TOODaNOop6XdZN2wddOU@ec2-54-243-204-57.compute-1.amazonaws.com:5432/d2ubph0nje9jmv'
 pg.defaults.ssl = true;
 
-
-var student = {name:"Bartolo",
-  lastName:"Del Pueblo",
-  email:"diablo@upr.edu",
-  profileImage: "https://s-media-cache-ak0.pinimg.com/236x/bd/01/40/bd01401c5b6c716b8b14786ec995ecbe.jpg",
-  major: "ICOM",
-  gpa: 3.43,
-  resume:"#",
-  projects: [
-          {id: 1, title: 'Enfoque Film Festival', picture:"http://www.filmfestivals.com/files/enfoque_logo_HORIZONTAL1.jpg?0", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
-          {id: 2, title: 'Tarzan Watch', picture:"http://www.nse.org/exchange/slides/135_4_Our-Mascot-Tarzan.jpg", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
-          {id: 3, title: 'Build NodeJS backend' , picture:"https://cdn.tutsplus.com/net/uploads/legacy/956_nodeJs/nodeJs.png", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
-          {id: 4, title: 'Get started with AngularJS' , picture:"https://yellowpencil.com/assets/blog/banners/banner-angularjs.jpg", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
-          {id: 5, title: 'Setup Postgres database' , picture:"https://yellowpencil.com/assets/blog/banners/banner-angularjs.jpg", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
-          {id: 6, title: 'Be awesome!' , picture:"https://yellowpencil.com/assets/blog/banners/banner-angularjs.jpg", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
-    ],
-  research: [
-        { name: 'Enfoque Film Festival', department: 'Computer Engineering', advisor: 'Nayda Santiago', role: 'Developer'},
-        { name: 'Tiburones', department: 'Electrical Engineering', advisor: 'Nayda Santiago', role: 'Developer'},
-
-    ],
-
-}
-
-var events = [
-        { id:1,title: 'Master HTML/CSS/Javascript',description:"Awesome Event",date:"10/12/16 10:00"},
-        { id:2,title: 'Raytheon Session',description:"Awesome Event",date:"10/12/16 10:00"},
-        { id:3,title: 'Johns Hopkins Session',description:"Awesome Event",date:"10/12/16 10:00"},
-        { id:4,title: 'Boeing Company',description:"Awesome Event",date:"10/12/16 10:00"},
-        { id:5,title: 'Mario Bros in the House',description:"Awesome Event",date:"10/12/16 10:00"}
-      ]
-var students = [
-        { studentName: 'Marcel',studentLastName:"Fuentes",gpa:3.53,major:"BIOL"},
-        { studentName: 'Maria',studentLastName:"Del Valle",gpa:3.32,major:"COMP"},
-        { studentName: 'Kelvin',studentLastName:"Pelota",gpa:2.74,major:"ICOM"},
-        { studentName: 'Nerymar',studentLastName:"Cucuza",gpa:2.9,major:"INEL"},
-        { studentName: 'Cafralin',studentLastName:"Pelora",gpa:3.94,major:"ININ"}
-      ]
-
-
+var getStudent = 'SELECT * FROM users natural join student natural join major where userid=$1'
+var getStudentId = 'SELECT studentid FROM users natural join student where userid = $1'
+var updateStudent ='UPDATE student set name=$1, lastname=$2 where studentid=$3';
+var updateStudentInfo ='UPDATE student set majorid=$1, year=$2, gpa=$3 where studentid=$4';
+var getMajors = 'SELECT * FROM major'
+var getProjects = 'SELECT projectid, description, title, image FROM projects natural join student natural join users where users.userid=$1 and student.userid = users.userid and projects.student_id = student.studentid order by projects.projectid'
+var insertProject = 'INSERT INTO projects(title, description, image, student_id) VALUES($1, $2, $3, $4)'
+var updateProject = 'UPDATE projects set title=$1, description=$2 where projectid=$3'
+var deleteProject = 'DELETE FROM projects WHERE projectid=$1';
 // router.get('/profile', function(req, res, next) {
 //     console.log('Student funciona')
 //     res.json(student);
 //
 // });
 
-
-
-
-
-
-
-
 router.post('/profile', function(req, res, next) {
     console.log(req.body)
     pg.connect(database_URL, function(err, client, done) {
-        client.query('SELECT * FROM users natural join student natural join major where userid=$1',[req.body.userid], function(err, result) {
+        client.query(getStudent,[req.body.userid], function(err, result) {
+
+            if (err)
+             { console.error(err); response.send("Error " + err); }
+            else
+            res.json(result.rows);
+            console.log(result.rows)
+            done();
+        });
+    });
+});
+
+router.put('/profile/update', function(req, res, next) {
+
+    console.log('updated student profile')
+    if(!req.body.hasOwnProperty('name') || !req.body.hasOwnProperty('lastname')){
+        res.statusCode = 400;
+        return res.send('Error: Missing fields for student.');
+    }
+    var studentid=0;
+    console.log(req.body)
+    pg.connect(database_URL, function(err, client, done) {
+        client.query(getStudentId,[req.body.userid], function(err, result) {
+
+            if (err)
+            { console.error(err); response.send("Error " + err); }
+            else
+
+            studentid=result.rows[0].studentid;
+
+            console.log(studentid)
+            done();
+            client.query(updateStudent,[req.body.name,req.body.lastname,studentid], function(err, result) {
+
+                if (err)
+                { console.error(err); response.send("Error " + err); }
+                else
+                res.json("OK");
+                done();
+            });
+        });
+
+    });
+
+});
+
+router.put('/info/update', function(req, res, next) {
+
+    console.log('updated student Info')
+    if(!req.body.hasOwnProperty('majorid') || !req.body.hasOwnProperty('year') || !req.body.hasOwnProperty('gpa')){
+        res.statusCode = 400;
+        return res.send('Error: Missing fields for student.');
+    }
+    var studentid=0;
+    console.log(req.body)
+    pg.connect(database_URL, function(err, client, done) {
+        client.query(getStudentId,[req.body.userid], function(err, result) {
+
+            if (err)
+            { console.error(err); response.send("Error " + err); }
+            else
+
+            studentid=result.rows[0].studentid;
+
+            console.log(studentid)
+            done();
+            client.query(updateStudentInfo,[req.body.majorid,req.body.year,req.body.gpa,studentid], function(err, result) {
+
+                if (err)
+                { console.error(err); response.send("Error " + err); }
+                else
+                res.json("OK");
+                done();
+            });
+        });
+
+    });
+
+});
+
+router.get('/majors', function(req, res, next) {
+    console.log(req.body)
+    pg.connect(database_URL, function(err, client, done) {
+        client.query(getMajors, function(err, result) {
 
             if (err)
              { console.error(err); response.send("Error " + err); }
@@ -73,14 +118,11 @@ router.post('/profile', function(req, res, next) {
 });
 
 
-
 router.post('/projects', function(req, res, next) {
     console.log('Projects Papeh')
     var projectID = 0;
     pg.connect(database_URL, function(err, client, done) {
-        client.query('SELECT description, title, image FROM projects natural join student natural join users where users.userid=$1 and student.userid = users.userid and projects.student_id = student.studentid',
-        [req.body.userid],
-        function(err, result) {
+        client.query(getProjects,[req.body.userid], function(err, result) {
 
           if (err)
            { console.error(err); response.send("Error " + err); }
@@ -90,6 +132,89 @@ router.post('/projects', function(req, res, next) {
         });
     });
 
+});
+
+router.post('/projects/add', function(req, res, next) {
+    console.log(req.body)
+    var studentId=0;
+    if(!req.body.hasOwnProperty('title') || !req.body.hasOwnProperty('description')
+    || !req.body.hasOwnProperty('image')) {
+        res.statusCode = 400;
+        return res.send('Error: Missing fields for event.');
+    }
+    console.log(req.body)
+    pg.connect(database_URL, function(err, client, done) {
+        client.query(getStudentId,[req.body.userid], function(err, result) {
+
+            if (err)
+            { console.error(err); response.send("Error " + err); }
+            else
+
+            studentId=result.rows[0].studentid;
+            console.log(result.rows)
+            console.log(studentId)
+            done();
+            client.query(insertProject,[req.body.title, req.body.description,req.body.image,studentId], function(err, result) {
+
+                if (err)
+                { console.error(err); response.send("Error " + err); }
+                else
+                res.json("OK");
+                done();
+            });
+        });
+
+    });
+});
+
+router.put('/projects/update/:id', function(req, res, next) {
+
+    console.log('updated project Info')
+    if(!req.body.hasOwnProperty('title') || !req.body.hasOwnProperty('description')){
+        res.statusCode = 400;
+        return res.send('Error: Missing fields for student.');
+    }
+    var studentid=0;
+    pg.connect(database_URL, function(err, client, done) {
+
+        if (err) {
+            return console.error('error fetching client from pool', err);
+        }
+        client.query(updateProject,[req.body.title, req.body.description, req.params.id], function(err, result) {
+
+            if (err)
+            { console.error(err); response.send("Error " + err); }
+            else
+            res.json("OK");
+            done();
+        });
+
+    });
+
+});
+
+
+router.delete('/projects/delete/:id', function(req, res, next) {
+
+
+    console.log("From delete project route");
+    console.log(req.params.id);
+    pg.connect(database_URL, function(err, client, done) {
+
+        if (err) {
+            return console.error('error fetching client from pool', err);
+        }
+        client.query(deleteProject, [req.params.id], function(err, result) {
+            //call `done()` to release the client back to the pool
+
+            if (err) {
+                res.send(err);
+            }
+            res.json("OK");
+            done();
+        });
+
+    });
 });
 
 router.get('/events', function(req, res, next) {

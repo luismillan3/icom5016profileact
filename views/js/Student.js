@@ -11,8 +11,8 @@ angular.module('student',[])
             console.log($scope.projects)
         })
         .error(function (data, status) {
-        	console.log(data, status);
-    		console.log("Could not get all projects")
+            console.log(data, status);
+            console.log("Could not get all projects")
         });
     };
 
@@ -32,8 +32,8 @@ angular.module('student',[])
             console.log($scope.events);
         })
         .error(function (data, status) {
-        	console.log(data, status);
-    		console.log("Could not get all projects")
+            console.log(data, status);
+            console.log("Could not get all projects")
         });
     };
 
@@ -57,7 +57,7 @@ angular.module('student',[])
 
     $scope.showAlert = function(ev) {
         $mdDialog.show(
-          $mdDialog.alert()
+            $mdDialog.alert()
             .parent(angular.element(document.querySelector('#popupContainer')))
             .clickOutsideToClose(true)
             .title('You will be reminded')
@@ -69,21 +69,21 @@ angular.module('student',[])
     };
 
     $scope.eventDialog = function(ev,event) {
-      $mdDialog.show({
-        controller: DialogController,
-        templateUrl: 'components/eventDialog.html',
-        parent: angular.element(document.body),
-        targetEvent: ev,
-        clickOutsideToClose:true,
-        fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-      })
-      .then(function() {
+        $mdDialog.show({
+            controller: DialogController,
+            templateUrl: 'components/eventDialog.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true,
+            fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+        })
+        .then(function() {
 
-      }, function() {
-        $scope.status = 'You cancelled the dialog.';
-      });
+        }, function() {
+            $scope.status = 'You cancelled the dialog.';
+        });
 
-      selectedEvent=event
+        selectedEvent=event
     };
 
     function DialogController($scope, $mdDialog) {
@@ -107,13 +107,13 @@ angular.module('student',[])
     $scope.newStudent={}
     $scope.student={}
     $scope.project={}
-
+    $scope.majors = []
     $scope.frmToggle = function() {
         $('#profileForm').slideToggle();
     }
     $scope.go = function ( path ) {
-      console.log(path);
-      window.location=path;
+        console.log(path);
+        window.location=path;
     }
 
     $scope.getStudent = function () {
@@ -126,10 +126,63 @@ angular.module('student',[])
             console.log($scope.student)
         })
         .error(function (data, status) {
-        	console.log(data, status);
-    		console.log("Could not get student Info")
+            console.log(data, status);
+            console.log("Could not get student Info")
         });
     };
+
+    $scope.getMajors = function () {
+        $http.get('/student/majors')
+        .success(function (data, status) {
+            $scope.majors = data;
+            console.log($scope.majors)
+        })
+        .error(function (data, status) {
+            console.log(data, status);
+            console.log("Could not get student Info")
+        });
+    };
+
+    $scope.updateProfile=function(re){
+		if(re.name==null){
+			re.name=$scope.student.name
+		}
+		if(re.lastname==null){
+			re.lastname=$scope.student.lastname
+		}
+		console.log(re)
+		re.userid=$cookieStore.get('userid')
+		$http.put('/student/profile/update', re )
+		.success(function (data) {
+			$scope.getStudent();
+		})
+		.error(function (data, status, header, config) {
+			console.log(data, status);
+			console.log("could not update profile")
+		});
+	};
+
+    $scope.updateInfo=function(re){
+		if(re.majorid==null){
+			re.majorid=$scope.student.majorid
+		}
+		if(re.year==null){
+			re.year=$scope.student.year
+		}
+        if(re.gpa==null){
+			re.gpa=$scope.student.gpa
+		}
+		console.log(re)
+		re.userid=$cookieStore.get('userid')
+		$http.put('/student/info/update', re )
+		.success(function (data) {
+			$scope.getStudent();
+		})
+		.error(function (data, status, header, config) {
+			console.log(data, status);
+			console.log("could not update student info")
+		});
+	};
 
     $scope.getProjects = function () {
         //chequiar rol, sino es student tirar homepage
@@ -141,10 +194,27 @@ angular.module('student',[])
             console.log($scope.projects)
         })
         .error(function (data, status) {
-        	console.log(data, status);
-    		console.log("Could not get all projects")
+            console.log(data, status);
+            console.log("Could not get all projects")
         });
     };
+
+    $scope.updateProject=function(re, id){
+		if(re.title==null){
+			re.title=$scope.student.title
+		}
+		if(re.description==null){
+			re.description=$scope.student.description
+		}
+		$http.put('/student/projects/update/'+id, re )
+		.success(function (data) {
+			$scope.getProjects();
+		})
+		.error(function (data, status, header, config) {
+			console.log(data, status);
+			console.log("could not update project info")
+		});
+	};
 
     $scope.getResearch = function () {
         //chequiar rol, sino es student tirar homepage
@@ -156,15 +226,42 @@ angular.module('student',[])
             console.log($scope.researchProjects)
         })
         .error(function (data, status) {
-        	console.log(data, status);
-    		console.log("Could not get all projects")
+            console.log(data, status);
+            console.log("Could not get all research projects")
         });
     };
+
+    $scope.addProject=function(e){
+        e.userid=$cookieStore.get('userid')
+        console.log(e)
+
+        $http.post('/student/projects/add', e )
+        .success(function (data) {
+            console.log("recibi la data del proyecto")
+            $scope.getProjects()
+        })
+        .error(function (data, status, header, config) {
+            console.log(data, status);
+            console.log("could not add project")
+        });
+    };
+
+    $scope.removeProject=function(id){
+       $http.delete('/student/projects/delete/'+id).success(function (data) {
+               $scope.getProjects();
+           })
+           .error(function (data, status, header, config) {
+               console.log(data, status);
+               console.log("could not remove event")
+           })
+     };
+
 
 
 
 
     $scope.getStudent();
+    $scope.getMajors();
     $scope.getProjects();
     $scope.getResearch();
 
@@ -182,21 +279,21 @@ angular.module('student',[])
     //     });
     // };
 
-     $scope.addProject=function(re){
-        $scope.project={}
-        re.id=$scope.student.projects.length+1;
-        console.log(re)
-        $scope.newr={}
-
-        $http.post('/student/projects', re )
-        .success(function (data) {
-            $scope.student.projects = data;
-        })
-        .error(function (data, status, header, config) {
-            console.log(data, status);
-            console.log("could not add event")
-        });
-    };
+    //  $scope.addProject=function(re){
+    //     $scope.project={}
+    //     re.id=$scope.student.projects.length+1;
+    //     console.log(re)
+    //     $scope.newr={}
+    //
+    //     $http.post('/student/projects', re )
+    //     .success(function (data) {
+    //         $scope.student.projects = data;
+    //     })
+    //     .error(function (data, status, header, config) {
+    //         console.log(data, status);
+    //         console.log("could not add event")
+    //     });
+    // };
 
 
     // $scope.addProject = function(project){
@@ -215,21 +312,21 @@ angular.module('student',[])
 
 
     $scope.showAdvanced = function(ev,project) {
-      $mdDialog.show({
-        controller: DialogController,
-        templateUrl: 'components/dialog.html',
-        parent: angular.element(document.body),
-        targetEvent: ev,
-        clickOutsideToClose:true,
-        fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-      })
-      .then(function() {
+        $mdDialog.show({
+            controller: DialogController,
+            templateUrl: 'components/dialog.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true,
+            fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+        })
+        .then(function() {
 
-      }, function() {
-        $scope.status = 'You cancelled the dialog.';
-      });
+        }, function() {
+            $scope.status = 'You cancelled the dialog.';
+        });
 
-      selectedProject=project
+        selectedProject=project
     };
 
     function DialogController($scope, $mdDialog) {
@@ -245,71 +342,13 @@ angular.module('student',[])
             $mdDialog.hide(answer);
         };
         $scope.selectedProject=selectedProject;
-    }
-
-    $scope.updateProfile=function(){
-        // return $http.post('/student/profile/update', $scope.student)
-        // return $http.post('/student/profile/update', {name:data,
-        //     lastName:"Diablo",
-        //     email:"diablo@upr.edu",
-        //     profileImage: "https://s-media-cache-ak0.pinimg.com/236x/bd/01/40/bd01401c5b6c716b8b14786ec995ecbe.jpg",
-        //     major: "Computer Engineering",
-        //     resume:"#",
-        //     projects: [
-        //         {id: 1, title: 'Enfoque Film Festival', picture:"http://www.filmfestivals.com/files/enfoque_logo_HORIZONTAL1.jpg?0", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
-        //         {id: 2, title: 'Tarzan Watch', picture:"http://www.nse.org/exchange/slides/135_4_Our-Mascot-Tarzan.jpg", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
-        //         {id: 3, title: 'Build NodeJS backend' , picture:"https://cdn.tutsplus.com/net/uploads/legacy/956_nodeJs/nodeJs.png", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
-        //         {id: 4, title: 'Get started with AngularJS' , picture:"https://yellowpencil.com/assets/blog/banners/banner-angularjs.jpg", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
-        //         {id: 5, title: 'Setup Postgres database' , picture:"https://yellowpencil.com/assets/blog/banners/banner-angularjs.jpg", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
-        //         {id: 6, title: 'Be awesome!' , picture:"https://yellowpencil.com/assets/blog/banners/banner-angularjs.jpg", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
-        //     ],
-        //     research: [
-        //         { name: 'Enfoque Film Festival', department: 'Computer Engineering', advisor: 'Nayda Santiago'},
-        //         { name: 'Tiburones', department: 'Electrical Engineering', advisor: 'Nayda Santiago'},
-
-        //     ],
-
-        // });
-        console.log()
-        $scope.newr={}
-        $http.put('/student/profile/update', $scope.student )
-        .success(function () {
-
-            console.log('funciona');
-            //     $scope.student = data
-            //     {name:data,
-            //     lastName:"Diablo",
-            //     email:"diablo@upr.edu",
-            //     profileImage: "https://s-media-cache-ak0.pinimg.com/236x/bd/01/40/bd01401c5b6c716b8b14786ec995ecbe.jpg",
-            //     major: "Computer Engineering",
-            //     resume:"#",
-            //     projects: [
-            //         {id: 1, title: 'Enfoque Film Festival', picture:"http://www.filmfestivals.com/files/enfoque_logo_HORIZONTAL1.jpg?0", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
-            //         {id: 2, title: 'Tarzan Watch', picture:"http://www.nse.org/exchange/slides/135_4_Our-Mascot-Tarzan.jpg", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
-            //         {id: 3, title: 'Build NodeJS backend' , picture:"https://cdn.tutsplus.com/net/uploads/legacy/956_nodeJs/nodeJs.png", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
-            //         {id: 4, title: 'Get started with AngularJS' , picture:"https://yellowpencil.com/assets/blog/banners/banner-angularjs.jpg", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
-            //         {id: 5, title: 'Setup Postgres database' , picture:"https://yellowpencil.com/assets/blog/banners/banner-angularjs.jpg", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
-            //         {id: 6, title: 'Be awesome!' , picture:"https://yellowpencil.com/assets/blog/banners/banner-angularjs.jpg", description:"Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus."},
-            //     ],
-            //     research: [
-            //         { name: 'Enfoque Film Festival', department: 'Computer Engineering', advisor: 'Nayda Santiago'},
-            //         { name: 'Tiburones', department: 'Electrical Engineering', advisor: 'Nayda Santiago'},
-
-            //     ],
-
-            // };
-        })
-        .error(function (data, status, header, config) {
-            console.log(data, status);
-            console.log("could not update profile")
-        });
     };
 
 }]).controller('AppCtrl', function($scope) {
-  $scope.title1 = 'Button';
-  $scope.title4 = 'Warn';
-  $scope.isDisabled = true;
+    $scope.title1 = 'Button';
+    $scope.title4 = 'Warn';
+    $scope.isDisabled = true;
 
-  $scope.googleUrl = 'http://google.com';
+    $scope.googleUrl = 'http://google.com';
 
 });
