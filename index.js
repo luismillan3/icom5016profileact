@@ -14,10 +14,11 @@ app.use(express.static(__dirname + '/views'));
 
 var storage =   multer.diskStorage({
   destination: function (req, file, callback) {
-    callback(null, './uploads/');
+    callback(null, './views/img');
   },
   filename: function (req, file, callback) {
-    callback(null, file.fieldname + '-' + Date.now());
+    callback(null, file.originalname);
+    console.log(file);
   }
 });
 
@@ -29,7 +30,7 @@ app.post('/api/photo',function(req,res){
         if(err) {
             return res.end("Error uploading file.");
         }
-        res.end("File is uploaded");
+        res.end("File is uploaded " + req.file.filename);
     });
 });
 
