@@ -18,11 +18,25 @@ var storage =   multer.diskStorage({
   },
   filename: function (req, file, callback) {
     callback(null, file.originalname);
-    console.log(file);
+   // console.log(file);
+  }
+});
+
+var storageResume =   multer.diskStorage({
+  destination: function (req, file, callback) {
+    callback(null, './views/resumes');
+  },
+  filename: function (req, file, callback) {
+    callback(null, file.originalname);
+   // console.log(file);
   }
 });
 
 var upload = multer({ storage : storage}).single('userPhoto');
+
+var uploadResume = multer({ storage : storageResume}).single('userResume');
+
+
 
 
 app.post('/api/photo',function(req,res){
@@ -30,7 +44,20 @@ app.post('/api/photo',function(req,res){
         if(err) {
             return res.end("Error uploading file.");
         }
-        res.end("File is uploaded " + req.file.filename);
+       
+        res.redirect("http://localhost:5000/#/professor");
+       // res.end("File is uploaded " + req.file.filename);
+    });
+});
+
+app.post('/api/resume',function(req,res){
+    uploadResume(req,res,function(err) {
+        if(err) {
+            return res.end("Error uploading file.");
+        }
+       
+        res.redirect("http://localhost:5000/#/professor");
+       // res.end("File is uploaded " + req.file.filename);
     });
 });
 
