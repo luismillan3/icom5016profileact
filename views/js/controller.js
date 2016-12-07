@@ -20,26 +20,49 @@ angular.module('mainController',[])
 	};
 	$scope.getMajor();
 
+ $scope.authenticateEmail = function(tempUsr){
+ 	// 
+        firebase.auth().onAuthStateChanged(function(user) {
+  			if (user) {
+    		// User is signed in.
+    		firebase.auth().currentUser.sendEmailVerification()
+  			}
+		});
+        console.log(firebase.auth().currentUser);
+        firebase.auth().signOut().then(
+     firebase.auth().createUserWithEmailAndPassword(tempUsr.email,tempUsr.password)
+     )
+  }
+
 	$scope.signUpStudent=function(usr){
 		console.log(usr)
 
-		$http.post('/auth/signup/student', usr )
-		.success(function (data, status) {
-			console.log(data[0])
+		$http.post('/api/resume', usr.resume).success(function (data, status){
 
-			$scope.user = data[0];
 
-			console.log($scope.user.userid)
-			console.log($scope.user.role)
-			$cookieStore.put('role', $scope.user.role);
-			$cookieStore.put('userid', $scope.user.userid);
-			window.location='/#/'+$scope.user.role;
-
-		})
-		.error(function (data, status, header, config) {
+		}).error(function (data, status, header, config) {
 			console.log(data, status);
-			console.log("could not register new student")
+			console.log("Error with pdf")
 		});
+		
+
+		// $http.post('/auth/signup/student', usr )
+		// .success(function (data, status) {
+		// 	console.log(data[0])
+
+		// 	$scope.user = data[0];
+
+		// 	console.log($scope.user.userid)
+		// 	console.log($scope.user.role)
+		// 	$cookieStore.put('role', $scope.user.role);
+		// 	$cookieStore.put('userid', $scope.user.userid);
+		// 	window.location='/#/'+$scope.user.role;
+		// 	//$scope.authenticateEmail(usr)
+		// })
+		// .error(function (data, status, header, config) {
+		// 	console.log(data, status);
+		// 	console.log("could not register new student")
+		// });
 	}
 
 
@@ -50,6 +73,7 @@ angular.module('mainController',[])
 			$cookieStore.put('role', $scope.user.role);
 			$cookieStore.put('userid', $scope.user.userid);
 			window.location='/#/'+$scope.user.role;
+			$scope.authenticateEmail(usr)
 		})
 		.error(function (data, status, header, config) {
 			console.log(data, status);
@@ -63,6 +87,7 @@ angular.module('mainController',[])
 			$cookieStore.put('role', $scope.user.role);
 			$cookieStore.put('userid', $scope.user.userid);
 			window.location='/#/'+$scope.user.role;
+			$scope.authenticateEmail(usr)
 		})
 		.error(function (data, status, header, config) {
 			console.log(data, status);

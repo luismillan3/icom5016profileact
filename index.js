@@ -45,7 +45,7 @@ app.post('/api/photo',function(req,res){
             return res.end("Error uploading file.");
         }
        
-        res.redirect("http://localhost:5000/#/professor");
+       // res.redirect("http://localhost:5000/#/professor");
        // res.end("File is uploaded " + req.file.filename);
     });
 });
@@ -55,8 +55,8 @@ app.post('/api/resume',function(req,res){
         if(err) {
             return res.end("Error uploading file.");
         }
-       
-        res.redirect("http://localhost:5000/#/professor");
+        //console.log("We entered");
+       // res.redirect("http://localhost:5000/#/professor");
        // res.end("File is uploaded " + req.file.filename);
     });
 });
@@ -95,14 +95,14 @@ app.use('/student', student);
 
 
 
-app.get('/db', function (request, response) {
-  pg.connect(database, function(err, client, done) {
-    client.query('SELECT * FROM admin_users', function(err, result) {
-      done();
-      if (err)
-       { console.error(err); response.send("Error " + err); }
-      else
-       { response.render('pages/db', {results: result.rows} ); }
-    });
-  });
-});
+// app.get('/db', function (request, response) {
+//   pg.connect(database, function(err, client, done) {
+//     client.query('SELECT * FROM admin_users', function(err, result) {
+//       done();
+//       if (err)
+//        { console.error(err); response.send("Error " + err); }
+//       else
+//        { response.render('pages/db', {results: result.rows} ); }
+//     });
+//   });
+// });

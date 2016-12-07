@@ -29,6 +29,8 @@
 			<h3 class="title">Student</h3>
 		</div>
 
+
+
 		<form>
 
 			<div class="form-group">
@@ -78,6 +80,15 @@
 				<input ng-model="tempUsr.email" class="form-control" placeholder="Input email"
 				type="email" id="inputEmail" />
 			</div>
+
+			<div class="form-group">
+				<label for="inputRes">Resume</label>
+				<input ng-model="tempUsr.resume" class="btn-primary" 
+				type="file" id="inputRes" />
+			</div>
+
+
+
 			<!-- <form id="uploadForm" enctype="multipart/form-data" action="/api/photo" method="post">
 				<input type="file" name="userPhoto" />
 				<md-button class="md-raised" type="submit" name="submit">Upload Image</md-button>
@@ -85,6 +96,18 @@
 			<br>
 			<button type="submit" class="btn btn-primary"  ng-click="signUpStudent(tempUsr)">SignUp</button>
 		</form>
+
+
+
+	<form id        =  "uploadFormResume"
+     enctype   =  "multipart/form-data"
+     action    =  "/api/resume"
+     method    =  "post"
+>
+<input type="file" name="userResume" />
+<input type="submit" value="Upload Resume" name="submit">
+</form>
+
 
 	</div>
 
