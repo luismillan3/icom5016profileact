@@ -24,10 +24,16 @@ angular.module('mainController',[])
 		console.log(usr)
 
 		$http.post('/auth/signup/student', usr )
-		.success(function (data) {
-			$cookieStore.put('role', $scope.user.role);
+		.success(function (data, status) {
+			console.log(data[0])
+
+			$scope.user = data[0];
+
+			console.log($scope.user.userid)
+			console.log($scope.user.role)
+			$cookieStore.put('role', 'student');
 			$cookieStore.put('userid', $scope.user.userid);
-			window.location='/#/'+$scope.user.role
+			window.location='/#/'+$scope.user.role;
 
 		})
 		.error(function (data, status, header, config) {

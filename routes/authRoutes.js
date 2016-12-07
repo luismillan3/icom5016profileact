@@ -8,6 +8,8 @@ var addUser = 'Insert into users (username, password, role) values ($1, $2, $3)'
 var addStudent = 'Insert into student (name, lastname, email, gpa, year, userid, majorid) values ($1, $2, $3, $4, $5, $6, $7)'
 var selectUser = 'SELECT * FROM users where username=$1 and password=$2'
 
+var addRecruiter = 'Insert into student (name, lastname, email, gpa, year, userid, majorid) values ($1, $2, $3, $4, $5, $6, $7)'
+
 router.get('/major', function(req, res, next) {
 
     pg.connect(database_URL, function(err, client, done) {
@@ -56,14 +58,14 @@ router.post('/signup/student', function(req, res, next) {
         res.statusCode = 400;
         return res.send('Error: Missing fields for event.');
     }
-
+    console.log(req.body)
     pg.connect(database_URL, function(err, client, done) {
         client.query(addUser,[req.body.username, req.body.password, 'student'], function(err, result) {
 
             if (err)
             { console.error(err); response.send("Error " + err); }
             else
-            res.json(result.rows);
+            // res.json(result.rows);
 
             done();
             client.query(selectUser,[req.body.username, req.body.password], function(err, result) {
@@ -73,6 +75,7 @@ router.post('/signup/student', function(req, res, next) {
                 else
 
                 userid=result.rows[0].userid;
+                resultRows = result.rows
                 console.log(result.rows)
                 console.log(userid)
                 done();
@@ -81,32 +84,55 @@ router.post('/signup/student', function(req, res, next) {
                     if (err)
                     { console.error(err); response.send("Error " + err); }
                     else
-                    res.json("OK");
+                    res.json(resultRows);
                     done();
                 });
             });
         });
     });
-
-
-    // pg.connect(database_URL, function(err, client, done) {
-    //
-    //
-    // });
-
 });
 
 router.post('/signup/recruiter', function(req, res, next) {
     console.log(req.body)
     if(!req.body.hasOwnProperty('username') || !req.body.hasOwnProperty('password')
-    || !req.body.hasOwnProperty('email'))
-    {
+    || !req.body.hasOwnProperty('email') || !req.body.hasOwnProperty('name') || !req.body.hasOwnProperty('lastname')
+    || !req.body.hasOwnProperty('company')){
+
         res.statusCode = 400;
         return res.send('Error: Missing fields for event.');
     }
+    console.log(req.body)
+    pg.connect(database_URL, function(err, client, done) {
+        client.query(addUser,[req.body.username, req.body.password, 'student'], function(err, result) {
 
-    users.push(req.body)
-    res.json(req.body);
+            if (err)
+            { console.error(err); response.send("Error " + err); }
+            else
+            // res.json(result.rows);
+
+            done();
+            client.query(selectUser,[req.body.username, req.body.password], function(err, result) {
+
+                if (err)
+                { console.error(err); response.send("Error " + err); }
+                else
+
+                userid=result.rows[0].userid;
+                resultRows = result.rows
+                console.log(result.rows)
+                console.log(userid)
+                done();
+                client.query(addStudent,[req.body.name, req.body.lastname,req.body.email,req.body.gpa,req.body.year,userid,req.body.major], function(err, result) {
+
+                    if (err)
+                    { console.error(err); response.send("Error " + err); }
+                    else
+                    res.json(resultRows);
+                    done();
+                });
+            });
+        });
+    });
 
 });
 router.post('/signup/professor', function(req, res, next) {

@@ -148,7 +148,6 @@ router.post('/projects/add', function(req, res, next) {
 
             if (err)
             { console.error(err); response.send("Error " + err); }
-            else
 
             studentId=result.rows[0].studentid;
             console.log(result.rows)
