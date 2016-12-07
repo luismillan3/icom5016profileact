@@ -9,6 +9,7 @@ var addStudent = 'Insert into student (name, lastname, email, gpa, year, userid,
 var selectUser = 'SELECT * FROM users where username=$1 and password=$2 and role=$3'
 
 var addRecruiter = 'Insert into recruiter (name, lastname, email, company, userid) values ($1, $2, $3, $4, $5)'
+var addProfessor = 'Insert into professor (name, lastname, email, userid) values ($1, $2, $3, $4)'
 
 router.get('/major', function(req, res, next) {
 
@@ -138,14 +139,43 @@ router.post('/signup/recruiter', function(req, res, next) {
 router.post('/signup/professor', function(req, res, next) {
     console.log(req.body)
     if(!req.body.hasOwnProperty('username') || !req.body.hasOwnProperty('password')
-    || !req.body.hasOwnProperty('email'))
-    {
+    || !req.body.hasOwnProperty('email') || !req.body.hasOwnProperty('name') || !req.body.hasOwnProperty('lastname')){
+
         res.statusCode = 400;
         return res.send('Error: Missing fields for event.');
     }
+    console.log(req.body)
+    pg.connect(database_URL, function(err, client, done) {
+        client.query(addUser,[req.body.username, req.body.password, 'professor'], function(err, result) {
 
-    users.push(req.body)
-    res.json(req.body);
+            if (err)
+            { console.error(err); response.send("Error " + err); }
+            else
+            // res.json(result.rows);
+
+            done();
+            client.query(selectUser,[req.body.username, req.body.password, 'professor'], function(err, result) {
+
+                if (err)
+                { console.error(err); response.send("Error " + err); }
+                else
+
+                userid=result.rows[0].userid;
+                resultRows = result.rows
+                console.log(result.rows)
+                console.log(userid)
+                done();
+                client.query(addProfessor,[req.body.name, req.body.lastname,req.body.email,userid], function(err, result) {
+
+                    if (err)
+                    { console.error(err); response.send("Error " + err); }
+                    else
+                    res.json(resultRows);
+                    done();
+                });
+            });
+        });
+    });
 
 });
 

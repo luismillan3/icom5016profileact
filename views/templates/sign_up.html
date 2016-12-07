@@ -143,7 +143,16 @@
 		</div>
 
 		<form>
-
+			<div class="form-group">
+				<label for="inputFirstName">First Name</label>
+				<input ng-model="tempUsr.name" class="form-control" placeholder="First Name"
+				type="text" id="inputFirstName" />
+			</div>
+			<div class="form-group">
+				<label for="inputLastName">Last Name</label>
+				<input ng-model="tempUsr.lastname" class="form-control" placeholder="Last Name"
+				type="text" id="inputLastName" />
+			</div>
 			<div class="form-group">
 				<label for="inputUserName">Username</label>
 				<input ng-model="tempUsr.username" class="form-control" placeholder="Login Username"

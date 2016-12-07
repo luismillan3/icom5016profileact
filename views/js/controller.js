@@ -57,19 +57,17 @@ angular.module('mainController',[])
 		});
 	}
 	$scope.signUpProfessor=function(usr){
-		// $http.post('/auth/signup/recruiter', usr )
-		//           .success(function (data) {
-		//           	console.log(data)
-		//               $scope.user = data;
-		// 		$cookieStore.put('role', $scope.user.role);
-		// 		$cookieStore.put('userID', $scope.user.userID);
-		// 		window.location='/#/'+$scope.user.role
-		//           })
-		//           .error(function (data, status, header, config) {
-		//               console.log(data, status);
-		//       		console.log("could not login")
-		//           });
-		window.location='/#/professor'
+		$http.post('/auth/signup/professor', usr )
+		.success(function (data, status) {
+			$scope.user = data[0];
+			$cookieStore.put('role', $scope.user.role);
+			$cookieStore.put('userid', $scope.user.userid);
+			window.location='/#/'+$scope.user.role;
+		})
+		.error(function (data, status, header, config) {
+			console.log(data, status);
+			console.log("could not register new recruiter")
+		});
 	}
 
 
