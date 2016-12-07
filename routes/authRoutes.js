@@ -6,9 +6,9 @@ pg.defaults.ssl = true;
 
 var addUser = 'Insert into users (username, password, role) values ($1, $2, $3)'
 var addStudent = 'Insert into student (name, lastname, email, gpa, year, userid, majorid) values ($1, $2, $3, $4, $5, $6, $7)'
-var selectUser = 'SELECT * FROM users where username=$1 and password=$2'
+var selectUser = 'SELECT * FROM users where username=$1 and password=$2 and role=$3'
 
-var addRecruiter = 'Insert into student (name, lastname, email, gpa, year, userid, majorid) values ($1, $2, $3, $4, $5, $6, $7)'
+var addRecruiter = 'Insert into recruiter (name, lastname, email, company, userid) values ($1, $2, $3, $4, $5)'
 
 router.get('/major', function(req, res, next) {
 
@@ -68,7 +68,7 @@ router.post('/signup/student', function(req, res, next) {
             // res.json(result.rows);
 
             done();
-            client.query(selectUser,[req.body.username, req.body.password], function(err, result) {
+            client.query(selectUser,[req.body.username, req.body.password, 'student'], function(err, result) {
 
                 if (err)
                 { console.error(err); response.send("Error " + err); }
@@ -103,7 +103,7 @@ router.post('/signup/recruiter', function(req, res, next) {
     }
     console.log(req.body)
     pg.connect(database_URL, function(err, client, done) {
-        client.query(addUser,[req.body.username, req.body.password, 'student'], function(err, result) {
+        client.query(addUser,[req.body.username, req.body.password, 'recruiter'], function(err, result) {
 
             if (err)
             { console.error(err); response.send("Error " + err); }
@@ -111,7 +111,7 @@ router.post('/signup/recruiter', function(req, res, next) {
             // res.json(result.rows);
 
             done();
-            client.query(selectUser,[req.body.username, req.body.password], function(err, result) {
+            client.query(selectUser,[req.body.username, req.body.password, 'recruiter'], function(err, result) {
 
                 if (err)
                 { console.error(err); response.send("Error " + err); }
@@ -122,7 +122,7 @@ router.post('/signup/recruiter', function(req, res, next) {
                 console.log(result.rows)
                 console.log(userid)
                 done();
-                client.query(addStudent,[req.body.name, req.body.lastname,req.body.email,req.body.gpa,req.body.year,userid,req.body.major], function(err, result) {
+                client.query(addRecruiter,[req.body.name, req.body.lastname,req.body.email,req.body.company,userid], function(err, result) {
 
                     if (err)
                     { console.error(err); response.send("Error " + err); }
