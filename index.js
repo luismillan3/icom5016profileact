@@ -24,6 +24,7 @@ var storage =   multer.diskStorage({
 
 var storageResume =   multer.diskStorage({
   destination: function (req, file, callback) {
+    console.log(req.resumename);
     callback(null, './views/resumes');
   },
   filename: function (req, file, callback) {
