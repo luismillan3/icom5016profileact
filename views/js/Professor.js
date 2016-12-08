@@ -12,6 +12,9 @@ angular.module('professor',[])
     $scope.studentsInProjects = []
     $scope.studentInProject = {}
     $scope.professor = {}
+    $scope.userid = $cookieStore.get('userid')
+
+    localStorage.setItem("myid",$cookieStore.get('userid'))
 
 	// $scope.projects = [
  //        { id:1,title: 'Gatos de ataque para el Army',funding:100,student:["Luis Millan","Juan Guzman"]},
@@ -38,6 +41,26 @@ angular.module('professor',[])
         });
     };
 
+ $scope.uploadFileName = function (proff) {
+     
+
+
+     console.log("Yes men");
+        // console.log("Filas y columnas"+$scope.professor.professorid);
+        $http.post('/investigacionprof/photoUpload', proff)
+        .success(function (data, status) {
+            $scope.projects = data;
+            
+             //console.log(data, status)
+        })
+        .error(function (data, status) {
+            console.log(data, status);
+            console.log("Could not get all projectazos")
+        });
+    };
+
+
+
     $scope.getProjectsStudents = function (researchstudent) {
 
         console.log
@@ -63,7 +86,7 @@ angular.module('professor',[])
         })
         .error(function (data, status) {
             console.log(data, status);
-            console.log("Error finding students in research " + status + "--o---" + data)
+         //   console.log("Error finding students in research " + status + "--o---" + data)
         });
     };
 

@@ -45,6 +45,18 @@ app.post('/api/photo',function(req,res){
         if(err) {
             return res.end("Error uploading file.");
         }
+
+           pg.connect(database, function(err, client, done) {
+           client.query('INSERT INTO files (profilepic,userid) VALUES ($1,$2) ON CONFLICT (userid) DO UPDATE SET profilepic = $1',[req.file.originalname,req.body.userid], function(err, result) {
+          //client.query('UPDATE files SET profilepic = $1 WHERE userid = $2; IF NOT FOUND THEN INSERT INTO files (profilepic,userid) VALUES($1,$2) END IF;',[req.file.originalname,req.body.userid], function(err, result) {
+      if (err)
+       { console.error(err); res.send("Error " + err); }
+      else
+     // res.json(result.rows);
+      //console.log(result.rows)
+      done();
+    });
+  });
        
        // res.redirect("http://localhost:5000/#/professor");
        // res.end("File is uploaded " + req.file.filename);
@@ -56,6 +68,18 @@ app.post('/api/resume',function(req,res){
         if(err) {
             return res.end("Error uploading file.");
         }
+
+         pg.connect(database, function(err, client, done) {
+          client.query('INSERT INTO files (resumecv,userid) VALUES ($1,$2) ON CONFLICT (userid) DO UPDATE SET resumecv = $1',[req.file.originalname,req.body.userid], function(err, result) {
+          
+      if (err)
+       { console.error(err); res.send("Error " + err); }
+      else
+    //  res.json(result.rows);
+      //console.log(result.rows)
+      done();
+    });
+  });
         //console.log("We entered");
        // res.redirect("http://localhost:5000/#/professor");
        // res.end("File is uploaded " + req.file.filename);
