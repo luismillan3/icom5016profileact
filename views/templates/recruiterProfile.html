@@ -26,7 +26,7 @@
 <div class="container">
 	<br>
 	<center>
-        <img src="img/user.png" height="300px" ><br>
+        <img src="{{recruiter.profilepic}}" height="200" width="150" ><br>
         <h2>{{recruiter.name}} {{recruiter.lastname}}</h2>
     </center>
 
@@ -34,8 +34,16 @@
     <center>
         <div class="form-group">
             <label for="inputPassword">Upload Profile Pic</label>
-            <form action="images/upload" id="profilepic" enctype="multipart/form-data">
-                <input type="file" name="images" />
+            <form id =  "uploadForm"
+            enctype   =  "multipart/form-data"
+            action    =  "/api/photo"
+            method    =  "post"
+            >
+            <input type="file" name="userPhoto" />
+            <input type="hidden" value="{{userid}}" name="userid">
+             <input type="hidden" value="recruiter" name="role">
+            <input type="submit"  value="Upload image" name="submit">
+
             </form>
         </div>
 

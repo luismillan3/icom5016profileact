@@ -41,6 +41,7 @@ var uploadResume = multer({ storage : storageResume}).single('userResume');
 
 
 app.post('/api/photo',function(req,res){
+    console.log("uploading picture")
     upload(req,res,function(err) {
         if(err) {
             return res.end("Error uploading file.");
@@ -52,7 +53,7 @@ app.post('/api/photo',function(req,res){
       if (err)
        { console.error(err); res.send("Error " + err); }
       else
-        res.redirect("http://localhost:5000/#/professor");
+        res.redirect("http://localhost:5000/#/"+req.body.role);
      // res.json(result.rows);
       //console.log(result.rows)
       done();
@@ -65,6 +66,7 @@ app.post('/api/photo',function(req,res){
 });
 
 app.post('/api/resume',function(req,res){
+  console.log("entre al resume")
     uploadResume(req,res,function(err) {
         if(err) {
             return res.end("Error uploading file.");
@@ -76,7 +78,7 @@ app.post('/api/resume',function(req,res){
       if (err)
        { console.error(err); res.send("Error " + err); }
       else
-        res.redirect("http://localhost:5000/#/professor");
+        //res.redirect("http://localhost:5000/#/professor");
     //  res.json(result.rows);
       //console.log(result.rows)
       done();

@@ -26,7 +26,7 @@
 
     <div class="" layout="row" layout-xs="column">
         <center flex>
-            <img src="img/user.png" height="300px" ><br>
+            <img src="{{student.profilepic || 'img/user.png'}}" height="300px" ><br>
             <form editable-form name="editableForm1" onaftersave="updateProfile(student)">
                 <h2>
                     <span style="width:25%" editable-text="student.name" e-name="name" e-form="textBtnForm" >
@@ -51,6 +51,7 @@
             <md-button type="button" class="btn btn-default" ng-click="editableForm1.$show()" ng-show="!editableForm1.$visible">
                 Edit
             </md-button>
+
             <md-button type="submit" class="btn btn-default" ng-show="editableForm1.$visible" ng-click="editableForm1.$cancel(); tableform.$cancel(); frmHide()">
                 Done
             </md-button>
@@ -71,6 +72,7 @@
                     <th flex>Major</th>
                     <th flex>Year</th>
                     <th flex>GPA</th>
+                    <th flex>ProfilePic</th>
                     <th flex>Resume</th>
                 </tr>
                 <tr layout="row">
@@ -93,12 +95,35 @@
                             {{ student.gpa || 'empty' }}
                         </span>
                     </td>
+                    <td flex>
+                    <form id =  "uploadForm"
+                    enctype   =  "multipart/form-data"
+                    action    =  "/api/photo"
+                    method    =  "post"
+                    >
+                    <input type="file" name="userPhoto" />
+                    <input type="hidden" value="{{userid}}" name="userid">
+                    <input type="hidden" value="student" name="role">
+                    <input type="submit"  value="Upload image" name="submit">
 
+                    </form>
+                    </td>
                     <td flex><!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#resumeModal">
+                        <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#resumeModal">
                             View Resume
                         </button>
-                    </td>
+
+ -->                    
+                    <form id        =  "uploadFormREsyme"
+     enctype   =  "multipart/form-data"
+     action    =  "/api/resume"
+     method    =  "post"
+    >
+    <input type="file" name="userResume" />
+    <input type="hidden" value="{{userid}}" name="userid">
+    <input type="submit" value="Upload Resume" name="submit">
+    </form>
+                </td>
                 </tr>
             </table>
             <!-- buttons -->
@@ -106,6 +131,7 @@
                 <button type="button" class="btn btn-default" ng-show="!tableform.$visible; editableForm1.$visible" ng-click="tableform.$show() ">
                     edit
                 </button>
+
             </div>
             <div class="btn-form" ng-show="tableform.$visible">
                 <button type="submit" ng-disabled="tableform.$waiting" class="btn btn-primary">save</button>

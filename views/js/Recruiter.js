@@ -1,11 +1,11 @@
 angular.module('recruiter',[])
 
-.controller('recruiterProfileController', ['$cookieStore','$scope', '$http', '$log', function($cookieStore,$scope, $http,$location, $log) {
+.controller('recruiterProfileController', ['$route','$cookieStore','$scope', '$http', '$log', function($route,$cookieStore,$scope, $http,$location, $log) {
 
 
 	$scope.newr={}
 	$scope.recruiter={}
-
+	$scope.userid = $cookieStore.get('userid')
 	$scope.frmToggle = function() {
 		$('#profileForm').slideToggle();
 	}

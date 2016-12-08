@@ -5,7 +5,7 @@ const database_URL= 'postgres://xwozcfrzmmekkv:zvyT7_TOODaNOop6XdZN2wddOU@ec2-54
 pg.defaults.ssl = true;
 
 
-var getRecruiter='SELECT name,lastname,email,company FROM users natural join recruiter  where userid=$1';
+var getRecruiter='SELECT name,lastname,email,company,profilepic FROM users natural join recruiter natural join files  where userid=$1';
 var updateRecruiter='UPDATE recruiter set name=$1, lastname=$2, email=$3, company=$4 where recruiterid=$5';
 var getEvents='SELECT eventid,title,description,date from users natural join recruiter natural join event where userid=$1';
 var getRecruiterID='SELECT recruiterid FROM users natural join recruiter where userid=$1';

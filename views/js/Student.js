@@ -101,13 +101,14 @@ angular.module('student',[])
         $scope.selectedEvent=selectedEvent;
     }
 
-}]).controller('studentProfileController', [ '$cookieStore','$scope', '$http', '$log', '$mdDialog', function($cookieStore, $scope, $http, $log, $mdDialog, $location ) {
+}]).controller('studentProfileController', ['$route', '$cookieStore','$scope', '$http', '$log', '$mdDialog', function($route,$cookieStore, $scope, $http, $log, $mdDialog, $location ) {
 
 
     $scope.newStudent={}
     $scope.student={}
     $scope.project={}
     $scope.majors = []
+    $scope.userid = $cookieStore.get('userid')
     $scope.frmToggle = function() {
         $('#profileForm').slideToggle();
     }
@@ -115,6 +116,7 @@ angular.module('student',[])
         console.log(path);
         window.location=path;
     }
+    $scope.userid = $cookieStore.get('userid')
 
     $scope.getStudent = function () {
         //chequiar rol, sino es student tirar homepage
@@ -130,7 +132,10 @@ angular.module('student',[])
             console.log("Could not get student Info")
         });
     };
-
+    $scope.go = function () {
+       console.log("quiero hacer reload")
+        $route.reload();
+    }
     $scope.getMajors = function () {
         $http.get('/student/majors')
         .success(function (data, status) {
