@@ -253,7 +253,7 @@ router.get('/research', function(req, res, next) {
     console.log('research Papeh')
     var projectID = 0;
     pg.connect(database_URL, function(err, client, done) {
-        client.query('select title, description, funding, professor.name, professor.lastname from research natural join professor where research.professorid = professor.professorid',
+        client.query('select title, description, funding, email, professor.name, professor.lastname from research natural join professor where research.professorid = professor.professorid',
         function(err, result) {
 
           if (err)

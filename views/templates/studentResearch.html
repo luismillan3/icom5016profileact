@@ -31,14 +31,14 @@
     </md-input-container>
     <table class="table table-striped">
         <tr>
-            <th>Name</th><th>Description</th><th>Advisor</th><th>View</th>
+            <th>Name</th><th>Description</th><th>Advisor</th><th>Advisor email</th>
         </tr>
         <tr ng-repeat="research in researchProjects | filter: query">
             <td>{{ research.title }}</td>
             <td>{{ research.description }}</td>
-            <td>{{ research.name }}</td>
+            <td>{{ research.name }} {{ research.lastname }}</td>
             <td>
-                <button class="btn btn-success" ng-click="display(student)">Look!</button>
+                {{ research.email }}
             </td>
         </tr>
     </table>
