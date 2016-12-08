@@ -11,8 +11,8 @@ var getEvents='SELECT eventid,title,description,date from users natural join rec
 var getRecruiterID='SELECT recruiterid FROM users natural join recruiter where userid=$1';
 var insertEvent='INSERT INTO event(title,description,date,recruiterid) values($1,$2,$3,$4)';
 var deleteEvent = 'DELETE FROM event WHERE eventid=$1';
-var getAllStudents='SELECT * FROM student natural join major';
-var getAddedStudents='SELECT * from recruiterfolder natural join student natural join major where recruiterid=$1';
+var getAllStudents='SELECT * FROM student natural join major natural join files';
+var getAddedStudents='SELECT * from recruiterfolder natural join student natural join major natural join fileswhere recruiterid=$1';
 var deleteAddedStudent = 'DELETE FROM recruiterfolder WHERE entryid=$1';
 var addingStudentToFolder='INSERT INTO recruiterfolder  (recruiterid, studentid) SELECT $1, $2 WHERE  NOT EXISTS ( SELECT recruiterid,studentid FROM recruiterfolder WHERE recruiterid = $1 and studentid=$2 )'
 var getAllResearch='Select * FROM research natural join professor'

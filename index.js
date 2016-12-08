@@ -78,9 +78,8 @@ app.post('/api/resume',function(req,res){
       if (err)
        { console.error(err); res.send("Error " + err); }
       else
-        //res.redirect("http://localhost:5000/#/professor");
-    //  res.json(result.rows);
-      //console.log(result.rows)
+        res.redirect("http://localhost:5000/#/"+req.body.role);
+        
       done();
     });
   });

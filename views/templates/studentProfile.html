@@ -42,7 +42,38 @@
 
                     </span>
                 </h2>
+                <div class="container">
+                <div class="pull-left">
             </form>
+            <div class="form-group">
+            <label for="inputPassword">Upload Profile Picture</label>
+            <form id =  "uploadForm"
+            enctype   =  "multipart/form-data"
+            action    =  "/api/photo"
+            method    =  "post"
+            >
+            <input type="file" name="userPhoto" />
+            <input type="hidden" value="{{userid}}" name="userid">
+            <input type="hidden" value="student" name="role">
+            <input type="submit"  value="Upload image" name="submit">
+
+            </form>
+            </div>
+            <div class="pull-right">
+            <label for="inputPassword">Upload Resume</label>
+            <form id        =  "uploadFormREsyme"
+     enctype   =  "multipart/form-data"
+     action    =  "/api/resume"
+     method    =  "post"
+    >
+    <input type="file" name="userResume" />
+    <input type="hidden" value="{{userid}}" name="userid">
+    <input type="hidden" value="student" name="role">
+    <input type="submit" value="Upload Resume" name="submit">
+    </form>
+    </div>
+    </div>
+        </div>
         </center>
 
 
@@ -72,7 +103,6 @@
                     <th flex>Major</th>
                     <th flex>Year</th>
                     <th flex>GPA</th>
-                    <th flex>ProfilePic</th>
                     <th flex>Resume</th>
                 </tr>
                 <tr layout="row">
@@ -95,24 +125,23 @@
                             {{ student.gpa || 'empty' }}
                         </span>
                     </td>
-                    <td flex>
-                 
-                    </td>
+                    
                     <td flex><!-- Button trigger modal -->
                         <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#resumeModal">
                             View Resume
                         </button>
 
  -->                    
-                    <form id        =  "uploadFormREsyme"
+                    <!-- <form id        =  "uploadFormREsyme"
      enctype   =  "multipart/form-data"
      action    =  "/api/resume"
      method    =  "post"
     >
     <input type="file" name="userResume" />
     <input type="hidden" value="{{userid}}" name="userid">
+    <input type="hidden" value="student" name="role">
     <input type="submit" value="Upload Resume" name="submit">
-    </form>
+    </form> -->
                 </td>
                 </tr>
             </table>
@@ -129,17 +158,6 @@
             </div>
         </form>
 
-   <form id =  "uploadForm"
-                    enctype   =  "multipart/form-data"
-                    action    =  "/api/photo"
-                    method    =  "post"
-                    >
-                    <input type="file" name="userPhoto" />
-                    <input type="hidden" value="{{userid}}" name="userid">
-                    <input type="hidden" value="student" name="role">
-                    <input type="submit"  value="Upload image" name="submit">
-
-                    </form>
     </div>
 
     <br>
