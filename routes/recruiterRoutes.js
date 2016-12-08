@@ -12,11 +12,11 @@ var getRecruiterID='SELECT recruiterid FROM users natural join recruiter where u
 var insertEvent='INSERT INTO event(title,description,date,recruiterid) values($1,$2,$3,$4)';
 var deleteEvent = 'DELETE FROM event WHERE eventid=$1';
 var getAllStudents='SELECT * FROM student natural join major natural join files';
-var getAddedStudents='SELECT * from recruiterfolder natural join student natural join major natural join fileswhere recruiterid=$1';
+var getAddedStudents='SELECT * from recruiterfolder natural join student natural join major natural join files where recruiterid=$1';
 var deleteAddedStudent = 'DELETE FROM recruiterfolder WHERE entryid=$1';
 var addingStudentToFolder='INSERT INTO recruiterfolder  (recruiterid, studentid) SELECT $1, $2 WHERE  NOT EXISTS ( SELECT recruiterid,studentid FROM recruiterfolder WHERE recruiterid = $1 and studentid=$2 )'
 var getAllResearch='Select * FROM research natural join professor'
-var donateToResearch='INSERT INTO fund(rid, recruiterid,funds) values($1,$2,$3)'
+var donateToResearch='INSERT INTO fund(rid, recruiterid,funds,company) values($1,$2,$3,$4)'
 
 
 router.post('/events', function(req, res, next) {
@@ -212,7 +212,7 @@ router.post('/adding', function(req, res, next) {
             if (err)
             { console.error(err); response.send("Error " + err); }
             else
-
+                console.log(result)
             recruiterid=result.rows[0].recruiterid;
 
             console.log(recruiterid)
@@ -248,7 +248,7 @@ router.post('/funding', function(req, res, next) {
 
             console.log(recruiterid)
             done();
-            client.query(donateToResearch,[req.body.rid,recruiterid,req.body.quantity], function(err, result) {
+            client.query(donateToResearch,[req.body.rid,recruiterid,req.body.quantity,req.body.company], function(err, result) {
 
                 if (err)
                 { console.error(err); response.send("Error " + err); }
@@ -260,7 +260,7 @@ router.post('/funding', function(req, res, next) {
         });
 
     });
-    console.log("trying to add student")
+    console.log("donated")
     // req.body.id=addedStudents.length+1;
     // addedStudents.push(req.body)
 

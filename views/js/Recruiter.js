@@ -155,6 +155,7 @@ angular.module('recruiter',[])
 			console.log(data, status);
 			console.log("could not add to folder")
 		});
+		alert ("Student added to Folder");
 	};
 	$scope.searchStudents=function(criteria){
 		$scope.results=[]
@@ -248,13 +249,13 @@ angular.module('recruiter',[])
 		$scope.donation.userid=$cookieStore.get('userid')
 		$http.post('recruiter/funding',$scope.donation)
 		.success(function (data, status) {
-			$scope.researches = data;
-			console.log(data)
+			
 		})
 		.error(function (data, status) {
 			console.log(data, status);
 			console.log("Could not get all projectazos")
 		});
+		alert ("Thanks for donating!! We appreciate it :)");
 	};
 
 

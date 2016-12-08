@@ -73,7 +73,7 @@ app.post('/api/resume',function(req,res){
         }
 
          pg.connect(database, function(err, client, done) {
-          client.query('INSERT INTO files (resumecv,userid) VALUES ($1,$2) ON CONFLICT (userid) DO UPDATE SET resumecv = $1',["resume/"+req.file.originalname,req.body.userid], function(err, result) {
+          client.query('INSERT INTO files (resumecv,userid) VALUES ($1,$2) ON CONFLICT (userid) DO UPDATE SET resumecv = $1',["resumes/"+req.file.originalname,req.body.userid], function(err, result) {
           
       if (err)
        { console.error(err); res.send("Error " + err); }
