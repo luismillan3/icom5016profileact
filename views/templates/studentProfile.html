@@ -96,17 +96,7 @@
                         </span>
                     </td>
                     <td flex>
-                    <form id =  "uploadForm"
-                    enctype   =  "multipart/form-data"
-                    action    =  "/api/photo"
-                    method    =  "post"
-                    >
-                    <input type="file" name="userPhoto" />
-                    <input type="hidden" value="{{userid}}" name="userid">
-                    <input type="hidden" value="student" name="role">
-                    <input type="submit"  value="Upload image" name="submit">
-
-                    </form>
+                 
                     </td>
                     <td flex><!-- Button trigger modal -->
                         <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#resumeModal">
@@ -139,7 +129,17 @@
             </div>
         </form>
 
+   <form id =  "uploadForm"
+                    enctype   =  "multipart/form-data"
+                    action    =  "/api/photo"
+                    method    =  "post"
+                    >
+                    <input type="file" name="userPhoto" />
+                    <input type="hidden" value="{{userid}}" name="userid">
+                    <input type="hidden" value="student" name="role">
+                    <input type="submit"  value="Upload image" name="submit">
 
+                    </form>
     </div>
 
     <br>
