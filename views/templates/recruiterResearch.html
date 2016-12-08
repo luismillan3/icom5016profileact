@@ -76,7 +76,7 @@ data-keyboard="false" data-backdrop="static">
                     </div>
                     <div class="form-group">
                         <label for="crdtc">Credit Card:</label>
-                        <input type="text" class="form-control" id="crdtc">
+                        <input type="number" class="form-control" id="crdtc">
                     </div>
 
                     <div class="form-group">
@@ -91,7 +91,7 @@ data-keyboard="false" data-backdrop="static">
 
                     <div class="form-group">
                         <label for="qty">Quantity:</label>
-                        <input type="text" class="form-control" id="qty">
+                        <input type="number" ng-model="donation.quantity" class="form-control" id="qty">
                     </div>
 
 
@@ -105,7 +105,7 @@ data-keyboard="false" data-backdrop="static">
         </div>
         <div class="modal-footer">
 
-            <button type="button" class="btn btn-primary">Make Donation</button>
+            <button type="button" class="btn btn-primary" ng-click="fund(selectedResearch.rid)">Make Donation</button>
             <button type="button" class="btn btn-primary"
             data-dismiss="modal">Close</button>
         </div>

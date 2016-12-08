@@ -220,17 +220,33 @@ angular.module('recruiter',[])
 
 	$scope.getStudents();
 
-}]).controller('recruiterResearch', ['$scope', '$http', '$log','$mdDialog', function($scope, $http, $log,$mdDialog) {
+}]).controller('recruiterResearch', ['$cookieStore','$scope', '$http', '$log','$mdDialog', function($cookieStore,$scope, $http, $log,$mdDialog) {
 
 	//TODO cambiar esto
 	$scope.selectedResearch={}
 	$scope.researches=[]
+	$scope.donation={}
 	console.log("entre")
 	$scope.display=function(student){
 		$scope.selectedStudent=student;
 	}
 	$scope.getResearch = function () {
 		$http.get('recruiter/research/get')
+		.success(function (data, status) {
+			$scope.researches = data;
+			console.log(data)
+		})
+		.error(function (data, status) {
+			console.log(data, status);
+			console.log("Could not get all projectazos")
+		});
+	};
+
+	$scope.fund = function (researchid) {
+		console.log("donating")
+		$scope.donation.rid=researchid;
+		$scope.donation.userid=$cookieStore.get('userid')
+		$http.post('recruiter/funding',$scope.donation)
 		.success(function (data, status) {
 			$scope.researches = data;
 			console.log(data)

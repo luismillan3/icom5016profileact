@@ -16,6 +16,8 @@ var getAddedStudents='SELECT * from recruiterfolder natural join student natural
 var deleteAddedStudent = 'DELETE FROM recruiterfolder WHERE entryid=$1';
 var addingStudentToFolder='INSERT INTO recruiterfolder  (recruiterid, studentid) SELECT $1, $2 WHERE  NOT EXISTS ( SELECT recruiterid,studentid FROM recruiterfolder WHERE recruiterid = $1 and studentid=$2 )'
 var getAllResearch='Select * FROM research natural join professor'
+var donateToResearch='INSERT INTO fund(rid, recruiterid,funds) values($1,$2,$3)'
+
 
 router.post('/events', function(req, res, next) {
     console.log(req.body)
@@ -234,7 +236,37 @@ router.post('/adding', function(req, res, next) {
 
 
 });
+router.post('/funding', function(req, res, next) {
+    pg.connect(database_URL, function(err, client, done) {
+        client.query(getRecruiterID,[req.body.userid], function(err, result) {
 
+            if (err)
+            { console.error(err); response.send("Error " + err); }
+            else
+
+            recruiterid=result.rows[0].recruiterid;
+
+            console.log(recruiterid)
+            done();
+            client.query(donateToResearch,[req.body.rid,recruiterid,req.body.quantity], function(err, result) {
+
+                if (err)
+                { console.error(err); response.send("Error " + err); }
+                else
+
+                res.json("OK");
+                done();
+            });
+        });
+
+    });
+    console.log("trying to add student")
+    // req.body.id=addedStudents.length+1;
+    // addedStudents.push(req.body)
+
+
+
+});
 router.get('/research/get', function(req, res, next) {
     console.log("Coji los research")
     pg.connect(database_URL, function(err, client, done) {
