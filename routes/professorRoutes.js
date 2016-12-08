@@ -101,7 +101,7 @@ router.post('/professorData', function(req, res, next) {
     
 
     pg.connect(database_URL, function(err, client, done) {
-    client.query('SELECT * FROM users NATURAL JOIN professor WHERE userid = $1',[req.body.uid], function(err, result) {
+    client.query('SELECT * FROM users NATURAL JOIN professor NATURAL JOIN files WHERE userid = $1',[req.body.uid], function(err, result) {
       
       if (err)
        { console.error(err); response.send("Error " + err); }

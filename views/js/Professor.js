@@ -1,6 +1,6 @@
 angular.module('professor',[])
 
-.controller('professorController', ['$scope', '$http', '$log', '$mdDialog','$cookieStore', function($scope, $http, $log, $mdDialog,$cookieStore) {
+.controller('professorController', ['$route','$scope', '$http', '$log', '$mdDialog','$cookieStore', function($route,$scope, $http, $log, $mdDialog,$cookieStore) {
 	
     $scope.profesora={name:"Clarita la Shark",lastName:"Diaz",title:"PhD"}
 
@@ -113,6 +113,7 @@ angular.module('professor',[])
         console.log("Profeeeee " + sending);
         $http.post('/investigacionprof/professorData', sending)
         .success(function (data) {
+            console.log(data[0])
             $scope.professor = data[0];
             $scope.getProjects(data[0]);
             // console.log(data[0]);
@@ -123,6 +124,10 @@ angular.module('professor',[])
         console.log("could not add event")
         });
     };
+    $scope.go = function () {
+       console.log("quiero hacer reload")
+        $route.reload();
+    }
 
       
 
