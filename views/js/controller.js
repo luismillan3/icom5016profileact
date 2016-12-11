@@ -21,7 +21,7 @@ angular.module('mainController',[])
 	$scope.getMajor();
 
  $scope.authenticateEmail = function(tempUsr){
- 	// 
+ 	//
         firebase.auth().onAuthStateChanged(function(user) {
   			if (user) {
     		// User is signed in.
@@ -44,7 +44,7 @@ angular.module('mainController',[])
 		// 	console.log(data, status);
 		// 	console.log("Error with pdf")
 		// });
-		
+
 
 		$http.post('/auth/signup/student', usr )
 		.success(function (data, status) {

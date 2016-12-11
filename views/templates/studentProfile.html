@@ -43,8 +43,8 @@
                     </span>
                 </h2>
                 <div class="row">
-                    <div class="col-md-6"> 
-                        
+                    <div class="col-md-6">
+
                         <div class="form-group">
                             <label for="inputPassword">Upload Profile Picture</label>
                             <form id =  "uploadForm"
@@ -58,45 +58,46 @@
                             <input type="submit"  value="Upload image" name="submit">
 
 
-                            </form>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="inputPassword">Upload Resume</label>
-                        <form id        =  "uploadFormREsyme"
-                             enctype   =  "multipart/form-data"
-                             action    =  "/api/resume"
-                             method    =  "post"
-                            >
-                            <input type="file" name="userResume" />
-                            <input type="hidden" value="{{userid}}" name="userid">
-                            <input type="hidden" value="student" name="role">
-                            <input type="submit" value="Upload Resume" name="submit">
                         </form>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <label for="inputPassword">Upload Resume</label>
+                    <form id        =  "uploadFormREsyme"
+                    enctype   =  "multipart/form-data"
+                    action    =  "/api/resume"
+                    method    =  "post"
+                    >
+                    <input type="file" name="userResume" />
+                    <input type="hidden" value="{{userid}}" name="userid">
+                    <input type="hidden" value="student" name="role">
+                    <input type="submit" value="Upload Resume" name="submit">
+                </form>
             </div>
-        </center>
-
-
-
-        <span>
-            <md-button type="button" class="btn btn-default" ng-click="editableForm1.$show()" ng-show="!editableForm1.$visible">
-                Edit
-            </md-button>
-
-            <md-button type="submit" class="btn btn-default" ng-show="editableForm1.$visible" ng-click="editableForm1.$cancel(); tableform.$cancel(); frmHide()">
-                Done
-            </md-button>
-        </span>
-
+        </div>
     </div>
+</center>
 
+
+
+<span>
+    <md-button type="button" class="btn btn-default" ng-click="editableForm1.$show()" ng-show="!editableForm1.$visible">
+        Edit
+    </md-button>
+
+    <md-button type="submit" class="btn btn-default" ng-show="editableForm1.$visible" ng-click="editableForm1.$cancel(); tableform.$cancel(); frmHide()">
+        Done
+    </md-button>
+</span>
+
+</div>
+
+
+<div class="container">
     <br>
     <md-divider ></md-divider>
     <br>
-
-    <div class="container-fluid">
+<div class="container-fluid">
         <h2>Profile</h2>
 
         <form editable-form name="tableform" onaftersave="updateInfo(student)">
@@ -105,12 +106,12 @@
                     <th flex>Major</th>
                     <th flex>Year</th>
                     <th flex>GPA</th>
-                    
+
                 </tr>
                 <tr layout="row">
 
                     <td flex>
-      <!-- editable status (select-local) -->
+                        <!-- editable status (select-local) -->
                         <span editable-select="student.majorid" e-name="status" e-ng-options="m.majorid as m.value for m in majors">
                             {{ (majors | filter:{majorid: student.majorid})[0].value || 'Not set' }}
                         </span>
@@ -127,8 +128,8 @@
                             {{ student.gpa || 'empty' }}
                         </span>
                     </td>
-                    
-                    
+
+
                 </tr>
             </table>
             <!-- buttons -->
@@ -189,39 +190,39 @@
                 </div>
             </form>
 
-                <table class="projectTable" >
-                    <tr ng-repeat="project in projects" layout="row">
-                        <td flex="25">
-                            <div>
-                                <md-button class="md-raised" ng-click="showAdvanced($event, project)">
-                                    <img width="200px" height="200px" src="{{project.image}}"/>
-                                </md-button>
-                                <span  style="text-align: center;" editable-text="project.title" e-name="title" e-form="projectTableForm">
-                                    {{project.title || 'empty'}}
-                                </span>
-                            </div>
-                        </td>
-                        <td flex="75">
-                            <span style="width:100%;" class="description" editable-textarea="project.description" e-name="description" e-form="projectTableForm">
-                                {{project.description || 'empty'}}
+            <table class="projectTable" >
+                <tr ng-repeat="project in projects" layout="row">
+                    <td flex="25">
+                        <div>
+                            <md-button class="md-raised" ng-click="showAdvanced($event, project)">
+                                <img width="200px" height="200px" src="{{project.image}}"/>
+                            </md-button>
+                            <span  style="text-align: center;" editable-text="project.title" e-name="title" e-form="projectTableForm">
+                                {{project.title || 'empty'}}
                             </span>
-                        </td>
+                        </div>
+                    </td>
+                    <td flex="75">
+                        <span style="width:100%;" class="description" editable-textarea="project.description" e-name="description" e-form="projectTableForm">
+                            {{project.description || 'empty'}}
+                        </span>
+                    </td>
 
-                        <td flex="10" ng-show="editableForm1.$visible">
-                            <form editable-form name="projectTableForm" onbeforesave="updateProject(project, project.projectid)" ng-show="projectTableForm.$visible" class="form-buttons form-inline">
-                                <md-button class="md-accent md-raised md-hue-1" type="submit" ng-disabled="projectTableForm.$waiting" style="margin-bottom: 10px;">Save</md-button>
-                                <md-button type="button" ng-disabled="projectTableForm.$waiting" ng-click="projectTableForm.$cancel()" class="md-raised md-primary">
-                                    Cancel
-                                </md-button>
-                            </form>
-                            <div class="buttons" ng-show="!projectTableForm.$visible">
-                                <md-button class="md-accent md-raised md-hue-1" ng-click="projectTableForm.$show()" style="margin-bottom: 10px;">Edit</md-button>
+                    <td flex="10" ng-show="editableForm1.$visible">
+                        <form editable-form name="projectTableForm" onbeforesave="updateProject(project, project.projectid)" ng-show="projectTableForm.$visible" class="form-buttons form-inline">
+                            <md-button class="md-accent md-raised md-hue-1" type="submit" ng-disabled="projectTableForm.$waiting" style="margin-bottom: 10px;">Save</md-button>
+                            <md-button type="button" ng-disabled="projectTableForm.$waiting" ng-click="projectTableForm.$cancel()" class="md-raised md-primary">
+                                Cancel
+                            </md-button>
+                        </form>
+                        <div class="buttons" ng-show="!projectTableForm.$visible">
+                            <md-button class="md-accent md-raised md-hue-1" ng-click="projectTableForm.$show()" style="margin-bottom: 10px;">Edit</md-button>
 
-                                <md-button class="md-warn md-raised md-hue-2" ng-click="removeProject(project.projectid)">Remove</md-button>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
+                            <md-button class="md-warn md-raised md-hue-2" ng-click="removeProject(project.projectid)">Remove</md-button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
 
 
