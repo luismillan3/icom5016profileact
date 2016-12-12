@@ -237,6 +237,7 @@ angular.module('student',[])
     };
 
     $scope.addProject=function(e){
+
         e.userid=$cookieStore.get('userid')
         console.log(e)
 
@@ -244,6 +245,7 @@ angular.module('student',[])
         .success(function (data) {
             console.log("recibi la data del proyecto")
             $scope.getProjects()
+            $scope.project = {}
         })
         .error(function (data, status, header, config) {
             console.log(data, status);
@@ -261,51 +263,11 @@ angular.module('student',[])
            })
      };
 
-
-
-
-
     $scope.getStudent();
     $scope.getMajors();
     $scope.getProjects();
     $scope.getResearch();
-
-    // $scope.updateProfile=function(re){
-    //     console.log(re)
-    //     $scope.newr={}
-
-    //     $http.put('/student/update', re )
-    //     .success(function (data) {
-    //         $scope.student = data;
-    //     })
-    //     .error(function (data, status, header, config) {
-    //         console.log(data, status);
-    //         console.log("could not add event")
-    //     });
-    // };
-
-    //  $scope.addProject=function(re){
-    //     $scope.project={}
-    //     re.id=$scope.student.projects.length+1;
-    //     console.log(re)
-    //     $scope.newr={}
-    //
-    //     $http.post('/student/projects', re )
-    //     .success(function (data) {
-    //         $scope.student.projects = data;
-    //     })
-    //     .error(function (data, status, header, config) {
-    //         console.log(data, status);
-    //         console.log("could not add event")
-    //     });
-    // };
-
-
-    // $scope.addProject = function(project){
-    //   this.project.id = projects.length
-    //   projects.push(this.project);
-    // };
-
+    
     $scope.frmToggle = function() {
         $('#projectForm').slideToggle();
     }
@@ -313,8 +275,6 @@ angular.module('student',[])
     $scope.frmHide = function() {
         $('#projectForm').hide();
     }
-
-
 
     $scope.showAdvanced = function(ev,project) {
         $mdDialog.show({
