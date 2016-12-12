@@ -28,7 +28,7 @@ angular.module('professor',[])
 
     $scope.getProjects = function (proff) {
      
-        console.log("Filas y columnas"+$scope.professor.professorid);
+        //console.log("Filas y columnas"+$scope.professor.professorid);
         $http.post('/investigacionprof/projectsByProf', proff)
         .success(function (data, status) {
             $scope.projects = data;

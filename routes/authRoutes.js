@@ -10,6 +10,8 @@ var selectUser = 'SELECT * FROM users where username=$1 and password=$2 and role
 
 var addRecruiter = 'Insert into recruiter (name, lastname, email, company, userid) values ($1, $2, $3, $4, $5)'
 var addProfessor = 'Insert into professor (name, lastname, email, userid) values ($1, $2, $3, $4)'
+var addFileID = 'Insert into files (userid) values ($1)'
+
 
 router.get('/major', function(req, res, next) {
 
@@ -17,7 +19,7 @@ router.get('/major', function(req, res, next) {
         client.query('SELECT * FROM major', function(err, result) {
 
             if (err)
-            { console.error(err); response.send("Error " + err); }
+            { console.error(err); res.send("Error " + err); }
             else
             res.json(result.rows);
             console.log(result.rows)
@@ -39,7 +41,7 @@ router.post('/login', function(req, res, next) {
         client.query('SELECT * FROM users where username=$1 and password=$2',[req.body.username, req.body.password], function(err, result) {
 
             if (err)
-            { console.error(err); response.send("Error " + err); }
+            { console.error(err); res.send("Error " + err); }
             else
             res.json(result.rows);
             console.log(result.rows)
@@ -64,7 +66,7 @@ router.post('/signup/student', function(req, res, next) {
         client.query(addUser,[req.body.username, req.body.password, 'student'], function(err, result) {
 
             if (err)
-            { console.error(err); response.send("Error " + err); }
+            { console.error(err); res.send("Error " + err); }
             else
             // res.json(result.rows);
 
@@ -72,7 +74,7 @@ router.post('/signup/student', function(req, res, next) {
             client.query(selectUser,[req.body.username, req.body.password, 'student'], function(err, result) {
 
                 if (err)
-                { console.error(err); response.send("Error " + err); }
+                { console.error(err); res.send("Error " + err); }
                 else
 
                 userid=result.rows[0].userid;
@@ -83,10 +85,16 @@ router.post('/signup/student', function(req, res, next) {
                 client.query(addStudent,[req.body.name, req.body.lastname,req.body.email,req.body.gpa,req.body.year,userid,req.body.major], function(err, result) {
 
                     if (err)
-                    { console.error(err); response.send("Error " + err); }
+                    { console.error(err); res.send("Error " + err); }
+                    else
+                    client.query(addFileID,[userid], function(err, result) {
+
+                    if (err)
+                    { console.error(err); res.send("Error " + err); }
                     else
                     res.json(resultRows);
                     done();
+                });
                 });
             });
         });
@@ -107,17 +115,21 @@ router.post('/signup/recruiter', function(req, res, next) {
         client.query(addUser,[req.body.username, req.body.password, 'recruiter'], function(err, result) {
 
             if (err)
-            { console.error(err); response.send("Error " + err); }
+            { console.error(err); res.send("Error " + err); }
             else
             // res.json(result.rows);
 
             done();
+
+
+
+
+
             client.query(selectUser,[req.body.username, req.body.password, 'recruiter'], function(err, result) {
 
                 if (err)
-                { console.error(err); response.send("Error " + err); }
+                { console.error(err); res.send("Error " + err); }
                 else
-
                 userid=result.rows[0].userid;
                 resultRows = result.rows
                 console.log(result.rows)
@@ -126,11 +138,19 @@ router.post('/signup/recruiter', function(req, res, next) {
                 client.query(addRecruiter,[req.body.name, req.body.lastname,req.body.email,req.body.company,userid], function(err, result) {
 
                     if (err)
-                    { console.error(err); response.send("Error " + err); }
+                    { console.error(err); res.send("Error " + err); }
+                    else
+
+                    client.query(addFileID,[userid], function(err, result) {
+
+                    if (err)
+                    { console.error(err); res.send("Error " + err); }
                     else
                     res.json(resultRows);
                     done();
                 });
+                });
+
             });
         });
     });
@@ -149,7 +169,7 @@ router.post('/signup/professor', function(req, res, next) {
         client.query(addUser,[req.body.username, req.body.password, 'professor'], function(err, result) {
 
             if (err)
-            { console.error(err); response.send("Error " + err); }
+            { console.error(err); res.send("Error " + err); }
             else
             // res.json(result.rows);
 
@@ -157,7 +177,7 @@ router.post('/signup/professor', function(req, res, next) {
             client.query(selectUser,[req.body.username, req.body.password, 'professor'], function(err, result) {
 
                 if (err)
-                { console.error(err); response.send("Error " + err); }
+                { console.error(err); res.send("Error " + err); }
                 else
 
                 userid=result.rows[0].userid;
@@ -168,10 +188,17 @@ router.post('/signup/professor', function(req, res, next) {
                 client.query(addProfessor,[req.body.name, req.body.lastname,req.body.email,userid], function(err, result) {
 
                     if (err)
-                    { console.error(err); response.send("Error " + err); }
+                    { console.error(err); res.send("Error " + err); }
+                    else
+
+                    client.query(addFileID,[userid], function(err, result) {
+
+                    if (err)
+                    { console.error(err); res.send("Error " + err); }
                     else
                     res.json(resultRows);
                     done();
+                });
                 });
             });
         });

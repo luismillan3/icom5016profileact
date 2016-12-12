@@ -56,7 +56,7 @@ angular.module('mainController',[])
 			console.log($scope.user.role)
 			$cookieStore.put('role', $scope.user.role);
 			$cookieStore.put('userid', $scope.user.userid);
-			window.location='/#/'+$scope.user.role;
+			window.location='/#/student';
 			//$scope.authenticateEmail(usr)
 		})
 		.error(function (data, status, header, config) {
@@ -72,7 +72,7 @@ angular.module('mainController',[])
 			$scope.user = data[0];
 			$cookieStore.put('role', $scope.user.role);
 			$cookieStore.put('userid', $scope.user.userid);
-			window.location='/#/'+$scope.user.role;
+			window.location='/#/recruiter';
 			$scope.authenticateEmail(usr)
 		})
 		.error(function (data, status, header, config) {
@@ -86,7 +86,7 @@ angular.module('mainController',[])
 			$scope.user = data[0];
 			$cookieStore.put('role', $scope.user.role);
 			$cookieStore.put('userid', $scope.user.userid);
-			window.location='/#/'+$scope.user.role;
+			window.location='/#/professor';
 			$scope.authenticateEmail(usr)
 		})
 		.error(function (data, status, header, config) {
