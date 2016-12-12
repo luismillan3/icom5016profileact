@@ -14,6 +14,7 @@ app.use(express.static(__dirname + '/views'));
 
 var storage =   multer.diskStorage({
   destination: function (req, file, callback) {
+    
     callback(null, './views/img');
   },
   filename: function (req, file, callback) {
