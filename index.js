@@ -42,6 +42,7 @@ var uploadResume = multer({ storage : storageResume}).single('userResume');
 
 
 app.post('/api/photo',function(req,res){
+  console.log("entre para anadir foto")
     console.log("uploading picture")
     upload(req,res,function(err) {
         if(err) {
@@ -55,6 +56,7 @@ app.post('/api/photo',function(req,res){
        { console.error(err); res.send("Error " + err); }
       else
         res.redirect("http://localhost:5000/#/"+req.body.role);
+    //  res.redirect("http://localhost:5000/#/"+req.body.role);
      // res.json(result.rows);
       //console.log(result.rows)
       done();

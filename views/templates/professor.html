@@ -26,7 +26,7 @@
 <!-- <h1>University of Puerto Rico at Mayaguez</h1>
 <img src="img/shark.jpg" height="300px" ><br> -->
 
-<img src="{{professor.profilepic || 'img/user.png'}}" height="200" width="150" />
+<img src="{{professor.profilepic || 'img/user.png'}}" height="200" width="200" />
 <h2>{{professor.name}} {{professor.lastname}} PhD:  Advisor</h2>
 
 </center>
@@ -88,7 +88,7 @@ method    =  "post"
                 <th>Setting</th>
             </tr>
             <tr ng-repeat="project in projects" >
-                <td>{{ project.title }}</td><td>{{ project.description }}</td><td>$ {{ project.funding }}</td><td>
+                <td>{{ project.title }}</td><td>{{ project.description }}</td><td>$ {{ project.funding|| '0' }}</td><td>
 
                 <ul><li ng-repeat="s in studentsInProjects"
                 ng-if="project.rid == s.rid">{{s.name}} {{s.lastname}}</li></ul>

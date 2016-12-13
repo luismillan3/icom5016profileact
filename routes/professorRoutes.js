@@ -29,14 +29,14 @@ router.post('/projectsByProf', function(req, res, next) {
    // console.log("AQui :" + req.body);
     var projectID = 0;
     pg.connect(database_URL, function(err, client, done) {
-    client.query('SELECT * FROM research WHERE professorid = $1',[req.body.professorid], function(err, result) {
+    client.query('SELECT rid,title,description, sum(funds) as funding FROM research natural left join fund WHERE professorid = $1 group by rid,title,description ',[req.body.professorid], function(err, result) {
       
       if (err)
-       { console.error(err); response.send("Error " + err); }
+       { console.error(err); res.send("Error " + err); }
       else
       res.json(result.rows);
   		
-      //console.log(result.rows[0].title)
+      console.log(result.rows)
       done();
     });
   });

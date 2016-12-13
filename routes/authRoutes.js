@@ -43,9 +43,46 @@ router.post('/login', function(req, res, next) {
             if (err)
             { console.error(err); res.send("Error " + err); }
             else
-            res.json(result.rows);
-            console.log(result.rows)
+
+                if (result.rows[0].role == "professor"){
+                client.query('SELECT * FROM users NATURAL JOIN professor where username=$1 and password=$2',[req.body.username, req.body.password], function(err, reslt) {
+
+            if (err)
+            { console.error(err); res.send("Error " + err); }
+            else
+            //result.rows[0].email=reslt;
+            res.json(reslt.rows);
+            console.log(reslt.rows)
             done();
+        });
+}
+
+else if (result.rows[0].role == "student"){
+                client.query('SELECT * FROM users NATURAL JOIN student where username=$1 and password=$2',[req.body.username, req.body.password], function(err, reslt) {
+
+            if (err)
+            { console.error(err); res.send("Error " + err); }
+            else
+            //result.rows[0].email=reslt;
+            res.json(reslt.rows);
+            console.log(reslt.rows)
+            done();
+        });
+}
+
+else if (result.rows[0].role == "recruiter"){
+                client.query('SELECT * FROM users NATURAL JOIN recruiter where username=$1 and password=$2',[req.body.username, req.body.password], function(err, reslt) {
+
+            if (err)
+            { console.error(err); res.send("Error " + err); }
+            else
+            //result.rows[0].email=reslt;
+            res.json(reslt.rows);
+            console.log(reslt.rows)
+            done();
+        });
+}
+
         });
     });
 
