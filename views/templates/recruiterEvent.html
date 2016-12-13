@@ -1,81 +1,92 @@
- <nav class="navbar navbar-default">
-          <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+<nav class="navbar navbar-default">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="#/">ProfileAct</a>
-            </div>
+            </button>
+            <a class="navbar-brand" href="#/">ProfileAct</a>
+        </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav navbar-left">
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-left">
                 <li><a href="#/recruiter">Home</a></li>
                 <li ><a href="#/recruiterEvent">Events</a></li>
                 <li><a href="#/recruiterSearch">Search Students</a></li>
                 <li><a href="#/recruiterFolder">Student Folder</a></li>
                 <li><a href="#/recruiterResearch">Projects</a></li>
-              </ul>
-            </div><!-- /.navbar-collapse -->
-          </div><!-- /.container-fluid -->
-        </nav>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
 <div class="container">
 
-	<h1>Events</h1>
+    <h1>Events</h1>
 
-	<button class="btn btn-primary" ng-click="frmToggle()">Add Event</button>
-	<br>
+    <button class="btn btn-primary" ng-click="frmToggle()">Add Event</button>
+    <br>
 
-	<form class="form-horizontal" id="eventForm" ng-submit="addEvent(event)" hidden>
-		<div class="form-group">
-			<label for="title" class="col-sm-2 control-label">Title</label>
-			<div class="col-sm-10">
-				<input type="text" ng-model="event.title" class="form-control">
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="description" class="col-sm-2 control-label">Description</label>
-			<div class="col-sm-10">
-				<textarea class="form-control" ng-model="event.description"></textarea>
-			</div>
-		</div>
-		<div class='form-group'>
-      		<div flex-gt-xs>
-        		<label for="title" class="col-sm-2 control-label">Date</label>
-        		<md-datepicker ng-model="event.date" md-placeholder="Enter date"></md-datepicker>
-        		</div>
-      </div>
-		<!-- <div class="form-group">
+    <form class="form-horizontal" id="eventForm" ng-submit="addEvent(event)" hidden>
+        <div class="form-group">
+            <label for="title" class="col-sm-2 control-label">Title</label>
+            <div class="col-sm-10">
+                <input type="text" ng-model="event.title" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="description" class="col-sm-2 control-label">Description</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" ng-model="event.description"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class='input-group date row' id='datetimepicker1'>
+                <label for="date" class="col-sm-2 control-label">Date</label>
 
-			<div class="col-sm-10">
-				<label for="title" class="col-sm-2 control-label">Date</label>
-				<input type="text" ng-model="event.date" class="form-control">
-			</div>
-		</div> -->
-		<!-- <div class="form-group">
-			<datetimepicker data-ng-model="data.date" ></datetimepicker>
-		</div> -->
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" value="submit" class="btn btn-primary">Insert Event</button>
-			</div>
-		</div>
-	</form>
+                <input ng-model="event.date" name="date" type='text' class="form-control col-sm-10" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
 
-	<br>
-	<input type="search" ng-model="query" placeholder="Search Events" class="form-control">
-	<br>
-	<table class="table table-striped">
-	 	<tr>
-	 		<th>Title</th><th>Description</th><th>Date</th><th>Remove</th>
-	 	</tr>
-	 	<tr ng-repeat="event in events | filter: query">
-	 		<td>{{ event.title }}</td><td>{{ event.description }}</td><td>{{event.date | date}}</td><td><button class="btn btn-danger" ng-click="removeEvent(event.eventid)">Remove</button></td>
-	 	</tr>
-	</table>
+            </div>
+        </div>
+        <!-- <div class="form-group">
+
+        <div class="col-sm-10">
+        <label for="title" class="col-sm-2 control-label">Date</label>
+        <input type="text" ng-model="event.date" class="form-control">
+    </div>
+</div> -->
+<!-- <div class="form-group">
+<datetimepicker data-ng-model="data.date" ></datetimepicker>
+</div> -->
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" value="submit" class="btn btn-primary">Insert Event</button>
+    </div>
+</div>
+</form>
+
+<br>
+<input type="search" ng-model="query" placeholder="Search Events" class="form-control">
+<br>
+<table class="table table-striped">
+    <tr>
+        <th>Title</th><th>Description</th><th>Date</th><th>Remove</th>
+    </tr>
+    <tr ng-repeat="event in events | filter: query">
+        <td>{{ event.title }}</td><td>{{ event.description }}</td><td>{{event.date | date}}</td><td><button class="btn btn-danger" ng-click="removeEvent(event.eventid)">Remove</button></td>
+    </tr>
+</table>
 
 </div>
+
+<script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+</script>
