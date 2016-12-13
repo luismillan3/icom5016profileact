@@ -89,8 +89,9 @@ else if (result.rows[0].role == "recruiter"){
 
 });
 
+
 router.post('/signup/student', function(req, res, next) {
-    console.log(req.body)
+    console.log("Lo entre alfin")
     if(!req.body.hasOwnProperty('username') || !req.body.hasOwnProperty('password')
     || !req.body.hasOwnProperty('email') || !req.body.hasOwnProperty('name') || !req.body.hasOwnProperty('lastname')
     || !req.body.hasOwnProperty('gpa') || !req.body.hasOwnProperty('year') || !req.body.hasOwnProperty('major')){
@@ -129,7 +130,7 @@ router.post('/signup/student', function(req, res, next) {
                     if (err)
                     { console.error(err); res.send("Error " + err); }
                     else
-                    res.json(resultRows);
+                    res.json(result.rows);
                     done();
                 });
                 });
