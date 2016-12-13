@@ -55,8 +55,8 @@ app.post('/api/photo',function(req,res){
       if (err)
        { console.error(err); res.send("Error " + err); }
       else
-        res.redirect("http://localhost:5000/#/"+req.body.role);
-    //  res.redirect("http://localhost:5000/#/"+req.body.role);
+    //    res.redirect("http://localhost:5000/#/"+req.body.role);
+      res.redirect("http://sheltered-river-39180.herokuapp.com/#/"+req.body.role);
      // res.json(result.rows);
       //console.log(result.rows)
       done();
@@ -81,7 +81,8 @@ app.post('/api/resume',function(req,res){
       if (err)
        { console.error(err); res.send("Error " + err); }
       else
-        res.redirect("http://localhost:5000/#/"+req.body.role);
+        //res.redirect("http://localhost:5000/#/"+req.body.role);
+            res.redirect("http://sheltered-river-39180.herokuapp.com/#/"+req.body.role);
         
       done();
     });
