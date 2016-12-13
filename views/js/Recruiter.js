@@ -77,6 +77,8 @@ angular.module('recruiter',[])
 		});
 	};
 	$scope.addEvent=function(e){
+		var date1= new Date(e.date)
+		e.date=date1;
 		e.userid=$cookieStore.get('userid')
 		console.log(e)
 
@@ -249,7 +251,7 @@ angular.module('recruiter',[])
 		$scope.donation.userid=$cookieStore.get('userid')
 		$http.post('recruiter/funding',$scope.donation)
 		.success(function (data, status) {
-			
+
 		})
 		.error(function (data, status) {
 			console.log(data, status);
